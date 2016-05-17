@@ -58,7 +58,7 @@ void A1::init()
   // since it depends on the GLFW window being set up correctly).
   view = glm::lookAt(
     //glm::vec3( 0.0f, float(DIM)*2.0*M_SQRT1_2, float(DIM)*2.0*M_SQRT1_2 ),
-    glm::vec3( 0.0f, 10.0f, 0.0f ),
+    glm::vec3( 0.0f, 30.0f, 0.0f ),
     glm::vec3( 0.0f, 0.0f, 0.0f ),
     glm::vec3( 0.0f, 1.0f, 0.0f ) );
   proj = glm::perspective(
