@@ -155,7 +155,7 @@ void A1::initCube() {
   glBindVertexArray(m_cube_vao);
 
   glGenBuffers(1, &m_cube_vbo);
-  glBindBuffer(GL_ARRAY_BUFFER, m_cube_vao);
+  glBindBuffer(GL_ARRAY_BUFFER, m_cube_vbo);
   glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(float), vertices, GL_STATIC_DRAW);
 
   glGenBuffers(1, &m_cube_ibo);
@@ -256,9 +256,9 @@ void A1::draw()
     // glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
 
 
-    glBindVertexArray( m_cube_vao );
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_cube_ibo );
     glUniform3f( col_uni, 1, 1, 1 );
-    glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
+    glDrawElements( GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, 0 );
 
     // Draw the cubes
     // Highlight the active square.
