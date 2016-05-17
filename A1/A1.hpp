@@ -42,8 +42,8 @@ class A1 : public CS488Window {
   GLuint m_grid_vao; // Vertex Array Object
   GLuint m_grid_vbo; // Vertex Buffer Object
   GLuint m_cube_vao;
-  GLUint m_cube_vbo;
-  GLUint m_cube_ibo;
+  GLuint m_cube_vbo;
+  GLuint m_cube_ibo;
 
   // Matrices controlling the camera and projection.
   glm::mat4 proj;
