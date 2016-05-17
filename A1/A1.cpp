@@ -255,6 +255,11 @@ void A1::draw()
     glUniform3f( col_uni, 1, 1, 1 );
     glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
 
+
+    glBindVertexArray( m_cube_vao );
+    glUniform3f( col_uni, 1, 1, 1 );
+    glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
+
     // Draw the cubes
     // Highlight the active square.
   m_shader.disable();
