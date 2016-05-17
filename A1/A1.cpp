@@ -247,6 +247,7 @@ void A1::draw()
   // Create a global transformation for the model (centre it).
   mat4 W;
   W = glm::translate( W, vec3( -float(DIM)/2.0f, 0, -float(DIM)/2.0f ) );
+  W = glm::translate( W, vec3( 0, 0, 100 ) );
 
   m_shader.enable();
     glEnable( GL_DEPTH_TEST );
@@ -259,7 +260,6 @@ void A1::draw()
     glBindVertexArray( m_grid_vao );
     glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
 
-    W = glm::translate( W, vec3( 0, 0, 100 ) );
     glBindVertexArray(m_cube_vao );
     glDrawElements( GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0 );
 
