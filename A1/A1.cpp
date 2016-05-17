@@ -259,7 +259,7 @@ void A1::draw()
     glBindVertexArray( m_grid_vao );
     glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
 
-    W = glm::translate( W, vec3( 0, 0, 10 ) );
+    W = glm::translate( W, vec3( 0, 0, 100 ) );
     glBindVertexArray(m_cube_vao );
     glDrawElements( GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0 );
 
