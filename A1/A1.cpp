@@ -255,14 +255,12 @@ void A1::draw()
     glUniformMatrix4fv( V_uni, 1, GL_FALSE, value_ptr( view ) );
     glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( W ) );
 
-    // Just draw the grid for now.
-    // glBindVertexArray( m_grid_vao );
-    // glUniform3f( col_uni, 1, 1, 1 );
-    // glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
+    glBindVertexArray( m_grid_vao );
+    glUniform3f( col_uni, 1, 1, 1 );
+    glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
 
 
     glBindVertexArray(m_cube_vao );
-    // glDrawArrays(GL_LINES, 0, 36);
     glDrawElements( GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0 );
 
     // Draw the cubes
