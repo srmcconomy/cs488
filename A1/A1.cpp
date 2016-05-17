@@ -263,7 +263,7 @@ void A1::draw()
 
     glBindVertexArray(m_cube_vao );
     // glDrawArrays(GL_LINES, 0, 36);
-    glDrawElements( GL_LINES, 36, GL_UNSIGNED_SHORT, 0 );
+    glDrawElements( GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0 );
 
     // Draw the cubes
     // Highlight the active square.
