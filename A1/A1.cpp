@@ -256,10 +256,10 @@ void A1::draw()
     glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( W ) );
 
     glBindVertexArray( m_grid_vao );
-    glUniform3f( col_uni, 1, 1, 1 );
     glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
 
 
+    glUniform3f( col_uni, 1, 0, 0 );
     glBindVertexArray(m_cube_vao );
     glDrawElements( GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0 );
 
