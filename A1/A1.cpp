@@ -247,7 +247,7 @@ void A1::draw()
   // Create a global transformation for the model (centre it).
   mat4 W;
   W = glm::translate( W, vec3( -float(DIM)/2.0f, 0, -float(DIM)/2.0f ) );
-  W = glm::translate( W, vec3( 0, 0, 100 ) );
+  W = glm::translate( W, vec3( 0, 0, 5 ) );
 
   m_shader.enable();
     glEnable( GL_DEPTH_TEST );
