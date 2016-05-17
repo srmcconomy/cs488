@@ -155,7 +155,7 @@ void A1::initCube() {
   glBindVertexArray(m_cube_vao);
 
   glGenBuffers(1, &m_cube_vbo);
-  glBindBuffer(GL_ARRAY_BUFFER, &m_cube_vao);
+  glBindBuffer(GL_ARRAY_BUFFER, m_cube_vao);
   glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(float), vertices, GL_STATIC_DRAW);
 
   glGenBuffers(1, &m_cube_ibo);
