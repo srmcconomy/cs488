@@ -254,12 +254,12 @@ void A1::draw()
     glUniformMatrix4fv( P_uni, 1, GL_FALSE, value_ptr( proj ) );
     glUniformMatrix4fv( V_uni, 1, GL_FALSE, value_ptr( view ) );
     glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( W ) );
+    glUniform3f( col_uni, 1, 0, 0 );
 
     glBindVertexArray( m_grid_vao );
     glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
 
-
-    glUniform3f( col_uni, 1, 0, 0 );
+    W = glm::translate( W, vec3( 0, 0, 10 ) );
     glBindVertexArray(m_cube_vao );
     glDrawElements( GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0 );
 
