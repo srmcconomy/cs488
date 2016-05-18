@@ -418,6 +418,12 @@ bool A1::keyInputEvent(int key, int action, int mods) {
       moveCursor(0, 1, mods & GLFW_MOD_SHIFT);
       eventHandled = true;
       break;
+     case(GLFW_KEY_R):
+      reset();
+      break;
+     case(GLFW_KEY_Q):
+      reset();
+      break;
     }
   }
   return eventHandled;
@@ -435,4 +441,24 @@ void A1::moveCursor(int x, int y, bool copy) {
     heights[currentPos[0] * DIM + currentPos[1]] = h;
     cubeColours[currentPos[0] * DIM + currentPos[1]] = c;
   }
+}
+
+void A1::reset() {
+  currentPos[0] = 0;
+  currentPos[1] = 1;
+  for (int x = 0; x < DIM; x++) {
+    for (int y = 0; y < DIM; y++) {
+      heights[x * DIM + y] = 0;
+      cubeColours[x * DIM + y] = 0;
+    }
+  }
+  for (int i = 0; i < NUM_COLOURS; i++) {
+    colours[i][0] = 0;
+    colours[i][1] = 0;
+    colours[i][2] = 0;
+  }
+  rotation = 0;
+  scale = 1.0f;
+  current_col = 0;
+
 }

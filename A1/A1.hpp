@@ -31,6 +31,7 @@ class A1 : public CS488Window {
   void initGrid();
   void initCube();
   void moveCursor(int, int, bool);
+  void reset();
 
   // Fields related to the shader and uniforms.
   ShaderProgram m_shader;
