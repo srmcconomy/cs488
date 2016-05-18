@@ -358,7 +358,7 @@ bool A1::mouseButtonInputEvent(int button, int actions, int mods) {
 bool A1::mouseScrollEvent(double xOffSet, double yOffSet) {
   bool eventHandled(false);
 
-  scale += yOffSet;
+  scale *= pow(1.2, yOffSet);
 
   return eventHandled;
 }
