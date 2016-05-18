@@ -13,6 +13,7 @@ using namespace std;
 
 static const size_t DIM = 16;
 static const size_t NUM_COLOURS = 8;
+static const float ROTATE_FACTOR = 0.1f;
 
 //----------------------------------------------------------------------------------------
 // Constructor
@@ -327,7 +328,7 @@ bool A1::mouseMoveEvent(double xPos, double yPos) {
 
   if (!ImGui::IsMouseHoveringAnyWindow()) {
       if (mouseDown) {
-        rotation += xPos - mouseLastX;
+        rotation += (xPos - mouseLastX) * ROTATE_FACTOR;
       }
       mouseLastX = xPos;
   }
