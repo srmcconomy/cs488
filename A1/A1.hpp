@@ -50,7 +50,7 @@ class A1 : public CS488Window {
   glm::mat4 proj;
   glm::mat4 view;
 
-  float* colours[3];
+  float (*colours)[3];
   int current_col;
   int currentPos[2];
   int** heights;
