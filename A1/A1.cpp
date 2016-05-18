@@ -401,6 +401,9 @@ bool A1::mouseScrollEvent(double xOffSet, double yOffSet) {
 
   scale *= pow(1.2, yOffSet);
 
+  if (scale > 10.0f) scale = 10.0f;
+  if (scale < 0.1f) scale = 0.1f;
+
   return eventHandled;
 }
 
