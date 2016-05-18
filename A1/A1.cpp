@@ -313,7 +313,7 @@ void A1::changeCursorColour() {
   switch(cursorColourState) {
    case(0): case(2): case(4): {
     int index = cursorColourState / 2;
-    cursorColour[index] += 0.01f;
+    cursorColour[index] += 0.05f;
     if (cursorColour[index] >= 1.0f) {
       cursorColour[index] = 1.0f;
       cursorColourState++;
@@ -323,7 +323,7 @@ void A1::changeCursorColour() {
    case(1): case(3): case(5): {
     int index = (cursorColourState - 3) / 2;
     index = index == -1 ? 2 : index;
-    cursorColour[index] -= 0.01f;
+    cursorColour[index] -= 0.05f;
     if (cursorColour[index] <= 0) {
      cursorColour[index] = 0;
      cursorColourState++;
