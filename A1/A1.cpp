@@ -311,7 +311,7 @@ void A1::draw() {
 
 void A1::changeCursorColour() {
   switch(cursorColourState) {
-   case(0): case(2): case(4):
+   case(0): case(2): case(4): {
     int index = cursorColourState / 2;
     cursorColour[index] += 0.01f;
     if (cursorColour[index] >= 1.0f) {
@@ -319,16 +319,18 @@ void A1::changeCursorColour() {
       cursorColourState++;
     }
     break;
-     case(1): case(3): case(5):
-      int index = (cursorColourState - 3) / 2;
-      index = index == -1 ? 2 : index;
-      cursorColour[index] -= 0.01f;
-      if (cursorColour[index] <= 0) {
-       cursorColour[index] = 0;
-       cursorColourState++;
-       if (cursorColourState > 5) cursorColourState = 0;
-      }
-      break;
+   }
+   case(1): case(3): case(5): {
+    int index = (cursorColourState - 3) / 2;
+    index = index == -1 ? 2 : index;
+    cursorColour[index] -= 0.01f;
+    if (cursorColour[index] <= 0) {
+     cursorColour[index] = 0;
+     cursorColourState++;
+     if (cursorColourState > 5) cursorColourState = 0;
+    }
+    break;
+   }
   }
 }
 
