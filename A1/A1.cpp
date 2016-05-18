@@ -27,8 +27,6 @@ A1::A1() : current_col(0), rotation(0), scale(1.0f), mouseLastX(0), mouseDown(fa
     colours[i][1] = 0;
     colours[i][2] = 0;
   }
-  heights = new int[DIM * DIM];
-  cubeColours = new int[DIM * DIM];
   grid = new Grid(DIM);
   currentPos[0] = 0;
   currentPos[1] = 0;
@@ -276,10 +274,10 @@ void A1::draw() {
 
     for (int x = 0; x < DIM; x++) {
       for (int y = 0; y < DIM; y++) {
-        float* colour = colours[grid.getColour(x, y)];
+        float* colour = colours[grid->getColour(x, y)];
         glUniform3f( col_uni, colour[0], colour[1], colour[2] );
         mat4 M2 = glm::translate(M, vec3((float)x * 2.0f, 0, (float)y * 2.0f));
-        for (int h = 0; h < grid.getHeight(x, y); h++) {
+        for (int h = 0; h < grid->getHeight(x, y); h++) {
           glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( M2 ) );
           glDrawElements( GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0 );
           M2 = glm::translate(M2, vec3(0, 2.0f, 0));
@@ -288,7 +286,7 @@ void A1::draw() {
     }
 
     glDisable( GL_DEPTH_TEST );
-    M = glm::translate(M, vec3((float)currentPos[0] * 2.0f, (float)grid.getHeight(currentPos[0], currentPos[1]) * 2.0f, (float)currentPos[1] * 2.0f));
+    M = glm::translate(M, vec3((float)currentPos[0] * 2.0f, (float)grid->getHeight(currentPos[0], currentPos[1]) * 2.0f, (float)currentPos[1] * 2.0f));
     glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( M ) );
     glUniform3f( col_uni, cursorColour[0], cursorColour[1], cursorColour[2] );
     glDrawElements( GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
@@ -422,12 +420,12 @@ bool A1::keyInputEvent(int key, int action, int mods) {
   if( action == GLFW_PRESS ) {
     switch(key) {
      case(GLFW_KEY_SPACE):
-      if (grid.getHeight(currentPos[0], currentPos[1]) == 0) grid.setColour(currentPos[0], currentPos[1], current_col);
-      grid.incrHeight(currentPos[0], currentPos[1]);
+      if (grid->getHeight(currentPos[0], currentPos[1]) == 0) grid->setColour(currentPos[0], currentPos[1], current_col);
+      grid->incrHeight(currentPos[0], currentPos[1]);
       eventHandled = true;
       break;
      case(GLFW_KEY_BACKSPACE):
-      if (grid.getHeight(currentPos[0], currentPos[1]) > 0) grid.decrHeight(currentPos[0], currentPos[1]);
+      if (grid->getHeight(currentPos[0], currentPos[1]) > 0) grid->decrHeight(currentPos[0], currentPos[1]);
       eventHandled = true;
       break;
      case(GLFW_KEY_LEFT):
@@ -461,20 +459,20 @@ void A1::moveCursor(int x, int y, bool copy) {
   if (currentPos[0] + x < 0 || currentPos[0] + x > DIM - 1 ||
     currentPos[1] + y < 0 || currentPos[1] + y > DIM - 1)
     return;
-  int h = grid.getHeight(currentPos[0], currentPos[1]);
-  int c = grid.getColour(currentPos[0], currentPos[1]);
+  int h = grid->getHeight(currentPos[0], currentPos[1]);
+  int c = grid->getColour(currentPos[0], currentPos[1]);
   currentPos[0] += x;
   currentPos[1] += y;
   if (copy) {
-    grid.setHeight(currentPos[0], currentPos[1], h);
-    grid.setColour(currentPos[0], currentPos[1], c);
+    grid->setHeight(currentPos[0], currentPos[1], h);
+    grid->setColour(currentPos[0], currentPos[1], c);
   }
 }
 
 void A1::reset() {
   currentPos[0] = 0;
   currentPos[1] = 0;
-  grid.reset();
+  grid->reset();
   for (int i = 0; i < NUM_COLOURS; i++) {
     colours[i][0] = 0;
     colours[i][1] = 0;
