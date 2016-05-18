@@ -32,6 +32,7 @@ class A1 : public CS488Window {
   void initCube();
   void moveCursor(int, int, bool);
   void reset();
+  void changeCursorColour();
 
   // Fields related to the shader and uniforms.
   ShaderProgram m_shader;
@@ -58,6 +59,8 @@ class A1 : public CS488Window {
   int* cubeColours;
   float rotation;
   float scale;
+  float[3] cursorColour;
+  int cursorColourState;
 
   bool mouseDown;
   double mouseLastX;

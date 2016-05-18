@@ -17,7 +17,10 @@ static const float ROTATE_FACTOR = 0.01f;
 
 //----------------------------------------------------------------------------------------
 // Constructor
-A1::A1() : current_col(0), rotation(0), scale(1.0f), mouseLastX(0), mouseDown(false) {
+A1::A1() : current_col(0), rotation(0), scale(1.0f), mouseLastX(0), mouseDown(false), cursorColourState(1) {
+  cursorColour[0] = 1.0f;
+  cursorColour[1] = 0;
+  cursorColour[2] = 0;
   colours = new float[NUM_COLOURS][3];
   for (int i = 0; i < NUM_COLOURS; i++) {
     colours[i][0] = 0;
@@ -295,14 +298,39 @@ void A1::draw() {
     glDisable( GL_DEPTH_TEST );
     M = glm::translate(M, vec3((float)currentPos[0] * 2.0f, (float)heights[currentPos[0] * DIM + currentPos[1]] * 2.0f, (float)currentPos[1] * 2.0f));
     glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( M ) );
-    glUniform3f( col_uni, 1, 0, 0 );
+    glUniform3f( col_uni, cursorColour[0], cursorColour[1], cursorColour[2] );
     glDrawElements( GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
   m_shader.disable();
 
   // Restore defaults
   glBindVertexArray( 0 );
+  changeCursorColour();
 
   CHECK_GL_ERRORS;
+}
+
+void A1::changeCursorColour() {
+  int index = 0;
+  switch(cursorColourState) {
+   case(0): case(2): case(4):
+    int index = cursorColour / 2;
+    cursorColour[index] += 0.01f;
+    if (cursorColour[index] >= 1.0f) {
+      cursorColour[index] = 1.0f;
+      cursorColourState++;
+    }
+    break;
+     case(1): case(3): case(5):
+      int index = (cursorColour - 3) / 2;
+      index = index == -1 ? 2 : index;
+      cursorColour[index] -= 0.01f;
+      if (cursorColour[index] <= 0) {
+       cursorColour[index] = 0;
+       cursorColourState++;
+       if (cursorColourState > 5) cursorColourState = 0;
+      }
+      break;
+  }
 }
 
 //----------------------------------------------------------------------------------------
