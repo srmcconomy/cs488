@@ -220,7 +220,7 @@ void A1::guiLogic() {
       ImGui::ColorEdit3( "##Colour", colours[i] );
       ImGui::SameLine();
       if( ImGui::RadioButton( "##Col", &current_col, i ) ) {
-          cubeColours[currentPos[0] * DIM + currentPos[1]] = current_col;
+          grid->setColour(currentPos[0], currentPos[1], current_col);
       }
       ImGui::PopID();
     }
