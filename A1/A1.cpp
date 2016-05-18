@@ -244,8 +244,6 @@ void A1::guiLogic() {
 */
 
     ImGui::Text( "Framerate: %.1f FPS", ImGui::GetIO().Framerate );
-    ImGui::Text( "X: %d", currentPos[0] );
-    ImGui::Text( "Y: %d", currentPos[1] );
 
   ImGui::End();
 
