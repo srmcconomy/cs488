@@ -44,6 +44,16 @@ void Grid::setHeight( int x, int y, int h )
 	m_heights[ y * m_dim + x ] = h;
 }
 
+void Grid::incrHeight( int x, int y)
+{
+  m_heights[y * m_dim + x]++;
+}
+
+void Grid::decrHeight( int x, int y)
+{
+  m_heights[y * m_dim + x]--;
+}
+
 void Grid::setColour( int x, int y, int c )
 {
 	m_cols[ y * m_dim + x ] = c;

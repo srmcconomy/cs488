@@ -15,7 +15,9 @@ public:
 
 	void setHeight( int x, int y, int h );
 	void setColour( int x, int y, int c );
-	
+	void incrHeight(int x, int y);
+	void decrHeight(int x, int y);
+
 private:
 	size_t m_dim;
 	int *m_heights;
