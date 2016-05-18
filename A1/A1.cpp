@@ -13,7 +13,7 @@ using namespace std;
 
 static const size_t DIM = 16;
 static const size_t NUM_COLOURS = 8;
-static const float ROTATE_FACTOR = 0.1f;
+static const float ROTATE_FACTOR = 0.01f;
 
 //----------------------------------------------------------------------------------------
 // Constructor
