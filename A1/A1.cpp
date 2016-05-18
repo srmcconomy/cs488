@@ -261,21 +261,21 @@ void A1::draw() {
   mat4 W;
   W = glm::scale(W, vec3(scale, scale, scale));
   W = glm::rotate(W, rotation, vec3(0, 1, 0));
-  W = glm::translate( W, vec3( -float(DIM)/2.0f, 0, -float(DIM)/2.0f ) );
+  mat4 M;
+  M = glm::translate( W, vec3( -float(DIM)/2.0f, 0, -float(DIM)/2.0f ) );
 
   m_shader.enable();
     glEnable( GL_DEPTH_TEST );
 
     glUniformMatrix4fv( P_uni, 1, GL_FALSE, value_ptr( proj ) );
     glUniformMatrix4fv( V_uni, 1, GL_FALSE, value_ptr( view ) );
-    glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( W ) );
+    glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( M ) );
     glUniform3f( col_uni, 1, 1, 1 );
 
     glBindVertexArray( m_grid_vao );
     glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
 
-    mat4 M;
-    M = glm::translate( M, vec3( -7.5f, 0.5f, -7.5f ) );
+    M = glm::translate( W, vec3( -7.5f, 0.5f, -7.5f ) );
     M = glm::scale(M, vec3(0.5f, 0.5f, 0.5f));
 
     glBindVertexArray(m_cube_vao );
