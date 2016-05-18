@@ -190,6 +190,41 @@ void A1::initCube() {
   CHECK_GL_ERRORS;
 }
 
+void A1::initSquare() {
+  float vertices[] = {
+    -1.0f, 1.0f, -1.0f,
+    -1.0f, 1.0f, 1.0f,
+    1.0f, 1.0f, -1.0f,
+    1.0f, 1.0f, 1.0f
+  };
+  unsigned short indices[] = {
+    0, 1, 2, 3
+  };
+
+  glGenVertexArrays(1, &m_square_vao);
+  glBindVertexArray(m_square_vao);
+
+  glGenBuffers(2, &m_square_vbo);
+
+  glBindBuffer(GL_ARRAY_BUFFER, m_square_vbo);
+  glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), vertices, GL_STATIC_DRAW);
+
+  GLint posAttrib = m_shader.getAttribLocation( "position" );
+  glEnableVertexAttribArray( posAttrib );
+  glVertexAttribPointer( posAttrib, 3, GL_FLOAT, GL_FALSE, 0, nullptr );
+
+  glGenBuffers(1, &m_square_ibo);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_square_ibo);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(unsigned short),
+    indices, GL_STATIC_DRAW);
+
+  glBindVertexArray( 0 );
+  glBindBuffer( GL_ARRAY_BUFFER, 0 );
+  glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
+
+  CHECK_GL_ERRORS;
+}
+
 
 
 //----------------------------------------------------------------------------------------
@@ -293,6 +328,10 @@ void A1::draw() {
         }
       }
     }
+
+    glBindVertexArray(m_square_vao);
+    M = glm::translate(M, vec3((float)currentPos[0] * 2.0f, (float)heights[currentPos[0] * DIM + currentPos[1]] * 2.0f, (float)currentPos[1] * 2.0f));
+
   m_shader.disable();
 
   // Restore defaults
@@ -422,7 +461,7 @@ bool A1::keyInputEvent(int key, int action, int mods) {
       reset();
       break;
      case(GLFW_KEY_Q):
-      reset();
+      glfwSetWindowShouldClose(m_window, GL_TRUE);
       break;
     }
   }
@@ -445,7 +484,7 @@ void A1::moveCursor(int x, int y, bool copy) {
 
 void A1::reset() {
   currentPos[0] = 0;
-  currentPos[1] = 1;
+  currentPos[1] = 0;
   for (int x = 0; x < DIM; x++) {
     for (int y = 0; y < DIM; y++) {
       heights[x * DIM + y] = 0;

@@ -30,6 +30,7 @@ class A1 : public CS488Window {
  private:
   void initGrid();
   void initCube();
+  void initSquare();
   void moveCursor(int, int, bool);
   void reset();
 
@@ -46,6 +47,9 @@ class A1 : public CS488Window {
   GLuint m_cube_vao;
   GLuint m_cube_vbo;
   GLuint m_cube_ibo;
+  GLuint m_square_vao;
+  GLuint m_square_vbo;
+  GLuint m_square_ibo;
 
   // Matrices controlling the camera and projection.
   glm::mat4 proj;
