@@ -292,6 +292,7 @@ void A1::draw() {
       }
     }
 
+    glDisable( GL_DEPTH_TEST );
     M = glm::translate(M, vec3((float)currentPos[0] * 2.0f, (float)heights[currentPos[0] * DIM + currentPos[1]] * 2.0f, (float)currentPos[1] * 2.0f));
     glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( M ) );
     glUniform3f( col_uni, 1, 0, 0 );
