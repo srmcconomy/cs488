@@ -296,7 +296,7 @@ void A1::draw() {
     M = glm::translate(M, vec3((float)currentPos[0] * 2.0f, (float)heights[currentPos[0] * DIM + currentPos[1]] * 2.0f, (float)currentPos[1] * 2.0f));
     glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( M ) );
     glUniform3f( col_uni, 1, 0, 0 );
-    glDrawElements( GL_LINES, 4, GL_UNSIGNED_SHORT, 0);
+    glDrawElements( GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
   m_shader.disable();
 
   // Restore defaults
