@@ -310,7 +310,6 @@ void A1::draw() {
 }
 
 void A1::changeCursorColour() {
-  int index = 0;
   switch(cursorColourState) {
    case(0): case(2): case(4):
     int index = cursorColourState / 2;
