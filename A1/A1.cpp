@@ -339,7 +339,7 @@ bool A1::mouseMoveEvent(double xPos, double yPos) {
 /*
  * Event handler.  Handles mouse button events.
  */
-bool A1::mouseButtonInputEvent(int button, int actions, int mods) {
+bool A1::mouseButtonInputEvent(int button, int action, int mods) {
   bool eventHandled(false);
 
   if (!ImGui::IsMouseHoveringAnyWindow()) {
