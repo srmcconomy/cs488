@@ -23,12 +23,12 @@ A1::A1() : current_col(0), rotation(0) {
     colours[i][1] = 0;
     colours[i][2] = 0;
   }
-  heights = new int[DIM][DIM];
-  cubeColours = new int[DIM][DIM];
+  heights = new int[DIM * DIM];
+  cubeColours = new int[DIM * DIM];
   for (int x = 0; x < DIM; x++) {
     for (int y = 0; y < DIM; y++) {
-      heights[x][y] = 0;
-      cubeColours[x][y] = 0;
+      heights[x * DIM + y] = 0;
+      cubeColours[x * DIM + y] = 0;
     }
   }
   currentPos[0] = 0;
@@ -226,7 +226,7 @@ void A1::guiLogic() {
       ImGui::ColorEdit3( "##Colour", colours[i] );
       ImGui::SameLine();
       if( ImGui::RadioButton( "##Col", &current_col, i ) ) {
-          cubeColours[currentPos[0]][currentPos[1]] = current_col;
+          cubeColours[currentPos[0] * DIM + currentPos[1]] = current_col;
       }
       ImGui::PopID();
     }
@@ -281,10 +281,10 @@ void A1::draw() {
 
     for (int x = 0; x < DIM; x++) {
       for (int y = 0; y < DIM; y++) {
-        float* colour = colours[cubeColours[x][y]];
+        float* colour = colours[cubeColours[x * DIM + y]];
         glUniform3f( col_uni, colour[0], colour[1], colour[2] );
         mat4 M2 = glm::translate(M, vec3((float)x * 2.0f, 0, (float)y * 2.0f));
-        for (int h = 0; h < heights[x][y]; h++) {
+        for (int h = 0; h < heights[x * DIM + y]; h++) {
           glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( M2 ) );
           glDrawElements( GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0 );
           M2 = glm::translate(M2, vec3(0, 2.0f, 0));
@@ -385,12 +385,12 @@ bool A1::keyInputEvent(int key, int action, int mods) {
   if( action == GLFW_PRESS ) {
     switch(key) {
      case(GLFW_KEY_SPACE):
-      if (heights[currentPos[0]][currentPos[1]] == 0) cubeColours[currentPos[0]][currentPos[1]] = current_col;
-      heights[currentPos[0]][currentPos[1]]++;
+      if (heights[currentPos[0] * DIM + currentPos[1]] == 0) cubeColours[currentPos[0] * DIM + currentPos[1]] = current_col;
+      heights[currentPos[0] * DIM + currentPos[1]]++;
       eventHandled = true;
       break;
      case(GLFW_KEY_BACKSPACE):
-      if (heights[currentPos[0]][currentPos[1]] > 0) heights[currentPos[0]][currentPos[1]]--;
+      if (heights[currentPos[0] * DIM + currentPos[1]] > 0) heights[currentPos[0] * DIM + currentPos[1]]--;
       eventHandled = true;
       break;
      case(GLFW_KEY_LEFT):
@@ -418,12 +418,12 @@ void A1::moveCursor(int x, int y, bool copy) {
   if (currentPos[0] + x < 0 || currentPos[0] + x > DIM - 1 ||
     currentPos[1] + y < 0 || currentPos[1] + y > DIM - 1)
     return;
-  int h = heights[currentPos[0]][currentPos[1]];
-  int c = cubeColours[currentPos[0]][currentPos[1]];
+  int h = heights[currentPos[0] * DIM + currentPos[1]];
+  int c = cubeColours[currentPos[0] * DIM + currentPos[1]];
   currentPos[0] += x;
   currentPos[1] += y;
   if (copy) {
-    heights[currentPos[0]][currentPos[1]] = h;
-    cubeColours[currentPos[0]][currentPos[1]] = c;
+    heights[currentPos[0] * DIM + currentPos[1]] = h;
+    cubeColours[currentPos[0] * DIM + currentPos[1]] = c;
   }
 }

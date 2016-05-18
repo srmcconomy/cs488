@@ -53,8 +53,8 @@ class A1 : public CS488Window {
   float (*colours)[3];
   int current_col;
   int currentPos[2];
-  int** heights;
-  int** cubeColours;
+  int* heights;
+  int* cubeColours;
   float rotation;
   float scale;
 };
