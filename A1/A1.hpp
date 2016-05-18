@@ -59,7 +59,7 @@ class A1 : public CS488Window {
   int* cubeColours;
   float rotation;
   float scale;
-  float[3] cursorColour;
+  float cursorColour[3];
   int cursorColourState;
 
   bool mouseDown;
