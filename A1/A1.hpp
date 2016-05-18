@@ -30,6 +30,7 @@ class A1 : public CS488Window {
  private:
   void initGrid();
   void initCube();
+  void moveCursor(int, int, bool);
 
   // Fields related to the shader and uniforms.
   ShaderProgram m_shader;
@@ -49,6 +50,11 @@ class A1 : public CS488Window {
   glm::mat4 proj;
   glm::mat4 view;
 
-  float colour[3];
+  float* colours[3];
   int current_col;
+  int currentPos[2];
+  int** heights;
+  int** cubeColours;
+  float rotation;
+  float scale;
 };

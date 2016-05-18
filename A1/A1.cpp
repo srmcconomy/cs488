@@ -12,28 +12,43 @@ using namespace glm;
 using namespace std;
 
 static const size_t DIM = 16;
+static const size_t NUM_COLOURS = 8;
 
 //----------------------------------------------------------------------------------------
 // Constructor
-A1::A1()
-  : current_col( 0 )
-{
-  colour[0] = 0.0f;
-  colour[1] = 0.0f;
-  colour[2] = 0.0f;
+A1::A1() : current_col(0), rotation(0) {
+  colours = new float[NUM_COLOURS][3];
+  for (int i = 0; i < NUM_COLOURS; i++) {
+    colours[i][0] = 0;
+    colours[i][1] = 0;
+    colours[i][2] = 0;
+  }
+  heights = new int[DIM][DIM];
+  cubeColours = new int[DIM][DIM];
+  for (int x = 0; x < DIM; x++) {
+    for (int y = 0; y < DIM; y++) {
+      heights[x][y] = 0;
+      cubeColours[x][y] = 0;
+    }
+  }
+  currentPos[0] = 0;
+  currentPos[1] = 0;
 }
 
 //----------------------------------------------------------------------------------------
 // Destructor
-A1::~A1()
-{}
+A1::~A1() {
+  delete [] colours;
+  delete [] heights;
+  delete [] cubeColours;
+}
 
 //----------------------------------------------------------------------------------------
 /*
  * Called once, at program start.
  */
-void A1::init()
-{
+void A1::init() {
+
   // Set the background colour.
   glClearColor( 0.3, 0.5, 0.7, 1.0 );
 
@@ -57,8 +72,7 @@ void A1::init()
   // Set up initial view and projection matrices (need to do this here,
   // since it depends on the GLFW window being set up correctly).
   view = glm::lookAt(
-    //glm::vec3( 0.0f, float(DIM)*2.0*M_SQRT1_2, float(DIM)*2.0*M_SQRT1_2 ),
-    glm::vec3( 0.0f, 30.0f, 0.0f ),
+    glm::vec3( 0.0f, float(DIM)*2.0*M_SQRT1_2, float(DIM)*2.0*M_SQRT1_2 ),
     glm::vec3( 0.0f, 0.0f, 0.0f ),
     glm::vec3( 0.0f, 1.0f, 0.0f ) );
   proj = glm::perspective(
@@ -67,8 +81,7 @@ void A1::init()
     1.0f, 1000.0f );
 }
 
-void A1::initGrid()
-{
+void A1::initGrid() {
   size_t sz = 3 * 2 * 2 * (DIM+3);
 
   float *verts = new float[ sz ];
@@ -168,6 +181,12 @@ void A1::initCube() {
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_cube_ibo);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, 36 * sizeof(unsigned short),
     indices, GL_STATIC_DRAW);
+
+  glBindVertexArray( 0 );
+  glBindBuffer( GL_ARRAY_BUFFER, 0 );
+  glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
+
+  CHECK_GL_ERRORS;
 }
 
 
@@ -176,8 +195,7 @@ void A1::initCube() {
 /*
  * Called once per frame, before guiLogic().
  */
-void A1::appLogic()
-{
+void A1::appLogic() {
   // Place per frame, application logic here ...
 }
 
@@ -185,8 +203,7 @@ void A1::appLogic()
 /*
  * Called once per frame, after appLogic(), but before the draw() method.
  */
-void A1::guiLogic()
-{
+void A1::guiLogic() {
   // We already know there's only going to be one window, so for
   // simplicity we'll store button states in static local variables.
   // If there was ever a possibility of having multiple instances of
@@ -203,22 +220,16 @@ void A1::guiLogic()
       glfwSetWindowShouldClose(m_window, GL_TRUE);
     }
 
-    // Eventually you'll create multiple colour widgets with
-    // radio buttons.  If you use PushID/PopID to give them all
-    // unique IDs, then ImGui will be able to keep them separate.
-    // This is unnecessary with a single colour selector and
-    // radio button, but I'm leaving it in as an example.
-
-    // Prefixing a widget name with "##" keeps it from being
-    // displayed.
-
-    ImGui::PushID( 0 );
-    ImGui::ColorEdit3( "##Colour", colour );
-    ImGui::SameLine();
-    if( ImGui::RadioButton( "##Col", &current_col, 0 ) ) {
-      // Select this colour.
+    //All Colour controls
+    for (int i = 0; i < NUM_COLOURS; i++) {
+      ImGui::PushID( i );
+      ImGui::ColorEdit3( "##Colour", colours[i] );
+      ImGui::SameLine();
+      if( ImGui::RadioButton( "##Col", &current_col, i ) ) {
+          cubeColours[currentPos[0]][currentPos[1]] = current_col;
+      }
+      ImGui::PopID();
     }
-    ImGui::PopID();
 
 /*
     // For convenience, you can uncomment this to show ImGui's massive
@@ -231,6 +242,8 @@ void A1::guiLogic()
 */
 
     ImGui::Text( "Framerate: %.1f FPS", ImGui::GetIO().Framerate );
+    ImGui::Text( "X: %d", currentPos[0] );
+    ImGui::Text( "Y: %d", currentPos[1] );
 
   ImGui::End();
 
@@ -243,10 +256,10 @@ void A1::guiLogic()
 /*
  * Called once per frame, after guiLogic().
  */
-void A1::draw()
-{
+void A1::draw() {
   // Create a global transformation for the model (centre it).
   mat4 W;
+  W = glm::scale(scale, scale, scale) * glm::rotateY(rotation);
   W = glm::translate( W, vec3( -float(DIM)/2.0f, 0, -float(DIM)/2.0f ) );
 
   m_shader.enable();
@@ -255,16 +268,29 @@ void A1::draw()
     glUniformMatrix4fv( P_uni, 1, GL_FALSE, value_ptr( proj ) );
     glUniformMatrix4fv( V_uni, 1, GL_FALSE, value_ptr( view ) );
     glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( W ) );
-    glUniform3f( col_uni, 1, 0, 0 );
+    glUniform3f( col_uni, 1, 1, 1 );
 
     glBindVertexArray( m_grid_vao );
     glDrawArrays( GL_LINES, 0, (3+DIM)*4 );
 
-    glBindVertexArray(m_cube_vao );
-    glDrawElements( GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0 );
+    mat4 M;
+    M = glm::translate( M, vec3( -7.5f, 0.5f, -7.5f ) );
+    M = glm::scale(M, vec3(0.5f, 0.5f, 0.5f));
 
-    // Draw the cubes
-    // Highlight the active square.
+    glBindVertexArray(m_cube_vao );
+
+    for (int x = 0; x < DIM; x++) {
+      for (int y = 0; y < DIM; y++) {
+        float* colour = colours[cubeColours[x][y]];
+        glUniform3f( col_uni, colour[0], colour[1], colour[2] );
+        mat4 M2 = glm::translate(M, vec3((float)x * 2.0f, 0, (float)y * 2.0f));
+        for (int h = 0; h < heights[x][y]; h++) {
+          glUniformMatrix4fv( M_uni, 1, GL_FALSE, value_ptr( M2 ) );
+          glDrawElements( GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, 0 );
+          M2 = glm::translate(M2, vec3(0, 2.0f, 0));
+        }
+      }
+    }
   m_shader.disable();
 
   // Restore defaults
@@ -277,16 +303,13 @@ void A1::draw()
 /*
  * Called once, after program is signaled to terminate.
  */
-void A1::cleanup()
-{}
+void A1::cleanup() { }
 
 //----------------------------------------------------------------------------------------
 /*
  * Event handler.  Handles cursor entering the window area events.
  */
-bool A1::cursorEnterWindowEvent (
-    int entered
-) {
+bool A1::cursorEnterWindowEvent(int entered) {
   bool eventHandled(false);
 
   // Fill in with event handling code...
@@ -298,8 +321,7 @@ bool A1::cursorEnterWindowEvent (
 /*
  * Event handler.  Handles mouse cursor movement events.
  */
-bool A1::mouseMoveEvent(double xPos, double yPos)
-{
+bool A1::mouseMoveEvent(double xPos, double yPos) {
   bool eventHandled(false);
 
   if (!ImGui::IsMouseHoveringAnyWindow()) {
@@ -335,7 +357,7 @@ bool A1::mouseButtonInputEvent(int button, int actions, int mods) {
 bool A1::mouseScrollEvent(double xOffSet, double yOffSet) {
   bool eventHandled(false);
 
-  // Zoom in or out.
+  scale += yOffset;
 
   return eventHandled;
 }
@@ -361,8 +383,47 @@ bool A1::keyInputEvent(int key, int action, int mods) {
 
   // Fill in with event handling code...
   if( action == GLFW_PRESS ) {
-    // Respond to some key events.
+    switch(key) {
+     case(GLFW_KEY_SPACE):
+      if (heights[currentPos[0]][currentPos[1]] == 0) cubeColours[currentPos[0]][currentPos[1]] = current_col;
+      heights[currentPos[0]][currentPos[1]]++;
+      eventHandled = true;
+      break;
+     case(GLFW_KEY_BACKSPACE):
+      if (heights[currentPos[0]][currentPos[1]] > 0) heights[currentPos[0]][currentPos[1]]--;
+      eventHandled = true;
+      break;
+     case(GLFW_KEY_LEFT):
+      moveCursor(-1, 0, mods & GLFW_MOD_SHIFT);
+      eventHandled = true;
+      break;
+     case(GLFW_KEY_RIGHT):
+      moveCursor(1, 0, mods & GLFW_MOD_SHIFT);
+      eventHandled = true;
+      break;
+     case(GLFW_KEY_UP):
+      moveCursor(0, -1, mods & GLFW_MOD_SHIFT);
+      eventHandled = true;
+      break;
+     case(GLFW_KEY_DOWN):
+      moveCursor(0, 1, mods & GLFW_MOD_SHIFT);
+      eventHandled = true;
+      break;
+    }
   }
-
   return eventHandled;
+}
+
+void A1::moveCursor(int x, int y, bool copy) {
+  if (currentPos[0] + x < 0 || currentPos[0] + x > DIM - 1 ||
+    currentPos[1] + y < 0 || currentPos[1] + y > DIM - 1)
+    return;
+  int h = heights[currentPos[0]][currentPos[1]];
+  int c = cubeColours[currentPos[0]][currentPos[1]];
+  currentPos[0] += x;
+  currentPos[1] += y;
+  if (copy) {
+    heights[currentPos[0]][currentPos[1]] = h;
+    cubeColours[currentPos[0]][currentPos[1]] = c;
+  }
 }
