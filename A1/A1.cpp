@@ -16,7 +16,7 @@ static const size_t NUM_COLOURS = 8;
 
 //----------------------------------------------------------------------------------------
 // Constructor
-A1::A1() : current_col(0), rotation(0) {
+A1::A1() : current_col(0), rotation(0), scale(1.0f) {
   colours = new float[NUM_COLOURS][3];
   for (int i = 0; i < NUM_COLOURS; i++) {
     colours[i][0] = 0;
