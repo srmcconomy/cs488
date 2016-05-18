@@ -57,4 +57,7 @@ class A1 : public CS488Window {
   int* cubeColours;
   float rotation;
   float scale;
+
+  bool mouseDown;
+  double mouseLastX;
 };

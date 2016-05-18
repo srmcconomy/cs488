@@ -16,7 +16,7 @@ static const size_t NUM_COLOURS = 8;
 
 //----------------------------------------------------------------------------------------
 // Constructor
-A1::A1() : current_col(0), rotation(0), scale(1.0f) {
+A1::A1() : current_col(0), rotation(0), scale(1.0f), mouseLastX(0), mouseDown(false) {
   colours = new float[NUM_COLOURS][3];
   for (int i = 0; i < NUM_COLOURS; i++) {
     colours[i][0] = 0;
@@ -326,11 +326,10 @@ bool A1::mouseMoveEvent(double xPos, double yPos) {
   bool eventHandled(false);
 
   if (!ImGui::IsMouseHoveringAnyWindow()) {
-    // Put some code here to handle rotations.  Probably need to
-    // check whether we're *dragging*, not just moving the mouse.
-    // Probably need some instance variables to track the current
-    // rotation amount, and maybe the previous X position (so
-    // that you can rotate relative to the *change* in X.
+      if (mouseDown) {
+        rotation += xPos - mouseLastX;
+      }
+      mouseLastX = xPos;
   }
 
   return eventHandled;
@@ -344,6 +343,14 @@ bool A1::mouseButtonInputEvent(int button, int actions, int mods) {
   bool eventHandled(false);
 
   if (!ImGui::IsMouseHoveringAnyWindow()) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT)
+      if (action == GLFW_PRESS) {
+        mouseDown = true;
+      }
+      if (action == GLFW_RELEASE) {
+        mouseDown = false;
+      }
+
     // The user clicked in the window.  If it's the left
     // mouse button, initiate a rotation.
   }
