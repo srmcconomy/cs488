@@ -259,7 +259,8 @@ void A1::guiLogic() {
 void A1::draw() {
   // Create a global transformation for the model (centre it).
   mat4 W;
-  W = glm::scale(scale, scale, scale) * glm::rotateY(rotation);
+  W = glm::scale(W, vex3(scale, scale, scale));
+  W = glm::rotateY(W, rotation)
   W = glm::translate( W, vec3( -float(DIM)/2.0f, 0, -float(DIM)/2.0f ) );
 
   m_shader.enable();
