@@ -19,7 +19,7 @@ enum mode {
   TRANSLATE_MODEL,
   SCALE_MODEL,
   VIEWPORT
-}
+};
 
 float vertices[24] = {
   -1.0f, -1.0f, -1.0f,
