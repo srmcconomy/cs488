@@ -388,7 +388,7 @@ bool A2::mouseMoveEvent (
  */
 bool A2::mouseButtonInputEvent (
 		int button,
-		int actions,
+		int action,
 		int mods
 ) {
 	bool eventHandled(false);
