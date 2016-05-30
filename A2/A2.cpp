@@ -369,7 +369,7 @@ bool A2::mouseMoveEvent (
 
 
   if (!ImGui::IsMouseHoveringAnyWindow()) {
-    double xOffset = xPos - mouseLastX;
+    float xOffset = xPos - mouseLastX;
     switch(mode) {
       case(ROTATE_VIEW):
         if (leftDown) {
