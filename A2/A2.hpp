@@ -74,7 +74,7 @@ protected:
 	glm::mat4 model;
 	glm::mat4 view;
 
-  vec3 modelTranslation;
+  glm::vec3 modelTranslation;
 
   float rotation;
 
