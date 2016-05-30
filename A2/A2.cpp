@@ -70,7 +70,7 @@ A2::A2()
     0, 0, 1, 0
   };
   proj = glm::make_mat4(projection);
-  view = glm::translate(view, vec3(0, 0, 4.0f))
+  view = glm::translate(view, vec3(0, 0, 4.0f));
 }
 
 //----------------------------------------------------------------------------------------
