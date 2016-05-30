@@ -232,8 +232,8 @@ void A2::appLogic()
 	setLineColour(vec3(1.0f, 0.7f, 0.8f));
   vec3 lineStart(-1.0f, -1.0f, -1.0f);
   vec3 lineEnd(1.0f, 1.0f, 1.0f);
-  lineStart = m * lineStart;
-  lineEnd = m * lineStart;
+  lineStart = proj * lineStart;
+  lineEnd = proj * lineStart;
 	drawLine(vec2(lineStart.x, lineStart.y), vec2(lineEnd.x, lineEnd.y));
 }
 
