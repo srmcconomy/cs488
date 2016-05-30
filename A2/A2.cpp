@@ -61,7 +61,8 @@ A2::A2()
   leftDown(false),
   rightDown(false),
   middleDown(false),
-  mode(ROTATE_MODEL)
+  mode(ROTATE_MODEL),
+  mouseLastX(0)
 {
   float projection[16] = {
     1, 0, 0, 0,
@@ -365,52 +366,59 @@ bool A2::mouseMoveEvent (
 		double yPos
 ) {
 	bool eventHandled(false);
-  switch(mode) {
-    case(ROTATE_VIEW):
-      if (leftDown) {
-        view = glm::rotate(view, 0.1f, vec3(1, 0, 0));
-      }
-      if (middleDown) {
-        view = glm::rotate(view, 0.1f, vec3(0, 1, 0));
-      }
-      if (rightDown) {
-        view = glm::rotate(view, 0.1f, vec3(0, 0, 1));
-      }
-      break;
-    case(TRANSLATE_VIEW):
-      if (leftDown) {
-        view = glm::translate(view, vec3(0.1f, 0, 0));
-      }
-      if (middleDown) {
-        view = glm::translate(view, vec3(0, 0.1f, 0));
-      }
-      if (rightDown) {
-        view = glm::translate(view, vec3(0, 0, 0.1f));
-      }
-      break;
 
-    case(ROTATE_MODEL):
-      if (leftDown) {
-        model = glm::rotate(model, 0.1f, vec3(1, 0, 0));
-      }
-      if (middleDown) {
-        model = glm::rotate(model, 0.1f, vec3(0, 1, 0));
-      }
-      if (rightDown) {
-        model = glm::rotate(model, 0.1f, vec3(0, 0, 1));
-      }
-      break;
-    case(TRANSLATE_MODEL):
-      if (leftDown) {
-        model = glm::translate(model, vec3(0.1f, 0, 0));
-      }
-      if (middleDown) {
-        model = glm::translate(model, vec3(0, 0.1f, 0));
-      }
-      if (rightDown) {
-        model = glm::translate(model, vec3(0, 0, 0.1f));
-      }
-      break;
+
+  if (!ImGui::IsMouseHoveringAnyWindow()) {
+    double xOffset = xPos - mouseLastX;
+    switch(mode) {
+      case(ROTATE_VIEW):
+        if (leftDown) {
+          view = glm::rotate(view, 0.1f * xOffset, vec3(1, 0, 0));
+        }
+        if (middleDown) {
+          view = glm::rotate(view, 0.1f * xOffset, vec3(0, 1, 0));
+        }
+        if (rightDown) {
+          view = glm::rotate(view, 0.1f * xOffset, vec3(0, 0, 1));
+        }
+        break;
+      case(TRANSLATE_VIEW):
+        if (leftDown) {
+          view = glm::translate(view, vec3(0.1f * xOffset, 0, 0));
+        }
+        if (middleDown) {
+          view = glm::translate(view, vec3(0, 0.1f * xOffset, 0));
+        }
+        if (rightDown) {
+          view = glm::translate(view, vec3(0, 0, 0.1f * xOffset));
+        }
+        break;
+
+      case(ROTATE_MODEL):
+        if (leftDown) {
+          model = glm::rotate(model, 0.1f * xOffset, vec3(1, 0, 0));
+        }
+        if (middleDown) {
+          model = glm::rotate(model, 0.1f * xOffset, vec3(0, 1, 0));
+        }
+        if (rightDown) {
+          model = glm::rotate(model, 0.1f * xOffset, vec3(0, 0, 1));
+        }
+        break;
+      case(TRANSLATE_MODEL):
+        if (leftDown) {
+          model = glm::translate(model, vec3(0.1f * xOffset, 0, 0));
+        }
+        if (middleDown) {
+          model = glm::translate(model, vec3(0, 0.1f * xOffset, 0));
+        }
+        if (rightDown) {
+          model = glm::translate(model, vec3(0, 0, 0.1f * xOffset));
+        }
+        break;
+    }
+
+    mouseLastX = xPos;
   }
 	// Fill in with event handling code...
 

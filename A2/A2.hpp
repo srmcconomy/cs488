@@ -94,4 +94,6 @@ protected:
 
   Mode mode;
 
+  double mouseLastX;
+
 };
