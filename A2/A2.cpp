@@ -241,7 +241,7 @@ void A2::drawGnomon(mat4 transformation) {
   setLineColour(vec3(1.0f, 0, 0));
   drawLine(vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z), vec2(lineX.x / lineX.z, lineX.y / lineX.z));
   setLineColour(vec3(0, 1.0f, 0));
-  drawLine(vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z), vec2(lineY.x / lineY.z, lineZ.y / lineY.z));
+  drawLine(vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z), vec2(lineY.x / lineY.z, lineY.y / lineY.z));
   setLineColour(vec3(0, 0, 1.0f));
   drawLine(vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z), vec2(lineZ.x / lineZ.z, lineZ.y / lineZ.z));
 }
