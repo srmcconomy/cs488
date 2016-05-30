@@ -226,6 +226,26 @@ void A2::drawLine(
 	m_vertexData.numVertices += 2;
 }
 
+
+void A2::drawGnomon(mat4 transformation) {
+  vec4 lineStart(0, 0, 0, 1.0f);
+  lineStart = transformation * lineStart;
+
+  vec4 lineX(1.0f, 0, 0, 1.0f);
+  lineX = transformation * lineX;
+  vec4 lineY(0, 1.0f, 0, 1.0f);
+  lineY = transformation * lineY;
+  vec4 lineZ(0, 0, 1.0f, 1.0f);
+  lineZ = transformation * lineZ;
+
+  setLineColour(vec3(1.0f, 0, 0));
+  drawLine(vec2(lineStart.x, lineStart.y), vec2(lineX.x, lineX.y));
+  setLineColour(vec3(0, 1.0f, 0));
+  drawLine(vec2(lineStart.x, lineStart.y), vec2(lineY.x, lineZ.y));
+  setLineColour(vec3(0, 0, 1.0f));
+  drawLine(vec2(lineStart.x, lineStart.y), vec2(lineZ.x, lineZ.y));
+}
+
 //----------------------------------------------------------------------------------------
 /*
  * Called once per frame, before guiLogic().
@@ -243,6 +263,10 @@ void A2::appLogic()
   drawLine(vec2(0.5f, -0.5f), vec2(0.5f, 0.5f));
   drawLine(vec2(0.5f, 0.5f), vec2(-0.5f, 0.5f));
   drawLine(vec2(-0.5f, 0.5f), vec2(-0.5f, -0.5f));
+
+  drawGnomon(view);
+  drawGnomon(model);
+
   for (int i = 0; i < 24; i+=2) {
     vec4 lineStart(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
     vec4 lineEnd(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);

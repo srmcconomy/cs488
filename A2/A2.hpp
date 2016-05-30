@@ -60,6 +60,8 @@ protected:
 			const glm::vec2 & v1
 	);
 
+  void drawGnomon(mat4);
+
 	ShaderProgram m_shader;
 
 	GLuint m_vao;            // Vertex Array Object
