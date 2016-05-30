@@ -22,7 +22,7 @@ float vertices[24] = {
   1.0f, 1.0f, 1.0f,
 };
 
-float edges[24] = {
+int edges[24] = {
   0, 1,
   1, 2,
   2, 3,
