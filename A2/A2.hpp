@@ -98,4 +98,6 @@ protected:
 
   double mouseLastX;
 
+  glm::vec4[12] clippingPlanes;
+
 };

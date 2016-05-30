@@ -62,7 +62,15 @@ A2::A2()
   rightDown(false),
   middleDown(false),
   mode(ROTATE_MODEL),
-  mouseLastX(0)
+  mouseLastX(0),
+  clippingPlanes{
+    vec4(-1.0f, 0, 0, 1.0f), vec4(1.0f, 0, 0, 0),
+    vec4(1.0f, 0, 0, 1.0f), vec4(-1.0f, 0, 0, 0),
+    vec4(0, -1.0f, 0, 1.0f), vec4(0, 1.0f, 0, 0),
+    vec4(0, 1.0f, 0, 1.0f), vec4(0, -1.0f, 0, 0),
+    vec4(0, 0, 1.0f, 1.0f), vec4(0, 0, 1.0f, 0),
+    vec4(0, 0, 10f, 1.0f), vec4(0, 0, -1.0f, 0)
+  }
 {
   float projection[16] = {
     1, 0, 0, 0,
