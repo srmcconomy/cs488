@@ -417,6 +417,7 @@ bool A2::mouseButtonInputEvent (
         middleDown = false;
       }
     }
+  }
 
 
 	// Fill in with event handling code...
