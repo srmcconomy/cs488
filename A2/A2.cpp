@@ -263,14 +263,27 @@ void A2::appLogic()
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
 
   for (int i = 0; i < 24; i+=2) {
-    vec4 lineStart(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
-    vec4 lineEnd(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
+    vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
+    vec4 B(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
 
-    lineStart = view * model * lineStart;
-    lineEnd = view * model * lineEnd;
+    A = view * model * A;
+    B = view * model * B;
+
+    float wecA = dot(A - vec4(0, 0, 1.0f, 1.0f), vec4(0, 0, 1.0f, 0));
+    float wecB = dot(B - vec4(0, 0, 1.0f, 1.0f), vec4(0, 0, 1.0f, 0));
+
+    if (wecA < 0 && wecB < 0) continue;
+    if (!(wecA >= 0 && webB >= 0)) {
+      float t = wecA / (wecA - wecB);
+      if (wecA < 0) {
+        A = A + t*(B - A);
+      } else {
+        B = A + t*(B - A):
+      }
+    }
     drawLine(
-      vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z),
-      vec2(lineEnd.x / lineEnd.z, lineEnd.y / lineEnd.z));
+      vec2(A.x / A.z, A.y / A.z),
+      vec2(B.x / B.z, B.y / B.z));
   }
   // lineStart = proj * lineStart;
   // lineEnd = proj * lineStart;
