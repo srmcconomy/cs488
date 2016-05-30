@@ -82,4 +82,16 @@ protected:
   bool middleDown;
   bool rightDown;
 
+  enum Mode {
+    ROTATE_VIEW,
+    TRANSLATE_VIEW,
+    PERSPECTIVE,
+    ROTATE_MODEL,
+    TRANSLATE_MODEL,
+    SCALE_MODEL,
+    VIEWPORT
+  };
+
+  Mode mode;
+
 };

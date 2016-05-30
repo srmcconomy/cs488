@@ -11,15 +11,6 @@ using namespace std;
 #include <glm/gtx/io.hpp>
 using namespace glm;
 
-enum mode {
-  ROTATE_VIEW,
-  TRANSLATE_VIEW,
-  PERSPECTIVE,
-  ROTATE_MODEL,
-  TRANSLATE_MODEL,
-  SCALE_MODEL,
-  VIEWPORT
-};
 
 float vertices[24] = {
   -1.0f, -1.0f, -1.0f,
