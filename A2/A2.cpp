@@ -234,7 +234,7 @@ void A2::appLogic()
   drawLine(vec2(0.5f, -0.5f), vec2(0.5f, 0.5f));
   drawLine(vec2(0.5f, 0.5f), vec2(-0.5f, 0.5f));
   drawLine(vec2(-0.5f, 0.5f), vec2(-0.5f, -0.5f));
-  vec4 lineStart(-0.5f, -0.5f, 0.5f, 1.0f);
+  vec4 lineStart(-0.5f, -0.5f, 2.0f, 1.0f);
   vec4 lineEnd(0.5f, 0.5f, 1.0f, 1.0f);
   vec4 line2Start(-0.5f, -0.5f, 0.5f, 1.0f);
   vec4 line2End(0.5f, 0.5f, 1.0f, 1.0f);
