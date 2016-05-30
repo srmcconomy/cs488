@@ -55,7 +55,8 @@ A2::A2()
 	: m_currentLineColour(vec3(0.0f)),
   model(1.0f),
   view(1.0f),
-  modelTranslation(0, 0, 0)
+  modelTranslation(0, 0, 0),
+  rotation(0)
 {
   float projection[16] = {
     1, 0, 0, 0,
