@@ -265,7 +265,7 @@ void A2::appLogic()
   drawLine(vec2(-0.5f, 0.5f), vec2(-0.5f, -0.5f));
 
   drawGnomon(view);
-  drawGnomon(model);
+  drawGnomon(view * model);
 
   for (int i = 0; i < 24; i+=2) {
     vec4 lineStart(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
