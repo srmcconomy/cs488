@@ -257,15 +257,10 @@ void A2::appLogic()
 	// Call at the beginning of frame, before drawing lines:
 	initLineData();
 
-	// Draw outer square:
-	setLineColour(vec3(1.0f, 0.7f, 0.8f));
-  drawLine(vec2(-0.5f, -0.5f), vec2(0.5f, -0.5f));
-  drawLine(vec2(0.5f, -0.5f), vec2(0.5f, 0.5f));
-  drawLine(vec2(0.5f, 0.5f), vec2(-0.5f, 0.5f));
-  drawLine(vec2(-0.5f, 0.5f), vec2(-0.5f, -0.5f));
-
   drawGnomon(view);
   drawGnomon(view * model);
+
+	setLineColour(vec3(1.0f, 1.0f, 1.0f));
 
   for (int i = 0; i < 24; i+=2) {
     vec4 lineStart(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
