@@ -439,20 +439,19 @@ bool A2::keyInputEvent (
       modelTranslation.x -= 0.1f;
       eventHandled = true;
       break;
-      case(GLFW_KEY_D):
-       modelTranslation.x += 0.1f;
-       eventHandled = true;
-       break;
+     case(GLFW_KEY_D):
+      modelTranslation.x += 0.1f;
+      eventHandled = true;
+      break;
      case(GLFW_KEY_W):
       modelTranslation.y -= 0.1f;
       eventHandled = true;
       break;
-      case(GLFW_KEY_S):
-       modelTranslation.y += 0.1f;
-       eventHandled = true;
-       break;
+     case(GLFW_KEY_S):
+      modelTranslation.y += 0.1f;
+      eventHandled = true;
+      break;
      }
-    }
   }
 
 	// Fill in with event handling code...
