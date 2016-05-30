@@ -238,8 +238,8 @@ void A2::appLogic()
   vec4 lineEnd(0.5f, 0.5f, 1.0f, 1.0f);
   vec4 line2Start(-0.5f, -0.5f, 0.5f, 1.0f);
   vec4 line2End(0.5f, 0.5f, 1.0f, 1.0f);
-  lineStart = proj * lineStart;
-  lineEnd = proj * lineStart;
+  // lineStart = proj * lineStart;
+  // lineEnd = proj * lineStart;
 	drawLine(vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z), vec2(lineEnd.x / lineEnd.z, lineEnd.y / lineEnd.z));
 }
 
