@@ -273,12 +273,12 @@ void A2::appLogic()
     float wecB = dot(B - vec4(0, 0, 1.0f, 1.0f), vec4(0, 0, 1.0f, 0));
 
     if (wecA < 0 && wecB < 0) continue;
-    if (!(wecA >= 0 && webB >= 0)) {
+    if (!(wecA >= 0 && wecB >= 0)) {
       float t = wecA / (wecA - wecB);
       if (wecA < 0) {
         A = A + t*(B - A);
       } else {
-        B = A + t*(B - A):
+        B = A + t*(B - A);
       }
     }
     drawLine(
