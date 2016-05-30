@@ -78,4 +78,8 @@ protected:
 
   float rotation;
 
+  bool leftDown;
+  bool middleDown;
+  bool rightDown;
+
 };

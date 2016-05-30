@@ -11,6 +11,16 @@ using namespace std;
 #include <glm/gtx/io.hpp>
 using namespace glm;
 
+enum mode {
+  ROTATE_VIEW,
+  TRANSLATE_VIEW,
+  PERSPECTIVE,
+  ROTATE_MODEL,
+  TRANSLATE_MODEL,
+  SCALE_MODEL,
+  VIEWPORT
+}
+
 float vertices[24] = {
   -1.0f, -1.0f, -1.0f,
   1.0f, -1.0f, -1.0f,
@@ -56,7 +66,10 @@ A2::A2()
   model(1.0f),
   view(1.0f),
   modelTranslation(0, 0, 0),
-  rotation(0)
+  rotation(0),
+  leftDown(false),
+  rightDown(false),
+  middleDown(false)
 {
   float projection[16] = {
     1, 0, 0, 0,
@@ -379,6 +392,32 @@ bool A2::mouseButtonInputEvent (
 		int mods
 ) {
 	bool eventHandled(false);
+  if (!ImGui::IsMouseHoveringAnyWindow()) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT)
+      if (action == GLFW_PRESS) {
+        leftDown = true;
+      }
+      if (action == GLFW_RELEASE) {
+        leftDown = false;
+      }
+    }
+    if (button == GLFW_MOUSE_BUTTON_RIGHT)
+      if (action == GLFW_PRESS) {
+        rightDown = true;
+      }
+      if (action == GLFW_RELEASE) {
+        rightDown = false;
+      }
+    }
+    if (button == GLFW_MOUSE_BUTTON_MIDDLE)
+      if (action == GLFW_PRESS) {
+        middleDown = true;
+      }
+      if (action == GLFW_RELEASE) {
+        middleDown = false;
+      }
+    }
+
 
 	// Fill in with event handling code...
 
