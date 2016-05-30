@@ -237,7 +237,7 @@ void A2::appLogic()
   drawLine(vec2(-0.5f, 0.5f), vec2(-0.5f, -0.5f));
 
   model = glm::rotate(mat4(1.0f), rotation, vec3(0, 1, 0));
-  model = glm::translate(model, modelTranslation);
+  //model = glm::translate(model, modelTranslation);
   view = glm::translate(mat4(1.0f), vec3(0, 0, 4.0f));
   for (int i = 0; i < 24; i+=2) {
     vec4 lineStart(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
