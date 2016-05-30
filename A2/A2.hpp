@@ -60,7 +60,7 @@ protected:
 			const glm::vec2 & v1
 	);
 
-  void drawGnomon(mat4);
+  void drawGnomon(glm::mat4);
 
 	ShaderProgram m_shader;
 
