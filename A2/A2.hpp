@@ -70,4 +70,8 @@ protected:
 
 	glm::vec3 m_currentLineColour;
 
+	glm::mat4 proj;
+	glm::mat4 model;
+	glm::mat4 view;
+
 };

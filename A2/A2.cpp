@@ -11,6 +11,33 @@ using namespace std;
 #include <glm/gtx/io.hpp>
 using namespace glm;
 
+float vertices[24] = {
+  -1.0f, -1.0f, -1.0f,
+  1.0f, -1.0f, -1.0f,
+  -1.0f, 1.0f, -1.0f,
+  1.0f, 1.0f, -1.0f,
+  -1.0f, -1.0f, 1.0f,
+  1.0f, -1.0f, 1.0f,
+  -1.0f, 1.0f, 1.0f,
+  1.0f, 1.0f, 1.0f,
+};
+
+float edges[24] = {
+  0, 1,
+  1, 2,
+  2, 3,
+  3, 0,
+  0, 4,
+  1, 5,
+  2, 6,
+  3, 7,
+  4, 5,
+  5, 6,
+  6, 7,
+  7, 4
+}
+
+
 //----------------------------------------------------------------------------------------
 // Constructor
 VertexData::VertexData()
@@ -25,9 +52,17 @@ VertexData::VertexData()
 //----------------------------------------------------------------------------------------
 // Constructor
 A2::A2()
-	: m_currentLineColour(vec3(0.0f))
+	: m_currentLineColour(vec3(0.0f)),
+  member(1.0f),
+  view(1.0f)
 {
-
+  float projection[16] = {
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 1,
+    0, 0, 1, 0
+  };
+  proj = glm::make_mat4(projection)
 }
 
 //----------------------------------------------------------------------------------------
@@ -195,18 +230,11 @@ void A2::appLogic()
 
 	// Draw outer square:
 	setLineColour(vec3(1.0f, 0.7f, 0.8f));
-	drawLine(vec2(-0.5f, -0.5f), vec2(0.5f, -0.5f));
-	drawLine(vec2(0.5f, -0.5f), vec2(0.5f, 0.5f));
-	drawLine(vec2(0.5f, 0.5f), vec2(-0.5f, 0.5f));
-	drawLine(vec2(-0.5f, 0.5f), vec2(-0.5f, -0.5f));
-
-
-	// Draw inner square:
-	setLineColour(vec3(0.2f, 1.0f, 1.0f));
-	drawLine(vec2(-0.25f, -0.25f), vec2(0.25f, -0.25f));
-	drawLine(vec2(0.25f, -0.25f), vec2(0.25f, 0.25f));
-	drawLine(vec2(0.25f, 0.25f), vec2(-0.25f, 0.25f));
-	drawLine(vec2(-0.25f, 0.25f), vec2(-0.25f, -0.25f));
+  vec3 lineStart(-1.0f, -1.0f, -1.0f);
+  vec3 lineEnd(1.0f, 1.0f, 1.0f);
+  lineStart = m * lineStart;
+  lineEnd = m * lineStart;
+	drawLine(vec2(lineStart.x, lineStart.y), vec2(lineEnd.x, lineEnd.y));
 }
 
 //----------------------------------------------------------------------------------------
