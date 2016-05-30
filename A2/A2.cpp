@@ -230,8 +230,14 @@ void A2::appLogic()
 
 	// Draw outer square:
 	setLineColour(vec3(1.0f, 0.7f, 0.8f));
+  drawLine(vec2(-0.5f, -0.5f), vec2(0.5f, -0.5f));
+  drawLine(vec2(0.5f, -0.5f), vec2(0.5f, 0.5f));
+  drawLine(vec2(0.5f, 0.5f), vec2(-0.5f, 0.5f));
+  drawLine(vec2(-0.5f, 0.5f), vec2(-0.5f, -0.5f));
   vec4 lineStart(-0.5f, -0.5f, 0.5f, 1.0f);
   vec4 lineEnd(0.5f, 0.5f, 1.0f, 1.0f);
+  vec4 line2Start(-0.5f, -0.5f, 0.5f, 1.0f);
+  vec4 line2End(0.5f, 0.5f, 1.0f, 1.0f);
   lineStart = proj * lineStart;
   lineEnd = proj * lineStart;
 	drawLine(vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z), vec2(lineEnd.x / lineEnd.z, lineEnd.y / lineEnd.z));
