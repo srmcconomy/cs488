@@ -393,7 +393,7 @@ bool A2::mouseButtonInputEvent (
 ) {
 	bool eventHandled(false);
   if (!ImGui::IsMouseHoveringAnyWindow()) {
-    if (button == GLFW_MOUSE_BUTTON_LEFT)
+    if (button == GLFW_MOUSE_BUTTON_LEFT) {
       if (action == GLFW_PRESS) {
         leftDown = true;
       }
@@ -401,7 +401,7 @@ bool A2::mouseButtonInputEvent (
         leftDown = false;
       }
     }
-    if (button == GLFW_MOUSE_BUTTON_RIGHT)
+    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
       if (action == GLFW_PRESS) {
         rightDown = true;
       }
@@ -409,7 +409,7 @@ bool A2::mouseButtonInputEvent (
         rightDown = false;
       }
     }
-    if (button == GLFW_MOUSE_BUTTON_MIDDLE)
+    if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
       if (action == GLFW_PRESS) {
         middleDown = true;
       }
