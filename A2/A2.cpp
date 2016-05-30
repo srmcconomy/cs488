@@ -241,8 +241,8 @@ void A2::appLogic()
     vec4 lineStart(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
     vec4 lineEnd(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
 
-    lineStart = model * view * lineStart;
-    lineEnd = model * view * lineEnd;
+    lineStart = view * model * lineStart;
+    lineEnd = view * model * lineEnd;
     drawLine(
       vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z),
       vec2(lineEnd.x / lineEnd.z, lineEnd.y / lineEnd.z));
