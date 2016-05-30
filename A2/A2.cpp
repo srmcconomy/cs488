@@ -503,20 +503,20 @@ bool A2::keyInputEvent (
 
   if( action == GLFW_PRESS ) {
     switch(key) {
-     case(GLFW_KEY_LEFT):
-      rotation -= 0.1f;
+     case(GLFW_KEY_O):
+      mode = ROTATE_VIEW;
       eventHandled = true;
       break;
-     case(GLFW_KEY_RIGHT):
-      rotation += 0.1f;
+     case(GLFW_KEY_N):
+      mode = TRANSLATE_VIEW;
       eventHandled = true;
       break;
-     case(GLFW_KEY_A):
-      modelTranslation.x -= 0.1f;
+     case(GLFW_KEY_R):
+      mode = ROTATE_MODEL;
       eventHandled = true;
       break;
-     case(GLFW_KEY_D):
-      modelTranslation.x += 0.1f;
+     case(GLFW_KEY_T):
+      mode = ROTATE_MODEL;
       eventHandled = true;
       break;
      case(GLFW_KEY_W):
