@@ -516,7 +516,7 @@ bool A2::keyInputEvent (
       eventHandled = true;
       break;
      case(GLFW_KEY_T):
-      mode = ROTATE_MODEL;
+      mode = TRANSLATE_MODEL;
       eventHandled = true;
       break;
      case(GLFW_KEY_W):
