@@ -234,10 +234,18 @@ void A2::appLogic()
   drawLine(vec2(0.5f, -0.5f), vec2(0.5f, 0.5f));
   drawLine(vec2(0.5f, 0.5f), vec2(-0.5f, 0.5f));
   drawLine(vec2(-0.5f, 0.5f), vec2(-0.5f, -0.5f));
+
+  model = glm::rotate(mat4(1.0f), rotation, vec3(0, 1, 0));
+  view = glm::translate(vec3(0, 0, 4.0f));
   for (int i = 0; i < 24; i+=2) {
+    vec4 lineStart(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2]);
+    vec4 lineEnd(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2]);
+
+    lineStart = model * view * lineStart;
+    lineEnd = model * view * lineEnd;
     drawLine(
-      vec2(vertices[edges[i] * 3] / (vertices[edges[i] * 3 + 2] + 4.0f), vertices[edges[i] * 3 + 1] / (vertices[edges[i] * 3 + 2] + 4.0f)),
-      vec2(vertices[edges[i + 1] * 3] / (vertices[edges[i + 1] * 3 + 2] + 4.0f), vertices[edges[i + 1] * 3 + 1] / (vertices[edges[i + 1] * 3 + 2] + 4.0f)));
+      vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z),
+      vec2(lineEnd.x / lineEnd.z, lineEnd.y / lineEnd.z));
   }
   // lineStart = proj * lineStart;
   // lineEnd = proj * lineStart;
@@ -414,6 +422,19 @@ bool A2::keyInputEvent (
 		int mods
 ) {
 	bool eventHandled(false);
+
+  if( action == GLFW_PRESS ) {
+    switch(key) {
+     case(GLFW_KEY_LEFT):
+      rotation -= 0.1f;
+      eventHandled = true;
+      break;
+     case(GLFW_KEY_RIGHT):
+      rotation += 0.1f;
+      eventHandled = true;
+      break;
+    }
+  }
 
 	// Fill in with event handling code...
 

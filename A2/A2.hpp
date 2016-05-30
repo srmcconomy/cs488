@@ -74,4 +74,6 @@ protected:
 	glm::mat4 model;
 	glm::mat4 view;
 
+  float rotation;
+
 };
