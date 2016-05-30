@@ -440,6 +440,17 @@ bool A2::mouseMoveEvent (
           model = glm::translate(model, vec3(0, 0, 0.1f * xOffset));
         }
         break;
+      case(SCALE_MODEL):
+        if (leftDown) {
+          model = glm::scale(model, vec3(pow(1.1f, xOffset), 1.0f, 1.0f));
+        }
+        if (middleDown) {
+          model = glm::scale(model, vec3(1.0f, pow(1.1f, xOffset), 1.0f));
+        }
+        if (rightDown) {
+          model = glm::scale(model, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
+        }
+        break;
     }
 
     mouseLastX = xPos;
@@ -551,12 +562,8 @@ bool A2::keyInputEvent (
       mode = TRANSLATE_MODEL;
       eventHandled = true;
       break;
-     case(GLFW_KEY_W):
-      modelTranslation.y += 0.1f;
-      eventHandled = true;
-      break;
      case(GLFW_KEY_S):
-      modelTranslation.y -= 0.1f;
+      mode = SCALE_MODEL;
       eventHandled = true;
       break;
      }
