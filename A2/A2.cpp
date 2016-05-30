@@ -234,13 +234,13 @@ void A2::appLogic()
   drawLine(vec2(0.5f, -0.5f), vec2(0.5f, 0.5f));
   drawLine(vec2(0.5f, 0.5f), vec2(-0.5f, 0.5f));
   drawLine(vec2(-0.5f, 0.5f), vec2(-0.5f, -0.5f));
-  vec4 lineStart(-0.5f, -0.5f, 2.0f, 1.0f);
-  vec4 lineEnd(0.5f, 0.5f, 1.0f, 1.0f);
-  vec4 line2Start(-0.5f, -0.5f, 0.5f, 1.0f);
-  vec4 line2End(0.5f, 0.5f, 1.0f, 1.0f);
+  for (int i = 0; i < 24; i+=2) {
+    drawLine(
+      vec2(vertices[edges[i] * 3] / (vertices[edges[i] * 3 + 2] + 2.0f), vertices[edges[i] * 3 + 1] / (vertices[edges[i] * 3 + 2] + 2.0f)),
+      vec2(vertices[edges[i + 1] * 3] / (vertices[edges[i + 1] * 3 + 2] + 2.0f), vertices[edges[i + 1] * 3 + 1] / (vertices[edges[i + 1] * 3 + 2] + 2.0f)));
+  }
   // lineStart = proj * lineStart;
   // lineEnd = proj * lineStart;
-	drawLine(vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z), vec2(lineEnd.x / lineEnd.z, lineEnd.y / lineEnd.z));
 }
 
 //----------------------------------------------------------------------------------------
