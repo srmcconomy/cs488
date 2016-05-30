@@ -60,7 +60,8 @@ A2::A2()
   rotation(0),
   leftDown(false),
   rightDown(false),
-  middleDown(false)
+  middleDown(false),
+  mode(ROTATE_MODEL)
 {
   float projection[16] = {
     1, 0, 0, 0,
@@ -69,6 +70,7 @@ A2::A2()
     0, 0, 1, 0
   };
   proj = glm::make_mat4(projection);
+  view = glm::translate(view, vec3(0, 0, 4.0f))
 }
 
 //----------------------------------------------------------------------------------------
@@ -240,10 +242,6 @@ void A2::appLogic()
   drawLine(vec2(0.5f, -0.5f), vec2(0.5f, 0.5f));
   drawLine(vec2(0.5f, 0.5f), vec2(-0.5f, 0.5f));
   drawLine(vec2(-0.5f, 0.5f), vec2(-0.5f, -0.5f));
-
-  model = glm::rotate(mat4(1.0f), rotation, vec3(0, 1, 0));
-  model = glm::translate(model, modelTranslation);
-  view = glm::translate(mat4(1.0f), vec3(0, 0, 4.0f));
   for (int i = 0; i < 24; i+=2) {
     vec4 lineStart(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
     vec4 lineEnd(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
@@ -367,7 +365,53 @@ bool A2::mouseMoveEvent (
 		double yPos
 ) {
 	bool eventHandled(false);
+  switch(mode) {
+    case(ROTATE_VIEW):
+      if (leftDown) {
+        view = glm::rotate(view, 0.1f, vec3(1, 0, 0));
+      }
+      if (middleDown) {
+        view = glm::rotate(view, 0.1f, vec3(0, 1, 0));
+      }
+      if (rightDown) {
+        view = glm::rotate(view, 0.1f, vec3(0, 0, 1));
+      }
+      break;
+    case(TRANSLATE_VIEW):
+      if (leftDown) {
+        view = glm::translate(view, vec3(0.1f, 0, 0));
+      }
+      if (middleDown) {
+        view = glm::translate(view, vec3(0, 0.1f, 0));
+      }
+      if (rightDown) {
+        view = glm::translate(view, vec3(0, 0, 0.1f));
+      }
+      break;
 
+    case(ROTATE_MODEL):
+      if (leftDown) {
+        model = glm::rotate(model, 0.1f, vec3(1, 0, 0));
+      }
+      if (middleDown) {
+        model = glm::rotate(model, 0.1f, vec3(0, 1, 0));
+      }
+      if (rightDown) {
+        model = glm::rotate(model, 0.1f, vec3(0, 0, 1));
+      }
+      break;
+    case(TRANSLATE_MODEL):
+      if (leftDown) {
+        model = glm::translate(model, vec3(0.1f, 0, 0));
+      }
+      if (middleDown) {
+        model = glm::translate(model, vec3(0, 0.1f, 0));
+      }
+      if (rightDown) {
+        model = glm::translate(model, vec3(0, 0, 0.1f));
+      }
+      break;
+  }
 	// Fill in with event handling code...
 
 	return eventHandled;
