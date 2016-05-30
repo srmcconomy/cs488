@@ -35,7 +35,7 @@ float edges[24] = {
   5, 6,
   6, 7,
   7, 4
-}
+};
 
 
 //----------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ VertexData::VertexData()
 // Constructor
 A2::A2()
 	: m_currentLineColour(vec3(0.0f)),
-  member(1.0f),
+  model(1.0f),
   view(1.0f)
 {
   float projection[16] = {
