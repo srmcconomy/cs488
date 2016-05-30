@@ -444,11 +444,11 @@ bool A2::keyInputEvent (
       eventHandled = true;
       break;
      case(GLFW_KEY_W):
-      modelTranslation.y -= 0.1f;
+      modelTranslation.y += 0.1f;
       eventHandled = true;
       break;
      case(GLFW_KEY_S):
-      modelTranslation.y += 0.1f;
+      modelTranslation.y -= 0.1f;
       eventHandled = true;
       break;
      }
