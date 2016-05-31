@@ -447,6 +447,14 @@ void A2::guiLogic()
 			glfwSetWindowShouldClose(m_window, GL_TRUE);
 		}
 
+    ImGui::RadioButton( "Rotate View", &mode, ROTATE_VIEW );
+    ImGui::RadioButton( "Translate View", &mode, TRANSLATE_VIEW );
+    ImGui::RadioButton( "Perspective", &mode, PERSPECTIVE );
+    ImGui::RadioButton( "Rotate Model", &mode, ROTATE_MODEL );
+    ImGui::RadioButton( "Translate Model", &mode, TRANSLATE_MODEL );
+    ImGui::RadioButton( "Scale Model", &mode, SCALE_MODEL );
+    ImGui::RadioButton( "Viewport", &mode, VIEWPORT );
+
 		ImGui::Text( "Framerate: %.1f FPS", ImGui::GetIO().Framerate );
 		ImGui::Text( "Near field: %.1f", clippingPlanes[0].z );
 		ImGui::Text( "Far field: %.1f", clippingPlanes[2].z );
