@@ -398,6 +398,8 @@ void A2::guiLogic()
 		}
 
 		ImGui::Text( "Framerate: %.1f FPS", ImGui::GetIO().Framerate );
+		ImGui::Text( "Near field: %.1f", clippingPlanes[0].z );
+		ImGui::Text( "Far field: %.1f", clippingPlanes[2].z );
 
 	ImGui::End();
 }
