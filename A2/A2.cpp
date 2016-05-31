@@ -276,6 +276,7 @@ void A2::appLogic()
   drawLine(vec2(-0.95f, 0.95f), vec2(-0.95f, -0.95f));
 
   for (int i = 0; i < 24; i+=2) {
+    bool draw = true;
     vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
     vec4 B(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
 
@@ -286,7 +287,10 @@ void A2::appLogic()
       float wecA = dot(A - clippingPlanes[clip], clippingPlanes[clip + 1]);
       float wecB = dot(B - clippingPlanes[clip], clippingPlanes[clip + 1]);
 
-      if (wecA < 0 && wecB < 0) goto skipdraw;
+      if (wecA < 0 && wecB < 0) {
+        draw = false;
+        break;
+      }
       if (!(wecA >= 0 && wecB >= 0)) {
         float t = wecA / (wecA - wecB);
         if (wecA < 0) {
@@ -296,10 +300,11 @@ void A2::appLogic()
         }
       }
     }
-    drawLine(
-      vec2(A.x / A.z, A.y / A.z),
-      vec2(B.x / B.z, B.y / B.z));
-skipdraw:
+    if (draw) {
+      drawLine(
+        vec2(A.x / A.z, A.y / A.z),
+        vec2(B.x / B.z, B.y / B.z));
+    }
   }
   // lineStart = proj * lineStart;
   // lineEnd = proj * lineStart;
