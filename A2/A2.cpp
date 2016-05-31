@@ -244,10 +244,19 @@ void A2::drawLine(
 	m_vertexData.numVertices += 2;
 }
 
+void divideByW(vec4& v) {
+  v.x /= v.w;
+  v.y /= v.w;
+}
+
 
 void A2::drawGnomon(mat4 transformation, float scaleX, float scaleY, float middleX, float middleY) {
   vec4 lineStart(0, 0, 0, 1.0f);
   lineStart = transformation * lineStart;
+
+  lineStartX = lineStart;
+  lineStartY = lineStart;
+  lineStartZ = lineStart;
 
   vec4 lineX(1.0f, 0, 0, 1.0f);
   lineX = transformation * lineX;
@@ -256,31 +265,40 @@ void A2::drawGnomon(mat4 transformation, float scaleX, float scaleY, float middl
   vec4 lineZ(0, 0, 1.0f, 1.0f);
   lineZ = transformation * lineZ;
 
-  clip(lineStart, lineX, 0);
-  clip(lineStart, lineY, 0);
-  clip(lineStart, lineZ, 0);
-
-  lineStart.x /= lineStart.w;
-  lineStart.y /= lineStart.w;
-  lineX.x /= lineX.w;
-  lineX.y /= lineX.w;
-  lineY.x /= lineY.w;
-  lineY.y /= lineY.w;
-  lineZ.x /= lineZ.w;
-  lineZ.y /= lineZ.w;
-
-  for (int c = 2; c < 12; c+=2) {
-    clip(lineStart, lineX, c);
-    clip(lineStart, lineY, c);
-    clip(lineStart, lineZ, c);
+  bool drawX = clip(lineStartX, lineX, 0);
+  bool drawY = clip(lineStartY, lineY, 0);
+  bool drawZ = clip(lineStartZ, lineZ, 0);
+  if (drawX) {
+    divideByW(lineStartX);
+    divideByW(lineX);
+  }
+  if (drawY) {
+    divideByW(lineStartY);
+    divideByW(lineY);
+  }
+  if (drawZ) {
+    divideByW(lineStartZ);
+    divideByW(lineZ);
   }
 
-  setLineColour(vec3(1.0f, 0, 0));
-  drawLine(vec2(lineStart.x * scaleX + middleX, lineStart.y * scaleY + middleY), vec2(lineX.x * scaleX + middleX, lineX.y * scaleY + middleY));
-  setLineColour(vec3(0, 1.0f, 0));
-  drawLine(vec2(lineStart.x * scaleX + middleX, lineStart.y * scaleY + middleY), vec2(lineY.x * scaleX + middleX, lineY.y * scaleY + middleY));
-  setLineColour(vec3(0, 0, 1.0f));
-  drawLine(vec2(lineStart.x * scaleX + middleX, lineStart.y * scaleY + middleY), vec2(lineZ.x * scaleX + middleX, lineZ.y * scaleY + middleY));
+  for (int c = 2; c < 12; c+=2) {
+    if (drawX) drawX &= clip(lineStartX, lineX, c);
+    if (drawY) drawY &= clip(lineStartY, lineY, c);
+    if (drawZ) drawZ &= clip(lineStartZ, lineZ, c);
+  }
+
+  if (drawX) {
+    setLineColour(vec3(1.0f, 0, 0));
+    drawLine(vec2(lineStartX.x * scaleX + middleX, lineStartX.y * scaleY + middleY), vec2(lineX.x * scaleX + middleX, lineX.y * scaleY + middleY));
+  }
+  if (drawY) {
+    setLineColour(vec3(0, 1.0f, 0));
+    drawLine(vec2(lineStartY.x * scaleX + middleX, lineStartY.y * scaleY + middleY), vec2(lineY.x * scaleX + middleX, lineY.y * scaleY + middleY));
+  }
+  if (drawZ) {
+    setLineColour(vec3(0, 0, 1.0f));
+    drawLine(vec2(lineStartZ.x * scaleX + middleX, lineStartZ.y * scaleY + middleY), vec2(lineZ.x * scaleX + middleX, lineZ.y * scaleY + middleY));
+  }
 }
 
 
@@ -375,16 +393,13 @@ void A2::appLogic()
 
 
     bool draw = clip(A, B, 0); //near-field clip
-
+    if (!draw) continue;
 
 
     A = proj * A;
     B = proj * B;
-    A.x /= A.w;
-    A.y /= A.w;
-    B.x /= B.w;
-    B.y /= B.w;
-
+    divideByW(A);
+    divideByW(B);
 
     for (int c = 2; c < 12; c += 2) {
       if (!clip(A, B, c)) {
