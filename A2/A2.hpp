@@ -60,7 +60,7 @@ protected:
 			const glm::vec2 & v1
 	);
 
-  void drawGnomon(glm::mat4, float, float, float, float);
+  void drawGnomon(glm::mat4, glm::mat4, float, float, float, float);
 	bool clip(glm::vec4&, glm::vec4&, int);
   void setFOV(float);
   void setNear(float);

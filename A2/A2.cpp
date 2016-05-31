@@ -252,7 +252,7 @@ void divideByW(vec4& v) {
 }
 
 
-void A2::drawGnomon(mat4 transformation, float scaleX, float scaleY, float middleX, float middleY) {
+void A2::drawGnomon(mat4 transformation, mat4 projection, float scaleX, float scaleY, float middleX, float middleY) {
   vec4 lineStart(0, 0, 0, 1.0f);
   lineStart = transformation * lineStart;
 
@@ -271,14 +271,20 @@ void A2::drawGnomon(mat4 transformation, float scaleX, float scaleY, float middl
   bool drawY = clip(lineStartY, lineY, 0);
   bool drawZ = clip(lineStartZ, lineZ, 0);
   if (drawX) {
+    lineStartX = lineStartX * projection;
+    lineX = lineX * projection;
     divideByW(lineStartX);
     divideByW(lineX);
   }
   if (drawY) {
+    lineStartY = lineStartY * projection;
+    lineY = lineY * projection;
     divideByW(lineStartY);
     divideByW(lineY);
   }
   if (drawZ) {
+    lineStartZ = lineStartZ * projection;
+    lineZ = lineZ * projection;
     divideByW(lineStartZ);
     divideByW(lineZ);
   }
@@ -395,8 +401,8 @@ void A2::appLogic()
   float middleX = left + xScale;
   float middleY = bottom + yScale;
 
-  drawGnomon(proj * view * world, xScale, yScale, middleX, middleY);
-  drawGnomon(proj * view * world * model, xScale, yScale, middleX, middleY);
+  drawGnomon(view * world, proj, xScale, yScale, middleX, middleY);
+  drawGnomon(view * world * model, proj, xScale, yScale, middleX, middleY);
 
 
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
