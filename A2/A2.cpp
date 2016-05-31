@@ -72,10 +72,6 @@ A2::A2()
   mode(ROTATE_MODEL),
   mouseLastX(0),
   mouseLastY(0),
-  viewPortLeft(40.0f),
-  viewPortRight(760.0f),
-  viewPortTop(40.0f),
-  viewPortBottom(760.0f),
   clippingPlanes{
     vec4(0, 0, 1.0f, 1.0f), vec4(0, 0, 1.0f, 0),
     vec4(0, 0, 10.0f, 1.0f), vec4(0, 0, -1.0f, 0),
@@ -90,6 +86,10 @@ A2::A2()
   setFOV(30.0f);
   setNearAndFar(1.0f, 10.0f);
   model = translate(model, vec3(0, 0, 4.0f));
+  viewPortTop = m_windowHeight * 0.05f;
+  viewPortBottom = m_windowHeight * 0.95f;
+  viewPortLeft = m_windowWidth * 0.05f;
+  viewPortRight = m_windowWidth * 0.95f;
 }
 
 //----------------------------------------------------------------------------------------
@@ -426,7 +426,6 @@ void A2::guiLogic()
 
       		ImGui::Text( "xScale: %.1f", xScale );
           		ImGui::Text( "left: %.1f", left );
-              		ImGui::Text( "right: %.1f", right );
 
 	ImGui::End();
 }
