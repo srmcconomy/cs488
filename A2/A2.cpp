@@ -11,6 +11,8 @@ using namespace std;
 #include <glm/gtx/io.hpp>
 using namespace glm;
 
+#define PI 3.14159265f;
+
 
 float vertices[24] = {
   -1.0f, -1.0f, -1.0f,
@@ -273,7 +275,8 @@ bool A2::clip(vec4& A, vec4& B, int c) {
 
 void A2::setFOV(float fov) {
   FOV = fov;
-  float cot = 1 / tan(fov / 2.0f);
+  float theta = fov * PI / 180.0f;
+  float cot = 1 / tan(theta / 2.0f);
   proj[0][0] = cot; // aspect is 1:1
   proj[1][1] = cot;
 }
