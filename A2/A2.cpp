@@ -70,13 +70,16 @@ A2::A2()
     vec4(0, -0.95f, 0, 1.0f), vec4(0, 1.0f, 0, 0),
     vec4(0, 0.95f, 0, 1.0f), vec4(0, -1.0f, 0, 0),
     vec4(0, 0, 10.0f, 1.0f), vec4(0, 0, -1.0f, 0)
-  }
+  },
+  FOV(30.0f)
 {
+  float uh = 1 / tan(FOV / 2);
+  float uw = uh / 1;
   float projection[16] = {
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 1,
-    0, 0, 1, 0
+    uw, 0, 0, 0,
+    0, uh, 0, 0,
+    0, 0, 10.0f / 9.0f, 1.0f,
+    0, 0, -10.0f / 9.0f, 0
   };
   proj = glm::make_mat4(projection);
   view = glm::translate(view, vec3(0, 0, 4.0f));
@@ -303,10 +306,14 @@ void A2::appLogic()
 
     bool draw = clip(A, B, 0); //near-field clip
 
-    A.x /= A.z;
-    A.y /= A.z;
-    B.x /= B.z;
-    B.y /= B.z;
+
+
+    A = proj * A;
+    B = proj * B;
+    // A.x /= A.z;
+    // A.y /= A.z;
+    // B.x /= B.z;
+    // B.y /= B.z;
 
 
     for (int c = 2; c < 12; c += 2) {

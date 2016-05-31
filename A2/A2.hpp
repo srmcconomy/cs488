@@ -101,4 +101,6 @@ protected:
 
   glm::vec4 clippingPlanes[12];
 
+  float FOV;
+
 };
