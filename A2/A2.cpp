@@ -64,11 +64,11 @@ A2::A2()
   mode(ROTATE_MODEL),
   mouseLastX(0),
   clippingPlanes{
+    vec4(0, 0, 1.0f, 1.0f), vec4(0, 0, 1.0f, 0),
     vec4(-0.95f, 0, 0, 1.0f), vec4(1.0f, 0, 0, 0),
     vec4(0.95f, 0, 0, 1.0f), vec4(-1.0f, 0, 0, 0),
     vec4(0, -0.95f, 0, 1.0f), vec4(0, 1.0f, 0, 0),
     vec4(0, 0.95f, 0, 1.0f), vec4(0, -1.0f, 0, 0),
-    vec4(0, 0, 1.0f, 1.0f), vec4(0, 0, 1.0f, 0),
     vec4(0, 0, 10.0f, 1.0f), vec4(0, 0, -1.0f, 0)
   }
 {
@@ -254,6 +254,24 @@ void A2::drawGnomon(mat4 transformation) {
   drawLine(vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z), vec2(lineZ.x / lineZ.z, lineZ.y / lineZ.z));
 }
 
+
+bool clip(vec4& A, vec4& B, int c) {
+  float wecA = dot(A - clippingPlanes[c], clippingPlanes[c + 1]);
+  float wecB = dot(B - clippingPlanes[c], clippingPlanes[c + 1]);
+
+  if (wecA < 0 && wecB < 0) {
+    return false;
+  }
+  if (!(wecA >= 0 && wecB >= 0)) {
+    float t = wecA / (wecA - wecB);
+    if (wecA < 0) {
+      A = A + t*(B - A);
+    } else {
+      B = A + t*(B - A);
+    }
+  }
+  return true;
+}
 //----------------------------------------------------------------------------------------
 /*
  * Called once per frame, before guiLogic().
@@ -276,35 +294,28 @@ void A2::appLogic()
   drawLine(vec2(-0.95f, 0.95f), vec2(-0.95f, -0.95f));
 
   for (int i = 0; i < 24; i+=2) {
-    bool draw = true;
     vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
     vec4 B(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
 
     A = view * model * A;
     B = view * model * B;
 
+
+    bool draw = clip(A, B, 0); //near-field clip
+
     A.x /= A.z;
     A.y /= A.z;
     B.x /= B.z;
     B.y /= B.z;
 
-    for (int clip = 0; clip < 12; clip += 2) {
-      float wecA = dot(A - clippingPlanes[clip], clippingPlanes[clip + 1]);
-      float wecB = dot(B - clippingPlanes[clip], clippingPlanes[clip + 1]);
 
-      if (wecA < 0 && wecB < 0) {
+    for (int c = 2; c < 12; c += 2) {
+      if (!clip(A, B, c)) {
         draw = false;
         break;
       }
-      if (!(wecA >= 0 && wecB >= 0)) {
-        float t = wecA / (wecA - wecB);
-        if (wecA < 0) {
-          A = A + t*(B - A);
-        } else {
-          B = A + t*(B - A);
-        }
-      }
     }
+
     if (draw) {
       drawLine(
         vec2(A.x, A.y),
