@@ -639,6 +639,14 @@ bool A2::keyInputEvent (
       mode = SCALE_MODEL;
       eventHandled = true;
       break;
+     case(GLFW_KEY_P):
+      mode = PERSPECTIVE;
+      eventHandled = true;
+      break;
+     case(GLFW_KEY_V):
+      mode = VIEWPORT;
+      eventHandled = true;
+      break;
      }
   }
 
