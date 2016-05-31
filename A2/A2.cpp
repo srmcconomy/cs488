@@ -85,10 +85,10 @@ A2::A2()
   setFOV(30.0f);
   setNearAndFar(1.0f, 10.0f);
   model = translate(model, vec3(0, 0, 4.0f));
-  viewPortTop = 768 * 0.05f;
-  viewPortBottom = 768 * 0.95f;
-  viewPortLeft = 768 * 0.05f;
-  viewPortRight = 768 * 0.95f;
+  viewPortY2 = 768 * 0.05f;
+  viewPortY1 = 768 * 0.95f;
+  viewPortX1 = 768 * 0.05f;
+  viewPortX2 = 768 * 0.95f;
 }
 
 //----------------------------------------------------------------------------------------
@@ -363,6 +363,10 @@ void A2::appLogic()
 	// Call at the beginning of frame, before drawing lines:
 	initLineData();
 
+  float viewPortLeft = viewPortX1 < viewPortX2 ? viewPortX1 : viewPortX2;
+  float viewPortRight = viewPortX1 < viewPortX2 ? viewPortX2 : viewPortX1;
+  float viewPortBottom = viewPortY1 < viewPortY2 ? viewPortY1 : viewPortY2;
+  float viewPortTop = viewPortY1 < viewPortY2 ? viewPortY2 : viewPortY1;
   float xScale = (viewPortRight - viewPortLeft) / m_windowWidth;
   float yScale = (viewPortBottom - viewPortTop) / m_windowHeight;
   float left = viewPortLeft * 2.0f / m_windowWidth - 1.0f;
@@ -460,10 +464,10 @@ void A2::guiLogic()
 		ImGui::Text( "mousey: %.1f", mouseLastY );
 
 
-      float xScale = (viewPortRight - viewPortLeft) * 2.0f / m_windowWidth;
-      float yScale = (viewPortTop - viewPortBottom) * 2.0f / m_windowWidth;
-      float left = viewPortLeft * 2.0f / m_windowWidth - 1.0f;
-      float top = viewPortTop * 2.0f / m_windowHeight - 1.0f;
+      float xScale = (viewPortX2 - viewPortX1) * 2.0f / m_windowWidth;
+      float yScale = (viewPortY2 - viewPortY1) * 2.0f / m_windowWidth;
+      float left = viewPortX1 * 2.0f / m_windowWidth - 1.0f;
+      float top = viewPortY2 * 2.0f / m_windowHeight - 1.0f;
 
       		ImGui::Text( "xScale: %.1f", xScale );
           		ImGui::Text( "left: %.1f", left );
@@ -625,8 +629,8 @@ bool A2::mouseMoveEvent (
         break;
       case(VIEWPORT):
         if (leftDown) {
-          viewPortRight = xPos < m_windowWidth ? (xPos > 0 ? xPos : 0): m_windowWidth;
-          viewPortBottom = yPos < m_windowHeight ? (yPos > 0 ? yPos : 0): m_windowHeight;
+          viewPortX2 = xPos < m_windowWidth ? (xPos > 0 ? xPos : 0): m_windowWidth;
+          viewPortY1 = yPos < m_windowHeight ? (yPos > 0 ? yPos : 0): m_windowHeight;
         }
         break;
     }
@@ -653,10 +657,10 @@ bool A2::mouseButtonInputEvent (
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
       if (action == GLFW_PRESS) {
         if (mode == VIEWPORT) {
-          viewPortLeft = mouseLastX;
-          viewPortTop = mouseLastY;
-          viewPortRight = mouseLastX;
-          viewPortBottom = mouseLastY;
+          viewPortX1 = mouseLastX;
+          viewPortY2 = mouseLastY;
+          viewPortX2 = mouseLastX;
+          viewPortY1 = mouseLastY;
         }
         leftDown = true;
       }
