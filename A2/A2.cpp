@@ -250,11 +250,11 @@ void A2::drawGnomon(mat4 transformation) {
   lineZ = transformation * lineZ;
 
   setLineColour(vec3(1.0f, 0, 0));
-  drawLine(vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z), vec2(lineX.x / lineX.z, lineX.y / lineX.z));
+  drawLine(vec2(lineStart.x / lineStart.w, lineStart.y / lineStart.w), vec2(lineX.x / lineX.w, lineX.y / lineX.w));
   setLineColour(vec3(0, 1.0f, 0));
-  drawLine(vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z), vec2(lineY.x / lineY.z, lineY.y / lineY.z));
+  drawLine(vec2(lineStart.x / lineStart.w, lineStart.y / lineStart.w), vec2(lineY.x / lineY.w, lineY.y / lineY.w));
   setLineColour(vec3(0, 0, 1.0f));
-  drawLine(vec2(lineStart.x / lineStart.z, lineStart.y / lineStart.z), vec2(lineZ.x / lineZ.z, lineZ.y / lineZ.z));
+  drawLine(vec2(lineStart.x / lineStart.w, lineStart.y / lineStart.w), vec2(lineZ.x / lineZ.w, lineZ.y / lineZ.w));
 }
 
 
@@ -286,8 +286,8 @@ void A2::appLogic()
 	// Call at the beginning of frame, before drawing lines:
 	initLineData();
 
-  drawGnomon(view);
-  drawGnomon(view * model);
+  drawGnomon(proj * view);
+  drawGnomon(proj * view * model);
 
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
 
