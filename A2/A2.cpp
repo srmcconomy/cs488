@@ -64,10 +64,10 @@ A2::A2()
   mode(ROTATE_MODEL),
   mouseLastX(0),
   clippingPlanes{
-    vec4(-1.0f, 0, 0, 1.0f), vec4(1.0f, 0, 0, 0),
-    vec4(1.0f, 0, 0, 1.0f), vec4(-1.0f, 0, 0, 0),
-    vec4(0, -1.0f, 0, 1.0f), vec4(0, 1.0f, 0, 0),
-    vec4(0, 1.0f, 0, 1.0f), vec4(0, -1.0f, 0, 0),
+    vec4(-0.95f, 0, 0, 1.0f), vec4(1.0f, 0, 0, 0),
+    vec4(0.95f, 0, 0, 1.0f), vec4(-1.0f, 0, 0, 0),
+    vec4(0, -0.95f, 0, 1.0f), vec4(0, 1.0f, 0, 0),
+    vec4(0, 0.95f, 0, 1.0f), vec4(0, -1.0f, 0, 0),
     vec4(0, 0, 1.0f, 1.0f), vec4(0, 0, 1.0f, 0),
     vec4(0, 0, 10.0f, 1.0f), vec4(0, 0, -1.0f, 0)
   }
@@ -269,6 +269,11 @@ void A2::appLogic()
   drawGnomon(view * model);
 
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
+
+  drawLine(vec2(-0.95f, -0.95f), vec2(0.95f, -0.95f));
+  drawLine(vec2(0.95f, -0.95f), vec2(0.95f, 0.95f));
+  drawLine(vec2(0.95f, 0.95f), vec2(-0.95f, 0.95f));
+  drawLine(vec2(-0.95f, 0.95f), vec2(-0.95f, -0.95f));
 
   for (int i = 0; i < 24; i+=2) {
     for (int clip = 0; clip < 12; clip += 2) {
