@@ -254,9 +254,9 @@ void A2::drawGnomon(mat4 transformation, float scaleX, float scaleY, float middl
   vec4 lineStart(0, 0, 0, 1.0f);
   lineStart = transformation * lineStart;
 
-  lineStartX = lineStart;
-  lineStartY = lineStart;
-  lineStartZ = lineStart;
+  vec4 lineStartX = lineStart;
+  vec4 lineStartY = lineStart;
+  vec4 lineStartZ = lineStart;
 
   vec4 lineX(1.0f, 0, 0, 1.0f);
   lineX = transformation * lineX;
