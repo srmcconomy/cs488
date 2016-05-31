@@ -61,7 +61,7 @@ protected:
 	);
 
   void drawGnomon(glm::mat4);
-	bool clip(glm::vec4, glm::vec4, int);
+	bool clip(glm::vec4&, glm::vec4&, int);
 
 	ShaderProgram m_shader;
 
