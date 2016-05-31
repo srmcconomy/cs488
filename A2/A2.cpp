@@ -65,23 +65,15 @@ A2::A2()
   mouseLastX(0),
   clippingPlanes{
     vec4(0, 0, 1.0f, 1.0f), vec4(0, 0, 1.0f, 0),
+    vec4(0, 0, 10.0f, 1.0f), vec4(0, 0, -1.0f, 0),
     vec4(-0.95f, 0, 0, 1.0f), vec4(1.0f, 0, 0, 0),
     vec4(0.95f, 0, 0, 1.0f), vec4(-1.0f, 0, 0, 0),
     vec4(0, -0.95f, 0, 1.0f), vec4(0, 1.0f, 0, 0),
-    vec4(0, 0.95f, 0, 1.0f), vec4(0, -1.0f, 0, 0),
-    vec4(0, 0, 10.0f, 1.0f), vec4(0, 0, -1.0f, 0)
-  },
-  FOV(180.0f)
+    vec4(0, 0.95f, 0, 1.0f), vec4(0, -1.0f, 0, 0)
+  }
 {
-  float uh = 1 / tan(FOV / 2.0f);
-  float uw = uh; //aspect ratio is 1:1
-  float projection[16] = {
-    uw, 0, 0, 0,
-    0, uh, 0, 0,
-    0, 0, 11.0f / 9.0f, 1.0f,
-    0, 0, (-2.0f * 10.0f) / 9.0f, 0
-  };
-  proj = glm::make_mat4(projection);
+  setFOV(30.0f);
+  setNearAndFar(1.0f, 10.0f);
   model = translate(model, vec3(0, 0, 4.0f));
 }
 
@@ -274,6 +266,21 @@ bool A2::clip(vec4& A, vec4& B, int c) {
     }
   }
   return true;
+}
+
+void A2::setFOV(float fov) {
+  float uw = 1 / tan(fov / 2.0f);
+  float uw = uh; //aspect ratio is 1:1
+  proj[0][0] = uh;
+  proj[1][1] = uw;
+}
+
+void A2::setNearAndFar(float n, float f) {
+  float farMinusNear = f - n;
+  proj[2][2] = (f + n) / farMinusNear;
+  proj[3][2] = (-2.0f * f * n) / farMinusNear;
+  clippingPlanes[0].z = n;
+  clippingPlanes[2].z = f;
 }
 //----------------------------------------------------------------------------------------
 /*

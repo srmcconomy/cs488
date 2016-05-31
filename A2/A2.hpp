@@ -62,6 +62,8 @@ protected:
 
   void drawGnomon(glm::mat4);
 	bool clip(glm::vec4&, glm::vec4&, int);
+  void setFOV(float);
+  void setNearAndFar(float, float);
 
 	ShaderProgram m_shader;
 
