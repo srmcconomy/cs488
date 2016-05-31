@@ -255,7 +255,7 @@ void A2::drawGnomon(mat4 transformation) {
 }
 
 
-bool clip(vec4& A, vec4& B, int c) {
+bool A2::clip(vec4& A, vec4& B, int c) {
   float wecA = dot(A - clippingPlanes[c], clippingPlanes[c + 1]);
   float wecB = dot(B - clippingPlanes[c], clippingPlanes[c + 1]);
 
