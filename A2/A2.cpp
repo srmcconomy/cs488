@@ -419,6 +419,10 @@ void A2::guiLogic()
       float left = viewPortLeft * 2.0f / windowWidth - 1.0f;
       float top = viewPortTop * 2.0f / windowHeight - 1.0f;
 
+      		ImGui::Text( "xScale: %.1f", xScale );
+          		ImGui::Text( "left: %.1f", left );
+              		ImGui::Text( "right: %.1f", right );
+
 	ImGui::End();
 }
 
