@@ -272,6 +272,7 @@ bool A2::clip(vec4& A, vec4& B, int c) {
 }
 
 void A2::setFOV(float fov) {
+  FOV = fov;
   float cot = 1 / tan(fov / 2.0f);
   proj[0][0] = cot; // aspect is 1:1
   proj[1][1] = cot;
@@ -510,6 +511,17 @@ bool A2::mouseMoveEvent (
         }
         if (rightDown) {
           model = glm::scale(model, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
+        }
+        break;
+      case(PERSPECTIVE):
+        if (leftDown) {
+          setFOV(FOV + xOffset);
+        }
+        if (middleDown) {
+          setNearAndFar(clippingPlanes[0].z + xOffset, clippingPlanes[2].z);
+        }
+        if (rightDown) {
+          setNearAndFar(clippingPlanes[0].z, clippingPlanes[2].z + xOffset);
         }
         break;
     }
