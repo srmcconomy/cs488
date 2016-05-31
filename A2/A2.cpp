@@ -310,10 +310,10 @@ void A2::appLogic()
 
     A = proj * A;
     B = proj * B;
-    // A.x /= A.z;
-    // A.y /= A.z;
-    // B.x /= B.z;
-    // B.y /= B.z;
+    A.x /= A.w;
+    A.y /= A.w;
+    B.x /= B.w;
+    B.y /= B.w;
 
 
     for (int c = 2; c < 12; c += 2) {
