@@ -364,8 +364,6 @@ void A2::appLogic()
 	// Call at the beginning of frame, before drawing lines:
 	initLineData();
 
-	setLineColour(vec3(1.0f, 1.0f, 1.0f));
-
   float xScale = (viewPortRight - viewPortLeft) / m_windowWidth;
   float yScale = (viewPortBottom - viewPortTop) / m_windowHeight;
   float left = viewPortLeft * 2.0f / m_windowWidth - 1.0f;
@@ -378,6 +376,9 @@ void A2::appLogic()
 
   drawGnomon(proj * view, xScale, yScale, middleX, middleY);
   drawGnomon(proj * view * model, xScale, yScale, middleX, middleY);
+
+
+	setLineColour(vec3(1.0f, 1.0f, 1.0f));
 
   drawLine(vec2(left, top), vec2(right, top));
   drawLine(vec2(right, top), vec2(right, bottom));
