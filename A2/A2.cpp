@@ -245,7 +245,7 @@ void A2::drawLine(
 }
 
 
-void A2::drawGnomon(mat4 transformation, scaleX, scaleY, middleX, middleY) {
+void A2::drawGnomon(mat4 transformation, float scaleX, float scaleY, float middleX, float middleY) {
   vec4 lineStart(0, 0, 0, 1.0f);
   lineStart = transformation * lineStart;
 
