@@ -625,10 +625,8 @@ bool A2::mouseMoveEvent (
         break;
       case(VIEWPORT):
         if (leftDown) {
-          viewPortRight = xPos < m_windowWidth ? xPos : m_windowWidth;
-          viewPortRight = xPos > 0 ? xPos : 0;
-          viewPortBottom = yPos < m_windowHeight ? yPos : m_windowHeight;
-          viewPortBottom = yPos > 0 ? yPos : 0;
+          viewPortRight = xPos < m_windowWidth ? (xPos > 0 ? xPos : 0): m_windowWidth;
+          viewPortBottom = yPos < m_windowHeight ? (yPos > 0 ? yPos : 0): m_windowHeight;
         }
         break;
     }
