@@ -360,8 +360,8 @@ void A2::appLogic()
     }
 
     if (draw) {
-      viewPortXScale = (viewPortRight - viewPortLeft) / 1.0f;
-      viewPortYScale = (viewPortTop - viewPortBottom) / 1.0f;
+      float viewPortXScale = (viewPortRight - viewPortLeft) / 1.0f;
+      float viewPortYScale = (viewPortTop - viewPortBottom) / 1.0f;
       drawLine(
         vec2(A.x + viewPortLeft, A.y),
         vec2(B.x, B.y));
