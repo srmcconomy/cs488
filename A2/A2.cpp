@@ -335,7 +335,7 @@ void A2::appLogic()
 
 
     float xScale = (viewPortRight - viewPortLeft) * 2.0f / windowWidth;
-    float yScale = (viewPortBottom - viewPortTop) * 2.0f / windowWidth;
+    float yScale = (viewPortBottom - viewPortTop) * 2.0f / windowHeight;
     float left = viewPortLeft * 2.0f / windowWidth - 1.0f;
     float top = viewPortTop * 2.0f / windowHeight - 1.0f;
     float right = left + xScale;
