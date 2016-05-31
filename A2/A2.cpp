@@ -360,11 +360,13 @@ void A2::appLogic()
     }
 
     if (draw) {
-      float viewPortXScale = (viewPortRight - viewPortLeft) / 1.0f;
-      float viewPortYScale = (viewPortTop - viewPortBottom) / 1.0f;
+      float xScale = (viewPortRight - viewPortLeft) * 2.0f / windowWidth;
+      float yScale = (viewPortTop - viewPortBottom) * 2.0f / windowWidth;
+      float left = viewPortLeft * 2.0f / windowWidth - 1.0f;
+      float top = viewPortTop * 2.0f / windowHeight - 1.0f;
       drawLine(
-        vec2(A.x + viewPortLeft, A.y),
-        vec2(B.x, B.y));
+        vec2(A.x * xScale + left, A.y * yScale + top),
+        vec2(B.x * xScale + left, B.y * yScale + top));
     }
   }
   // lineStart = proj * lineStart;
@@ -632,6 +634,8 @@ bool A2::windowResizeEvent (
 		int height
 ) {
 	bool eventHandled(false);
+  windowWidth = width;
+  windowHeight = height;
 
 	// Fill in with event handling code...
 

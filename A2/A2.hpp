@@ -112,4 +112,7 @@ protected:
   float viewPortTop;
   float viewPortBottom;
 
+  int windowWidth;
+  int windowHeight;
+
 };
