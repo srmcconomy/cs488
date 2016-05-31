@@ -66,6 +66,7 @@ protected:
   void setNear(float);
   void setFar(float);
   void setNearAndFar(float, float);
+  void reset();
 
 	ShaderProgram m_shader;
 
