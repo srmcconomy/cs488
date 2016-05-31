@@ -600,16 +600,16 @@ bool A2::mouseMoveEvent (
       case(SCALE_MODEL):
         if (leftDown) {
           // model = glm::scale(model, vec3(pow(1.1f, xOffset), 1.0f, 1.0f));
-          modelScale = glm::scale(model, vec3(pow(1.1f, xOffset), 1.0f, 1.0f));
+          modelScale = glm::scale(modelScale, vec3(pow(1.1f, xOffset), 1.0f, 1.0f));
 
         }
         if (middleDown) {
           // model = glm::scale(model, vec3(1.0f, pow(1.1f, xOffset), 1.0f));
-          modelScale = glm::scale(model, vec3(1.0f, pow(1.1f, xOffset), 1.0f));
+          modelScale = glm::scale(modelScale, vec3(1.0f, pow(1.1f, xOffset), 1.0f));
         }
         if (rightDown) {
           // model = glm::scale(model, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
-          modelScale = glm::scale(model, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
+          modelScale = glm::scale(modelScale, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
         }
         break;
       case(PERSPECTIVE):
