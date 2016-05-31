@@ -86,10 +86,10 @@ A2::A2()
   setFOV(30.0f);
   setNearAndFar(1.0f, 10.0f);
   model = translate(model, vec3(0, 0, 4.0f));
-  viewPortTop = m_windowHeight * 0.05f;
-  viewPortBottom = m_windowHeight * 0.95f;
-  viewPortLeft = m_windowWidth * 0.05f;
-  viewPortRight = m_windowWidth * 0.95f;
+  viewPortTop = 768 * 0.05f;
+  viewPortBottom = 768 * 0.95f;
+  viewPortLeft = 768 * 0.05f;
+  viewPortRight = 768 * 0.95f;
 }
 
 //----------------------------------------------------------------------------------------
