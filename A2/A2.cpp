@@ -290,6 +290,20 @@ void A2::setFOV(float fov) {
   proj[1][1] = cot;
 }
 
+void A2::setNear(float n) {
+  if (n >= clippingPlanes[2].z) {
+    n = clippingPlanes[2].z;
+  }
+  setNearAndFar(n, clippingPlanes[2].z);
+}
+
+void A2::setFar(float f) {
+  if (f <= clippingPlanes[0].z) {
+    f = clippingPlanes[0].z;
+  }
+  setNearAndFar(clippingPlanes[0].z, f);
+}
+
 void A2::setNearAndFar(float n, float f) {
   float farMinusNear = f - n;
   proj[2][2] = (f + n) / farMinusNear;
@@ -530,10 +544,10 @@ bool A2::mouseMoveEvent (
           setFOV(FOV + xOffset * FOV_FACTOR);
         }
         if (middleDown) {
-          setNearAndFar(clippingPlanes[0].z + xOffset * NEAR_FAR_FACTOR, clippingPlanes[2].z);
+          setNear(clippingPlanes[0].z + xOffset * NEAR_FAR_FACTOR);
         }
         if (rightDown) {
-          setNearAndFar(clippingPlanes[0].z, clippingPlanes[2].z + xOffset * NEAR_FAR_FACTOR);
+          setFar(clippingPlanes[2].z + xOffset * NEAR_FAR_FACTOR);
         }
         break;
     }
