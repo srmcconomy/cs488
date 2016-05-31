@@ -332,7 +332,6 @@ void A2::appLogic()
 
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
 
-
   float xScale = (viewPortRight - viewPortLeft) / m_windowWidth;
   float yScale = (viewPortBottom - viewPortTop) / m_windowHeight;
   float left = viewPortLeft * 2.0f / m_windowWidth - 1.0f;
@@ -341,6 +340,10 @@ void A2::appLogic()
   float top = bottom + yScale * 2.0f;
   float middleX = left + xScale;
   float middleY = bottom + yScale;
+  mat4 viewPort = scale(mat4(1.0f), vec3(xScale, yScale, 1.0f));
+  viewPort = translate(viewPort, vex3(middleX, middleY, 0));
+
+
 
   drawLine(vec2(left, top), vec2(right, top));
   drawLine(vec2(right, top), vec2(right, bottom));
@@ -375,9 +378,11 @@ void A2::appLogic()
     }
 
     if (draw) {
+      A = viewPort * A;
+      B = viewPort * B;
       drawLine(
-        vec2(A.x * xScale + middleX, A.y * yScale + middleY),
-        vec2(B.x * xScale + middleX, B.y * yScale + middleY));
+        vec2(A.x, A.y),
+        vec2(B.x, B.y));
     }
   }
   // lineStart = proj * lineStart;
