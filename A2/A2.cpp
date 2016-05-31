@@ -466,6 +466,10 @@ void A2::guiLogic()
 			glfwSetWindowShouldClose(m_window, GL_TRUE);
 		}
 
+    if( ImGui::Button( "Reset" ) ) {
+      reset();
+    }
+
     ImGui::RadioButton( "Rotate View", (int*)&mode, ROTATE_VIEW );
     ImGui::RadioButton( "Translate View", (int*)&mode, TRANSLATE_VIEW );
     ImGui::RadioButton( "Perspective", (int*)&mode, PERSPECTIVE );
@@ -778,6 +782,14 @@ bool A2::keyInputEvent (
       break;
      case(GLFW_KEY_V):
       mode = VIEWPORT;
+      eventHandled = true;
+      break;
+     case(GLFW_KEY_A):
+      reset();
+      eventHandled = true;
+      break;
+     case(GLFW_KEY_Q):
+      glfwSetWindowShouldClose(m_window, GL_TRUE);
       eventHandled = true;
       break;
      }
