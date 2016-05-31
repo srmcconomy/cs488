@@ -12,8 +12,11 @@ using namespace std;
 using namespace glm;
 
 #define PI 3.14159265f
-#define maxFOV 160.0f
-#define minFOV 5.0f
+#define MAX_FOV 160.0f
+#define MIN_FOV 5.0f
+#define FOV_FACTOR 1.0f
+
+#define NEAR_FAR_FACTOR 0.1f
 
 
 float vertices[24] = {
@@ -276,10 +279,10 @@ bool A2::clip(vec4& A, vec4& B, int c) {
 }
 
 void A2::setFOV(float fov) {
-  if (FOV <= minFOV && fov <= minFOV) return;
-  if (fov <= minFOV) fov = minFOV;
-  if (FOV >= maxFOV && fov >= maxFOV) return;
-  if (fov >= maxFOV) fov = maxFOV;
+  if (FOV <= MIN_FOV && fov <= MIN_FOV) return;
+  if (fov <= MIN_FOV) fov = MIN_FOV;
+  if (FOV >= MAX_FOV && fov >= MAX_FOV) return;
+  if (fov >= MAX_FOV) fov = MAX_FOV;
   FOV = fov;
   float theta = fov * PI / 180.0f;
   float cot = 1 / tan(theta / 2.0f);
@@ -524,13 +527,13 @@ bool A2::mouseMoveEvent (
         break;
       case(PERSPECTIVE):
         if (leftDown) {
-          setFOV(FOV + xOffset);
+          setFOV(FOV + xOffset * FOV_FACTOR);
         }
         if (middleDown) {
-          setNearAndFar(clippingPlanes[0].z + xOffset, clippingPlanes[2].z);
+          setNearAndFar(clippingPlanes[0].z + xOffset * NEAR_FAR_FACTOR, clippingPlanes[2].z);
         }
         if (rightDown) {
-          setNearAndFar(clippingPlanes[0].z, clippingPlanes[2].z + xOffset);
+          setNearAndFar(clippingPlanes[0].z, clippingPlanes[2].z + xOffset * NEAR_FAR_FACTOR);
         }
         break;
     }
