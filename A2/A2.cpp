@@ -73,13 +73,13 @@ A2::A2()
   },
   FOV(30.0f)
 {
-  float uh = 1 / tan(FOV / 2);
-  float uw = uh / 1;
+  float uh = cot(FOV / 2);
+  float uw = uh; //aspect ratio is 1:1
   float projection[16] = {
     uw, 0, 0, 0,
     0, uh, 0, 0,
-    0, 0, 10.0f / 9.0f, 1.0f,
-    0, 0, -10.0f / 9.0f, 0
+    0, 0, 11.0f / 9.0f, 1.0f,
+    0, 0, (-2.0f * 10.0f) / 9.0f, 0
   };
   proj = glm::make_mat4(projection);
   model = translate(model, vec3(0, 0, 4.0f));
