@@ -357,7 +357,6 @@ void A2::reset() {
   model = translate(mat4(1.0f), vec3(0, 0, 4.0f));
   modelScale = mat4(1.0f);
   view = mat4(1.0f);
-  proj = mat4(1.0f);
   leftDown = false;
   rightDown = false;
   middleDown = false;
