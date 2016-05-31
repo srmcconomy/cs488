@@ -89,6 +89,7 @@ A2::A2()
   viewPortY1 = 768 * 0.95f;
   viewPortX1 = 768 * 0.05f;
   viewPortX2 = 768 * 0.95f;
+  world = translate(mat4(1.0f), vec3(0, 0, 5.0f));
 }
 
 //----------------------------------------------------------------------------------------
@@ -392,8 +393,8 @@ void A2::appLogic()
   float middleX = left + xScale;
   float middleY = bottom + yScale;
 
-  drawGnomon(proj * view, xScale, yScale, middleX, middleY);
-  drawGnomon(proj * view * model, xScale, yScale, middleX, middleY);
+  drawGnomon(proj * view * world, xScale, yScale, middleX, middleY);
+  drawGnomon(proj * view * world * model, xScale, yScale, middleX, middleY);
 
 
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
@@ -407,8 +408,8 @@ void A2::appLogic()
     vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
     vec4 B(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
 
-    A = view * model * modelScale * A;
-    B = view * model * modelScale * B;
+    A = view * world * model * modelScale * A;
+    B = view * world * model * modelScale * B;
 
 
     bool draw = clip(A, B, 0); //near-field clip
