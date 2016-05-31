@@ -84,7 +84,6 @@ A2::A2()
   proj[2][3] = 1.0f;
   setFOV(30.0f);
   setNearAndFar(1.0f, 10.0f);
-  model = translate(model, vec3(0, 0, 4.0f));
   viewPortY2 = 768 * 0.05f;
   viewPortY1 = 768 * 0.95f;
   viewPortX1 = 768 * 0.05f;
@@ -355,7 +354,7 @@ void A2::setNearAndFar(float n, float f) {
 }
 
 void A2::reset() {
-  model = translate(mat4(1.0f), vec3(0, 0, 4.0f));
+  model = mat4(1.0f);
   modelScale = mat4(1.0f);
   view = mat4(1.0f);
   leftDown = false;
