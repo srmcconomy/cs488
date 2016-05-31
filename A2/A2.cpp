@@ -333,10 +333,18 @@ void A2::appLogic()
 
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
 
-  drawLine(vec2(-0.95f, -0.95f), vec2(0.95f, -0.95f));
-  drawLine(vec2(0.95f, -0.95f), vec2(0.95f, 0.95f));
-  drawLine(vec2(0.95f, 0.95f), vec2(-0.95f, 0.95f));
-  drawLine(vec2(-0.95f, 0.95f), vec2(-0.95f, -0.95f));
+
+    float xScale = (viewPortRight - viewPortLeft) * 2.0f / windowWidth;
+    float yScale = (viewPortTop - viewPortBottom) * 2.0f / windowWidth;
+    float left = viewPortLeft * 2.0f / windowWidth - 1.0f;
+    float top = viewPortTop * 2.0f / windowHeight - 1.0f;
+    float right = left + xScale;
+    float bottom = top + yScale;
+
+  drawLine(vec2(left, top), vec2(right, top));
+  drawLine(vec2(right, top), vec2(right, bottom));
+  drawLine(vec2(right, bottom), vec2(left, bottom));
+  drawLine(vec2(left, bottom), vec2(left, top));
 
   for (int i = 0; i < 24; i+=2) {
     vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
@@ -366,10 +374,6 @@ void A2::appLogic()
     }
 
     if (draw) {
-      float xScale = (viewPortRight - viewPortLeft) * 2.0f / windowWidth;
-      float yScale = (viewPortTop - viewPortBottom) * 2.0f / windowWidth;
-      float left = viewPortLeft * 2.0f / windowWidth - 1.0f;
-      float top = viewPortTop * 2.0f / windowHeight - 1.0f;
       drawLine(
         vec2(A.x * xScale + left, A.y * yScale + top),
         vec2(B.x * xScale + left, B.y * yScale + top));
