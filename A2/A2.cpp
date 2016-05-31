@@ -655,6 +655,8 @@ bool A2::mouseButtonInputEvent (
         if (mode == VIEWPORT) {
           viewPortLeft = mouseLastX;
           viewPortTop = mouseLastY;
+          viewPortRight = mouseLastX;
+          viewPortBottom = mouseLastY;
         }
         leftDown = true;
       }
