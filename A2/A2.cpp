@@ -334,12 +334,12 @@ void A2::appLogic()
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
 
 
-    float xScale = (viewPortRight - viewPortLeft) * 2.0f / windowWidth;
-    float yScale = (viewPortBottom - viewPortTop) * 2.0f / windowHeight;
+    float xScale = (viewPortRight - viewPortLeft) / windowWidth;
+    float yScale = (viewPortBottom - viewPortTop) / windowHeight;
     float left = viewPortLeft / windowWidth;
-    float bottom = viewPortTop / windowHeight;
+    float top = viewPortTop / windowHeight;
     float right = left + xScale;
-    float top = bottom + yScale;
+    float bottom = top + yScale;
 
   drawLine(vec2(left, top), vec2(right, top));
   drawLine(vec2(right, top), vec2(right, bottom));
