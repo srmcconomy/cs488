@@ -73,7 +73,7 @@ A2::A2()
   },
   FOV(30.0f)
 {
-  float uh = cot(FOV / 2);
+  float uh = 1 / tan(FOV / 2.0f);
   float uw = uh; //aspect ratio is 1:1
   float projection[16] = {
     uw, 0, 0, 0,
