@@ -56,6 +56,7 @@ A2::A2()
 	: m_currentLineColour(vec3(0.0f)),
   model(1.0f),
   view(1.0f),
+  proj(1.0f),
   modelTranslation(0, 0, 0),
   rotation(0),
   leftDown(false),
@@ -72,6 +73,8 @@ A2::A2()
     vec4(0, 0.95f, 0, 1.0f), vec4(0, -1.0f, 0, 0)
   }
 {
+  proj[3][3] = 0;
+  proj[2][3] = 1.0f;
   setFOV(30.0f);
   setNearAndFar(1.0f, 10.0f);
   model = translate(model, vec3(0, 0, 4.0f));
