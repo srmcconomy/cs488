@@ -82,7 +82,7 @@ A2::A2()
     0, 0, -10.0f / 9.0f, 0
   };
   proj = glm::make_mat4(projection);
-  view = glm::translate(view, vec3(0, 0, 4.0f));
+  model = translate(model, vec3(0, 0, 4.0f));
 }
 
 //----------------------------------------------------------------------------------------
