@@ -12,6 +12,8 @@ using namespace std;
 using namespace glm;
 
 #define PI 3.14159265f
+#define maxFOV 160.0f
+#define minFOV 5.0f
 
 
 float vertices[24] = {
@@ -274,6 +276,10 @@ bool A2::clip(vec4& A, vec4& B, int c) {
 }
 
 void A2::setFOV(float fov) {
+  if (FOV <= minFOV && fov <= minFOV) return;
+  if (fov <= minFOV) fov = minFOV;
+  if (FOV >= maxFOV && fov >= maxFOV) return;
+  if (fov >= maxFOV) fov = maxFOV;
   FOV = fov;
   float theta = fov * PI / 180.0f;
   float cot = 1 / tan(theta / 2.0f);
