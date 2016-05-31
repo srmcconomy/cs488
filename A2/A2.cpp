@@ -62,6 +62,7 @@ VertexData::VertexData()
 A2::A2()
 	: m_currentLineColour(vec3(0.0f)),
   model(1.0f),
+  modelScale(1.0f),
   view(1.0f),
   proj(1.0f),
   modelTranslation(0, 0, 0),
@@ -373,12 +374,8 @@ void A2::appLogic()
   float middleX = left + xScale;
   float middleY = bottom + yScale;
 
-
-  mat4 modelNoScale = model;
-  modelNoScale[0][0] = 1.0f;
-  modelNoScale[1][1] = 1.0f;
   drawGnomon(proj * view, xScale, yScale, middleX, middleY);
-  drawGnomon(proj * view * modelNoScale, xScale, yScale, middleX, middleY);
+  drawGnomon(proj * view * model, xScale, yScale, middleX, middleY);
 
 
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
@@ -392,8 +389,8 @@ void A2::appLogic()
     vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
     vec4 B(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
 
-    A = view * model * A;
-    B = view * model * B;
+    A = view * modelScale * model * A;
+    B = view * modelScale * model * B;
 
 
     bool draw = clip(A, B, 0); //near-field clip
@@ -604,13 +601,13 @@ bool A2::mouseMoveEvent (
         break;
       case(SCALE_MODEL):
         if (leftDown) {
-          model = glm::scale(model, vec3(pow(1.1f, xOffset), 1.0f, 1.0f));
+          modelScale = glm::scale(modelScale, vec3(pow(1.1f, xOffset), 1.0f, 1.0f));
         }
         if (middleDown) {
-          model = glm::scale(model, vec3(1.0f, pow(1.1f, xOffset), 1.0f));
+          modelScale = glm::scale(modelScale, vec3(1.0f, pow(1.1f, xOffset), 1.0f));
         }
         if (rightDown) {
-          model = glm::scale(model, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
+          modelScale = glm::scale(modelScale, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
         }
         break;
       case(PERSPECTIVE):
