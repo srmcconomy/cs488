@@ -341,9 +341,9 @@ void A2::appLogic()
   float middleX = left + xScale;
   float middleY = bottom + yScale;
   mat4 viewPort(1.0f);
-  viewPort = scale(viewPort, vec3(xScale, yScale, 1.0f));
   viewPort = translate(viewPort, vec3(middleX, middleY, 0));
 
+  viewPort = scale(viewPort, vec3(xScale, yScale, 1.0f));
 
 
   drawLine(vec2(left, top), vec2(right, top));
