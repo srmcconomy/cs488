@@ -71,6 +71,12 @@ A2::A2()
   middleDown(false),
   mode(ROTATE_MODEL),
   mouseLastX(0),
+  windowWidth(800),
+  windowHeight(800),
+  viewPortLeft(40.0f),
+  viewPortRight(760.0f),
+  viewPortTop(40.0f),
+  viewPortBottom(760.0f),
   clippingPlanes{
     vec4(0, 0, 1.0f, 1.0f), vec4(0, 0, 1.0f, 0),
     vec4(0, 0, 10.0f, 1.0f), vec4(0, 0, -1.0f, 0),
@@ -406,6 +412,12 @@ void A2::guiLogic()
 		ImGui::Text( "Far field: %.1f", clippingPlanes[2].z );
 
 		ImGui::Text( "Mouse x: %.1f", mouseLastX );
+
+
+      float xScale = (viewPortRight - viewPortLeft) * 2.0f / windowWidth;
+      float yScale = (viewPortTop - viewPortBottom) * 2.0f / windowWidth;
+      float left = viewPortLeft * 2.0f / windowWidth - 1.0f;
+      float top = viewPortTop * 2.0f / windowHeight - 1.0f;
 
 	ImGui::End();
 }
