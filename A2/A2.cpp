@@ -71,7 +71,7 @@ A2::A2()
     vec4(0, 0.95f, 0, 1.0f), vec4(0, -1.0f, 0, 0),
     vec4(0, 0, 10.0f, 1.0f), vec4(0, 0, -1.0f, 0)
   },
-  FOV(30.0f)
+  FOV(180.0f)
 {
   float uh = 1 / tan(FOV / 2.0f);
   float uw = uh; //aspect ratio is 1:1
