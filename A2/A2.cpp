@@ -341,8 +341,8 @@ void A2::appLogic()
   float middleX = left + xScale;
   float middleY = bottom + yScale;
   mat4 viewPort(1.0f);
-  viewPort = scale(viewPort, vec3(xScale, yScale, 1.0f));
-  viewPort = translate(viewPort, vec3(left, bottom, 0));
+  viewPort = scale(viewPort, vec3(xScale * 2.0f, yScale * 2.0f, 1.0f));
+  viewPort = translate(viewPort, vec3(middle, middleY, 0));
 
 
 
