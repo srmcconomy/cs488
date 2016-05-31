@@ -74,10 +74,10 @@ A2::A2()
   clippingPlanes{
     vec4(0, 0, 1.0f, 1.0f), vec4(0, 0, 1.0f, 0),
     vec4(0, 0, 10.0f, 1.0f), vec4(0, 0, -1.0f, 0),
-    vec4(-0.95f, 0, 0, 1.0f), vec4(1.0f, 0, 0, 0),
-    vec4(0.95f, 0, 0, 1.0f), vec4(-1.0f, 0, 0, 0),
-    vec4(0, -0.95f, 0, 1.0f), vec4(0, 1.0f, 0, 0),
-    vec4(0, 0.95f, 0, 1.0f), vec4(0, -1.0f, 0, 0)
+    vec4(-1.0f, 0, 0, 1.0f), vec4(1.0f, 0, 0, 0),
+    vec4(1.0f, 0, 0, 1.0f), vec4(-1.0f, 0, 0, 0),
+    vec4(0, -1.0f, 0, 1.0f), vec4(0, 1.0f, 0, 0),
+    vec4(0, 1.0f, 0, 1.0f), vec4(0, -1.0f, 0, 0)
   }
 {
   proj[3][3] = 0;
@@ -360,8 +360,10 @@ void A2::appLogic()
     }
 
     if (draw) {
+      viewPortXScale = (viewPortRight - viewPortLeft) / 1.0f;
+      viewPortYScale = (viewPortTop - viewPortBottom) / 1.0f;
       drawLine(
-        vec2(A.x, A.y),
+        vec2(A.x + viewPortLeft, A.y),
         vec2(B.x, B.y));
     }
   }
@@ -400,6 +402,8 @@ void A2::guiLogic()
 		ImGui::Text( "Framerate: %.1f FPS", ImGui::GetIO().Framerate );
 		ImGui::Text( "Near field: %.1f", clippingPlanes[0].z );
 		ImGui::Text( "Far field: %.1f", clippingPlanes[2].z );
+
+		ImGui::Text( "Mouse x: %.1f", mouseLastX );
 
 	ImGui::End();
 }
