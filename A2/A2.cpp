@@ -17,6 +17,9 @@ using namespace glm;
 #define FOV_FACTOR 1.0f
 
 #define NEAR_FAR_FACTOR 0.1f
+#define ROTATE_FACTOR 0.2f
+#define SCALE_FACTOR 0.1f
+#define TRANSLATE_FACTOR 0.2f
 
 
 float vertices[24] = {
@@ -578,36 +581,36 @@ bool A2::mouseMoveEvent (
     switch(mode) {
       case(ROTATE_VIEW):
         if (leftDown) {
-          view = glm::rotate(view, 0.1f * xOffset, vec3(1, 0, 0));
+          view = glm::rotate(view, 0.1f * xOffset * ROTATE_FACTOR, vec3(1, 0, 0));
         }
         if (middleDown) {
-          view = glm::rotate(view, 0.1f * xOffset, vec3(0, 1, 0));
+          view = glm::rotate(view, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 1, 0));
         }
         if (rightDown) {
-          view = glm::rotate(view, 0.1f * xOffset, vec3(0, 0, 1));
+          view = glm::rotate(view, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 0, 1));
         }
         break;
       case(TRANSLATE_VIEW):
         if (leftDown) {
-          view = glm::translate(view, vec3(0.1f * xOffset, 0, 0));
+          view = glm::translate(view, vec3(0.1f * xOffset * TRANSLATE_FACTOR, 0, 0));
         }
         if (middleDown) {
-          view = glm::translate(view, vec3(0, 0.1f * xOffset, 0));
+          view = glm::translate(view, vec3(0, 0.1f * xOffset * TRANSLATE_FACTOR, 0));
         }
         if (rightDown) {
-          view = glm::translate(view, vec3(0, 0, 0.1f * xOffset));
+          view = glm::translate(view, vec3(0, 0, 0.1f * xOffset * TRANSLATE_FACTOR));
         }
         break;
 
       case(ROTATE_MODEL):
         if (leftDown) {
-          model = glm::rotate(model, 0.1f * xOffset, vec3(1, 0, 0));
+          model = glm::rotate(model, 0.1f * xOffset * ROTATE_FACTOR, vec3(1, 0, 0));
         }
         if (middleDown) {
-          model = glm::rotate(model, 0.1f * xOffset, vec3(0, 1, 0));
+          model = glm::rotate(model, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 1, 0));
         }
         if (rightDown) {
-          model = glm::rotate(model, 0.1f * xOffset, vec3(0, 0, 1));
+          model = glm::rotate(model, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 0, 1));
         }
         break;
       case(TRANSLATE_MODEL):
@@ -624,16 +627,16 @@ bool A2::mouseMoveEvent (
       case(SCALE_MODEL):
         if (leftDown) {
           // model = glm::scale(model, vec3(pow(1.1f, xOffset), 1.0f, 1.0f));
-          modelScale = glm::scale(modelScale, vec3(pow(1.1f, xOffset), 1.0f, 1.0f));
+          modelScale = glm::scale(modelScale, vec3(pow(1.1f, xOffset * SCALE_FACTOR), 1.0f, 1.0f));
 
         }
         if (middleDown) {
           // model = glm::scale(model, vec3(1.0f, pow(1.1f, xOffset), 1.0f));
-          modelScale = glm::scale(modelScale, vec3(1.0f, pow(1.1f, xOffset), 1.0f));
+          modelScale = glm::scale(modelScale, vec3(1.0f, pow(1.1f, xOffset * SCALE_FACTOR), 1.0f));
         }
         if (rightDown) {
           // model = glm::scale(model, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
-          modelScale = glm::scale(modelScale, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
+          modelScale = glm::scale(modelScale, vec3(1.0f, 1.0f, pow(1.1f, xOffset * SCALE_FACTOR)));
         }
         break;
       case(PERSPECTIVE):
