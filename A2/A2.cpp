@@ -377,8 +377,8 @@ void A2::appLogic()
 
     if (draw) {
       drawLine(
-        vec2(A.x * xScale + left, A.y * yScale + top),
-        vec2(B.x * xScale + left, B.y * yScale + top));
+        vec2(A.x * xScale + middleX, A.y * yScale + middleY),
+        vec2(B.x * xScale + middleX, B.y * yScale + middleY));
     }
   }
   // lineStart = proj * lineStart;
