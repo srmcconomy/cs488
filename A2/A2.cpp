@@ -490,17 +490,6 @@ void A2::guiLogic()
 		ImGui::Text( "Near field: %.1f", clippingPlanes[0].z );
 		ImGui::Text( "Far field: %.1f", clippingPlanes[2].z );
 
-		ImGui::Text( "mousey: %.1f", mouseLastY );
-
-
-      float xScale = (viewPortX2 - viewPortX1) * 2.0f / m_windowWidth;
-      float yScale = (viewPortY2 - viewPortY1) * 2.0f / m_windowWidth;
-      float left = viewPortX1 * 2.0f / m_windowWidth - 1.0f;
-      float top = viewPortY2 * 2.0f / m_windowHeight - 1.0f;
-
-      		ImGui::Text( "xScale: %.1f", xScale );
-          		ImGui::Text( "left: %.1f", left );
-
 	ImGui::End();
 }
 
