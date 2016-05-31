@@ -62,11 +62,9 @@ VertexData::VertexData()
 A2::A2()
 	: m_currentLineColour(vec3(0.0f)),
   model(1.0f),
-  modelNoScale(1.0f),
+  modelScale(1.0f),
   view(1.0f),
   proj(1.0f),
-  modelTranslation(0, 0, 0),
-  rotation(0),
   leftDown(false),
   rightDown(false),
   middleDown(false),
@@ -375,7 +373,7 @@ void A2::appLogic()
   float middleY = bottom + yScale;
 
   drawGnomon(proj * view, xScale, yScale, middleX, middleY);
-  drawGnomon(proj * view * modelNoScale, xScale, yScale, middleX, middleY);
+  drawGnomon(proj * view * model, xScale, yScale, middleX, middleY);
 
 
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
@@ -389,8 +387,8 @@ void A2::appLogic()
     vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
     vec4 B(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
 
-    A = view * model * A;
-    B = view * model * B;
+    A = view * model * modelScale * A;
+    B = view * model * modelScale * B;
 
 
     bool draw = clip(A, B, 0); //near-field clip
@@ -580,40 +578,38 @@ bool A2::mouseMoveEvent (
       case(ROTATE_MODEL):
         if (leftDown) {
           model = glm::rotate(model, 0.1f * xOffset, vec3(1, 0, 0));
-          modelNoScale = glm::rotate(model, 0.1f * xOffset, vec3(1, 0, 0));
         }
         if (middleDown) {
           model = glm::rotate(model, 0.1f * xOffset, vec3(0, 1, 0));
-          modelNoScale = glm::rotate(model, 0.1f * xOffset, vec3(0, 1, 0));
         }
         if (rightDown) {
           model = glm::rotate(model, 0.1f * xOffset, vec3(0, 0, 1));
-          modelNoScale = glm::rotate(model, 0.1f * xOffset, vec3(0, 0, 1));
         }
         break;
       case(TRANSLATE_MODEL):
         if (leftDown) {
           model = glm::translate(model, vec3(0.1f * xOffset, 0, 0));
-          modelNoScale = glm::translate(model, vec3(0.1f * xOffset, 0, 0));
         }
         if (middleDown) {
           model = glm::translate(model, vec3(0, 0.1f * xOffset, 0));
-          modelNoScale = glm::translate(model, vec3(0, 0.1f * xOffset, 0));
         }
         if (rightDown) {
           model = glm::translate(model, vec3(0, 0, 0.1f * xOffset));
-          modelNoScale = glm::translate(model, vec3(0, 0, 0.1f * xOffset));
         }
         break;
       case(SCALE_MODEL):
         if (leftDown) {
-          model = glm::scale(model, vec3(pow(1.1f, xOffset), 1.0f, 1.0f));
+          // model = glm::scale(model, vec3(pow(1.1f, xOffset), 1.0f, 1.0f));
+          modelScale = glm::scale(model, vec3(pow(1.1f, xOffset), 1.0f, 1.0f));
+
         }
         if (middleDown) {
-          model = glm::scale(model, vec3(1.0f, pow(1.1f, xOffset), 1.0f));
+          // model = glm::scale(model, vec3(1.0f, pow(1.1f, xOffset), 1.0f));
+          modelScale = glm::scale(model, vec3(1.0f, pow(1.1f, xOffset), 1.0f));
         }
         if (rightDown) {
-          model = glm::scale(model, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
+          // model = glm::scale(model, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
+          modelScale = glm::scale(model, vec3(1.0f, 1.0f, pow(1.1f, xOffset)));
         }
         break;
       case(PERSPECTIVE):

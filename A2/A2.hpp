@@ -79,7 +79,7 @@ protected:
 
 	glm::mat4 proj;
   glm::mat4 model;
-	glm::mat4 modelNoScale;
+	glm::mat4 modelScale;
 	glm::mat4 view;
 
   glm::vec3 modelTranslation;
