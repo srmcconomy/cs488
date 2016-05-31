@@ -580,9 +580,16 @@ bool A2::mouseMoveEvent (
           setFar(clippingPlanes[2].z + xOffset * NEAR_FAR_FACTOR);
         }
         break;
+      case(VIEWPORT):
+        if (leftDown) {
+          viewPortRight = xPos;
+          viewPortBottom = yPos;
+        }
+        break;
     }
 
     mouseLastX = xPos;
+    mouseLastY = yPos;
   }
 	// Fill in with event handling code...
 
@@ -602,6 +609,10 @@ bool A2::mouseButtonInputEvent (
   if (!ImGui::IsMouseHoveringAnyWindow()) {
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
       if (action == GLFW_PRESS) {
+        if (mode == VIEWPORT) {
+          viewPortLeft = mouseLastX;
+          viewPortTop = mouseLastY;
+        }
         leftDown = true;
       }
       if (action == GLFW_RELEASE) {
