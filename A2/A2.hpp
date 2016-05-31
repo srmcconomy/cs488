@@ -109,9 +109,9 @@ protected:
 
   float FOV;
 
-  float viewPortLeft;
-  float viewPortRight;
-  float viewPortTop;
-  float viewPortBottom;
+  float viewPortX1;
+  float viewPortX2;
+  float viewPortY1;
+  float viewPortY2;
 
 };
