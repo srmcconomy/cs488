@@ -11,7 +11,7 @@ using namespace std;
 #include <glm/gtx/io.hpp>
 using namespace glm;
 
-#define PI 3.14159265f;
+#define PI 3.14159265f
 
 
 float vertices[24] = {
