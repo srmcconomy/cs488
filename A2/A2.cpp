@@ -336,11 +336,11 @@ void A2::appLogic()
   float xScale = (viewPortRight - viewPortLeft) / m_windowWidth;
   float yScale = (viewPortBottom - viewPortTop) / m_windowHeight;
   float left = viewPortLeft * 2.0f / m_windowWidth - 1.0f;
-  float top = viewPortTop * 2.0f / m_windowHeight - 1.0f;
+  float bottom = (m_windowHeight - viewPortBottom) * 2.0f / m_windowHeight - 1.0f;
   float right = left + xScale * 2.0f;
-  float bottom = top + yScale * 2.0f;
+  float top = bottom + yScale * 2.0f;
   float middleX = left + xScale;
-  float middleY = top + yScale;
+  float middleY = bottom + yScale;
 
   drawLine(vec2(left, top), vec2(right, top));
   drawLine(vec2(right, top), vec2(right, bottom));
