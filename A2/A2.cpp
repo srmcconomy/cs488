@@ -269,10 +269,9 @@ bool A2::clip(vec4& A, vec4& B, int c) {
 }
 
 void A2::setFOV(float fov) {
-  float uw = 1 / tan(fov / 2.0f);
-  float uw = uh; //aspect ratio is 1:1
-  proj[0][0] = uh;
-  proj[1][1] = uw;
+  float cot = 1 / tan(fov / 2.0f);
+  proj[0][0] = cot; // aspect is 1:1
+  proj[1][1] = cot;
 }
 
 void A2::setNearAndFar(float n, float f) {
