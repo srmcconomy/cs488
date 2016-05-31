@@ -102,6 +102,7 @@ protected:
   Mode mode;
 
   double mouseLastX;
+  double mouseLastY;
 
   glm::vec4 clippingPlanes[12];
 

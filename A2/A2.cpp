@@ -71,6 +71,7 @@ A2::A2()
   middleDown(false),
   mode(ROTATE_MODEL),
   mouseLastX(0),
+  mouseLastY(0),
   windowWidth(800),
   windowHeight(800),
   viewPortLeft(40.0f),
