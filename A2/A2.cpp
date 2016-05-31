@@ -72,8 +72,6 @@ A2::A2()
   mode(ROTATE_MODEL),
   mouseLastX(0),
   mouseLastY(0),
-  windowWidth(800),
-  windowHeight(800),
   viewPortLeft(40.0f),
   viewPortRight(760.0f),
   viewPortTop(40.0f),
@@ -335,10 +333,10 @@ void A2::appLogic()
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
 
 
-  float xScale = (viewPortRight - viewPortLeft) / windowWidth;
-  float yScale = (viewPortBottom - viewPortTop) / windowHeight;
-  float left = viewPortLeft * 2.0f / windowWidth - 1.0f;
-  float top = viewPortTop * 2.0f / windowHeight - 1.0f;
+  float xScale = (viewPortRight - viewPortLeft) / m_windowWidth;
+  float yScale = (viewPortBottom - viewPortTop) / m_windowHeight;
+  float left = viewPortLeft * 2.0f / m_windowWidth - 1.0f;
+  float top = viewPortTop * 2.0f / m_windowHeight - 1.0f;
   float right = left + xScale * 2.0f;
   float bottom = top + yScale * 2.0f;
   float middleX = left + xScale;
@@ -421,10 +419,10 @@ void A2::guiLogic()
 		ImGui::Text( "Mouse x: %.1f", mouseLastX );
 
 
-      float xScale = (viewPortRight - viewPortLeft) * 2.0f / windowWidth;
-      float yScale = (viewPortTop - viewPortBottom) * 2.0f / windowWidth;
-      float left = viewPortLeft * 2.0f / windowWidth - 1.0f;
-      float top = viewPortTop * 2.0f / windowHeight - 1.0f;
+      float xScale = (viewPortRight - viewPortLeft) * 2.0f / m_windowWidth;
+      float yScale = (viewPortTop - viewPortBottom) * 2.0f / m_windowWidth;
+      float left = viewPortLeft * 2.0f / m_windowWidth - 1.0f;
+      float top = viewPortTop * 2.0f / m_windowHeight - 1.0f;
 
       		ImGui::Text( "xScale: %.1f", xScale );
           		ImGui::Text( "left: %.1f", left );
@@ -668,8 +666,6 @@ bool A2::windowResizeEvent (
 		int height
 ) {
 	bool eventHandled(false);
-  windowWidth = width;
-  windowHeight = height;
 
 	// Fill in with event handling code...
 
