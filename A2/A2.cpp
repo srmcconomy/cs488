@@ -283,6 +283,11 @@ void A2::appLogic()
     A = view * model * A;
     B = view * model * B;
 
+    A.x /= A.z;
+    A.y /= A.z;
+    B.x /= B.z;
+    B.y /= B.z;
+
     for (int clip = 0; clip < 12; clip += 2) {
       float wecA = dot(A - clippingPlanes[clip], clippingPlanes[clip + 1]);
       float wecB = dot(B - clippingPlanes[clip], clippingPlanes[clip + 1]);
@@ -302,8 +307,8 @@ void A2::appLogic()
     }
     if (draw) {
       drawLine(
-        vec2(A.x / A.z, A.y / A.z),
-        vec2(B.x / B.z, B.y / B.z));
+        vec2(A.x, A.y),
+        vec2(B.x, B.y));
     }
   }
   // lineStart = proj * lineStart;
