@@ -271,20 +271,20 @@ void A2::drawGnomon(mat4 transformation, mat4 projection, float scaleX, float sc
   bool drawY = clip(lineStartY, lineY, 0);
   bool drawZ = clip(lineStartZ, lineZ, 0);
   if (drawX) {
-    lineStartX = lineStartX * projection;
-    lineX = lineX * projection;
+    lineStartX = projection * lineStartX;
+    lineX = projection * lineX;
     divideByW(lineStartX);
     divideByW(lineX);
   }
   if (drawY) {
-    lineStartY = lineStartY * projection;
-    lineY = lineY * projection;
+    lineStartY = projection * lineStartY;
+    lineY = projection * lineY;
     divideByW(lineStartY);
     divideByW(lineY);
   }
   if (drawZ) {
-    lineStartZ = lineStartZ * projection;
-    lineZ = lineZ * projection;
+    lineStartZ = projection * lineStartZ;
+    lineZ = projection * lineZ;
     divideByW(lineStartZ);
     divideByW(lineZ);
   }
