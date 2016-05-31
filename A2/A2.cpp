@@ -250,7 +250,10 @@ void divideByW(vec4& v) {
 }
 
 
-void A2::drawGnomon(mat4 transformation, float scaleX, float scaleY, float middleX, float middleY) {
+void A2::drawGnomon(mat4 trans, float scaleX, float scaleY, float middleX, float middleY) {
+  mat4 transformation = trans;
+  transformation[0][0] = 1.0f;
+  transformation[1][1] = 1.0f;
   vec4 lineStart(0, 0, 0, 1.0f);
   lineStart = transformation * lineStart;
 
