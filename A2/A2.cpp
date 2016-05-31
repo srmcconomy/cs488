@@ -276,17 +276,17 @@ void A2::appLogic()
   drawLine(vec2(-0.95f, 0.95f), vec2(-0.95f, -0.95f));
 
   for (int i = 0; i < 24; i+=2) {
+    vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
+    vec4 B(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
+
+    A = view * model * A;
+    B = view * model * B;
+
     for (int clip = 0; clip < 12; clip += 2) {
-      vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
-      vec4 B(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
-
-      A = view * model * A;
-      B = view * model * B;
-
       float wecA = dot(A - clippingPlanes[clip], clippingPlanes[clip + 1]);
       float wecB = dot(B - clippingPlanes[clip], clippingPlanes[clip + 1]);
 
-      if (wecA < 0 && wecB < 0) continue;
+      if (wecA < 0 && wecB < 0) goto skipdraw;
       if (!(wecA >= 0 && wecB >= 0)) {
         float t = wecA / (wecA - wecB);
         if (wecA < 0) {
@@ -295,10 +295,11 @@ void A2::appLogic()
           B = A + t*(B - A);
         }
       }
-      drawLine(
-        vec2(A.x / A.z, A.y / A.z),
-        vec2(B.x / B.z, B.y / B.z));
     }
+    drawLine(
+      vec2(A.x / A.z, A.y / A.z),
+      vec2(B.x / B.z, B.y / B.z));
+skipdraw:
   }
   // lineStart = proj * lineStart;
   // lineEnd = proj * lineStart;
