@@ -1,0 +1,7 @@
+To compile the program, run
+  $ premake4 gmake
+  $ make
+
+I completed the assignment on g129.student.cs.uwaterloo.ca
+
+The program should work as specified, with no additional functionality or missing functionality
