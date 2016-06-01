@@ -345,9 +345,6 @@ void A2::setNear(float n) {
   if (n >= clippingPlanes[2].z) {
     n = clippingPlanes[2].z;
   }
-  if (n <= NEAR_FAR_FACTOR) {
-    n = NEAR_FAR_FACTOR;
-  }
   setNearAndFar(n, clippingPlanes[2].z);
 }
 
