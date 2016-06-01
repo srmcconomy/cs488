@@ -67,7 +67,7 @@ A2::A2()
   model(1.0f),
   modelScale(1.0f),
   view(1.0f),
-  view2(1.0f),
+  viewRotation(1.0f),
   proj(1.0f),
   leftDown(false),
   rightDown(false),
@@ -369,7 +369,8 @@ void A2::setNearAndFar(float n, float f) {
 void A2::reset() {
   model = mat4(1.0f);
   modelScale = mat4(1.0f);
-  view = mat4(1.0f);
+  view = translate(view, vec3(0, 0, 5.0f));
+  viewRotation = mat4(1.0f);
   leftDown = false;
   rightDown = false;
   middleDown = false;
@@ -405,8 +406,8 @@ void A2::appLogic()
   float middleX = left + xScale;
   float middleY = bottom + yScale;
 
-  drawGnomon(view2 * view, proj, xScale, yScale, middleX, middleY);
-  drawGnomon(view2 * view * model, proj, xScale, yScale, middleX, middleY);
+  drawGnomon(viewRotation * view, proj, xScale, yScale, middleX, middleY);
+  drawGnomon(viewRotation * view * model, proj, xScale, yScale, middleX, middleY);
 
 
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
@@ -420,8 +421,8 @@ void A2::appLogic()
     vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
     vec4 B(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
 
-    A = view2 * view * model * modelScale * A;
-    B = view2 * view * model * modelScale * B;
+    A = viewRotation * view * model * modelScale * A;
+    B = viewRotation * view * model * modelScale * B;
 
 
     bool draw = clip(A, B, 0); //near-field clip
@@ -580,13 +581,13 @@ bool A2::mouseMoveEvent (
     switch(mode) {
       case(ROTATE_VIEW):
         if (leftDown) {
-          view2 = glm::rotate(view2, 0.1f * xOffset * ROTATE_FACTOR, vec3(1, 0, 0));
+          viewRotation = glm::rotate(viewRotation, 0.1f * xOffset * ROTATE_FACTOR, vec3(1, 0, 0));
         }
         if (middleDown) {
-          view2 = glm::rotate(view2, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 1, 0));
+          viewRotation = glm::rotate(viewRotation, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 1, 0));
         }
         if (rightDown) {
-          view2 = glm::rotate(view2, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 0, 1));
+          viewRotation = glm::rotate(viewRotation, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 0, 1));
         }
         break;
       case(TRANSLATE_VIEW):
