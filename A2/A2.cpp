@@ -397,10 +397,10 @@ void A2::appLogic()
   float viewPortRight = viewPortX1 < viewPortX2 ? viewPortX2 : viewPortX1;
   float viewPortBottom = viewPortY1 < viewPortY2 ? viewPortY1 : viewPortY2;
   float viewPortTop = viewPortY1 < viewPortY2 ? viewPortY2 : viewPortY1;
-  float xScale = (viewPortRight - viewPortLeft) / m_windowWidth;
-  float yScale = (viewPortBottom - viewPortTop) / m_windowHeight;
-  float left = viewPortLeft * 2.0f / m_windowWidth - 1.0f;
-  float bottom = (m_windowHeight - viewPortBottom) * 2.0f / m_windowHeight - 1.0f;
+  float xScale = (viewPortRight - viewPortLeft) / m_viewportWidth;
+  float yScale = (viewPortBottom - viewPortTop) / m_viewportHeight;
+  float left = viewPortLeft * 2.0f / m_viewportWidth - 1.0f;
+  float bottom = (m_viewportHeight - viewPortBottom) * 2.0f / m_viewportHeight - 1.0f;
   float right = left + xScale * 2.0f;
   float top = bottom + yScale * 2.0f;
   float middleX = left + xScale;
@@ -652,8 +652,8 @@ bool A2::mouseMoveEvent (
         break;
       case(VIEWPORT):
         if (leftDown) {
-          viewPortX2 = xPos < m_windowWidth ? (xPos > 0 ? xPos : 0): m_windowWidth;
-          viewPortY1 = yPos < m_windowHeight ? (yPos > 0 ? yPos : 0): m_windowHeight;
+          viewPortX2 = xPos < m_viewportWidth ? (xPos > 0 ? xPos : 0): m_viewportWidth;
+          viewPortY1 = yPos < m_viewportHeight ? (yPos > 0 ? yPos : 0): m_viewportHeight;
         }
         break;
     }
