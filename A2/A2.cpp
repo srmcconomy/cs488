@@ -91,7 +91,7 @@ A2::A2()
   viewPortY1 = 768 * 0.95f;
   viewPortX1 = 768 * 0.05f;
   viewPortX2 = 768 * 0.95f;
-  world = translate(mat4(1.0f), vec3(0, 0, 5.0f));
+  view = translate(mat4(1.0f), vec3(0, 0, 5.0f));
 }
 
 //----------------------------------------------------------------------------------------
@@ -344,6 +344,9 @@ void A2::setNear(float n) {
   if (n >= clippingPlanes[2].z) {
     n = clippingPlanes[2].z;
   }
+  if (n <= NEAR_FAR_FACTOR) {
+    n = NEAR_FAR_FACTOR;
+  }
   setNearAndFar(n, clippingPlanes[2].z);
 }
 
@@ -416,8 +419,8 @@ void A2::appLogic()
     vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
     vec4 B(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
 
-    A = view * world * model * modelScale * A;
-    B = view * world * model * modelScale * B;
+    A = view2 * view * world * model * modelScale * A;
+    B = view2 * view * world * model * modelScale * B;
 
 
     bool draw = clip(A, B, 0); //near-field clip
@@ -576,13 +579,13 @@ bool A2::mouseMoveEvent (
     switch(mode) {
       case(ROTATE_VIEW):
         if (leftDown) {
-          view = glm::rotate(view, 0.1f * xOffset * ROTATE_FACTOR, vec3(1, 0, 0));
+          view2 = glm::rotate(view2, 0.1f * xOffset * ROTATE_FACTOR, vec3(1, 0, 0));
         }
         if (middleDown) {
-          view = glm::rotate(view, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 1, 0));
+          view2 = glm::rotate(view2, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 1, 0));
         }
         if (rightDown) {
-          view = glm::rotate(view, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 0, 1));
+          view2 = glm::rotate(view2, 0.1f * xOffset * ROTATE_FACTOR, vec3(0, 0, 1));
         }
         break;
       case(TRANSLATE_VIEW):
