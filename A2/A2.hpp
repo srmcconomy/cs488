@@ -83,7 +83,6 @@ protected:
 	glm::mat4 modelScale;
 	glm::mat4 view;
 	glm::mat4 view2;
-  glm::mat4 world;
 
   glm::vec3 modelTranslation;
 

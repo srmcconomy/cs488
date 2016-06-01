@@ -67,6 +67,7 @@ A2::A2()
   model(1.0f),
   modelScale(1.0f),
   view(1.0f),
+  view2(1.0f),
   proj(1.0f),
   leftDown(false),
   rightDown(false),
@@ -404,8 +405,8 @@ void A2::appLogic()
   float middleX = left + xScale;
   float middleY = bottom + yScale;
 
-  drawGnomon(view * world, proj, xScale, yScale, middleX, middleY);
-  drawGnomon(view * world * model, proj, xScale, yScale, middleX, middleY);
+  drawGnomon(view2 * view, proj, xScale, yScale, middleX, middleY);
+  drawGnomon(view2 * view * model, proj, xScale, yScale, middleX, middleY);
 
 
 	setLineColour(vec3(1.0f, 1.0f, 1.0f));
@@ -419,8 +420,8 @@ void A2::appLogic()
     vec4 A(vertices[edges[i] * 3], vertices[edges[i] * 3 + 1], vertices[edges[i] * 3 + 2], 1.0f);
     vec4 B(vertices[edges[i + 1] * 3], vertices[edges[i + 1] * 3 + 1], vertices[edges[i + 1] * 3 + 2], 1.0f);
 
-    A = view2 * view * world * model * modelScale * A;
-    B = view2 * view * world * model * modelScale * B;
+    A = view2 * view * model * modelScale * A;
+    B = view2 * view * model * modelScale * B;
 
 
     bool draw = clip(A, B, 0); //near-field clip
