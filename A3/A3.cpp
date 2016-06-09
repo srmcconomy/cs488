@@ -395,6 +395,8 @@ void A3::draw() {
 }
 
 void A3::renderNode(const SceneNode * node) {
+  glPushMatrix();
+  glMultMatrix(node->trans)
   if (node->m_nodeType == NodeType::GeometryNode) {
     const GeometryNode * geometryNode = static_cast<const GeometryNode *>(node);
 
@@ -411,6 +413,7 @@ void A3::renderNode(const SceneNode * node) {
   for (const SceneNode* child : node->children) {
     renderNode(child);
   }
+  glPopMatrix();
 }
 
 //----------------------------------------------------------------------------------------
