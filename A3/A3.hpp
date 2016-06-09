@@ -49,7 +49,7 @@ protected:
 	void uploadCommonSceneUniforms();
 	void renderSceneGraph(const SceneNode &node);
 	void renderArcCircle();
-	void renderNode(const SceneNode *node)
+	void renderNode(const SceneNode *node);
 
 	glm::mat4 m_perpsective;
 	glm::mat4 m_view;

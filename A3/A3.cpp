@@ -408,7 +408,7 @@ void A3::renderNode(const SceneNode * node) {
 		glDrawArrays(GL_TRIANGLES, batchInfo.startIndex, batchInfo.numIndices);
 		m_shader.disable();
   }
-  for (const SceneNode* child : root.children) {
+  for (const SceneNode* child : node.children) {
     renderNode(child);
   }
 }
