@@ -394,11 +394,31 @@ void A3::draw() {
 	renderArcCircle();
 }
 
+void A3::renderNode(const SceneNode * node) {
+  if (node->m_nodeType == NodeType::GeometryNode) {
+    const GeometryNode * geometryNode = static_cast<const GeometryNode *>(node);
+
+		updateShaderUniforms(m_shader, *geometryNode, m_view);
+
+		// Get the BatchInfo corresponding to the GeometryNode's unique MeshId.
+		BatchInfo batchInfo = m_batchInfoMap[geometryNode->meshId];
+    cout << geometryNode->trans[0][0] << endl;
+		//-- Now render the mesh:
+		m_shader.enable();
+		glDrawArrays(GL_TRIANGLES, batchInfo.startIndex, batchInfo.numIndices);
+		m_shader.disable();
+  }
+  for (const SceneNode* child : root.children) {
+    renderNode(*child);
+  }
+}
+
 //----------------------------------------------------------------------------------------
 void A3::renderSceneGraph(const SceneNode & root) {
 
 	// Bind the VAO once here, and reuse for all GeometryNode rendering below.
 	glBindVertexArray(m_vao_meshData);
+  renderNode(&root);
 
 	// This is emphatically *not* how you should be drawing the scene graph in
 	// your final implementation.  This is a non-hierarchical demonstration
@@ -412,24 +432,6 @@ void A3::renderSceneGraph(const SceneNode & root) {
 	// subclasses, that renders the subtree rooted at every node.  Or you
 	// could put a set of mutually recursive functions in this class, which
 	// walk down the tree from nodes of different types.
-
-	for (const SceneNode * node : root.children) {
-
-		if (node->m_nodeType != NodeType::GeometryNode)
-			continue;
-
-		const GeometryNode * geometryNode = static_cast<const GeometryNode *>(node);
-
-		updateShaderUniforms(m_shader, *geometryNode, m_view);
-
-		// Get the BatchInfo corresponding to the GeometryNode's unique MeshId.
-		BatchInfo batchInfo = m_batchInfoMap[geometryNode->meshId];
-    cout << geometryNode->trans[0][0] << endl;
-		//-- Now render the mesh:
-		m_shader.enable();
-		glDrawArrays(GL_TRIANGLES, batchInfo.startIndex, batchInfo.numIndices);
-		m_shader.disable();
-	}
 
 	glBindVertexArray(0);
 	CHECK_GL_ERRORS;
