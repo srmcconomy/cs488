@@ -424,7 +424,7 @@ void A3::renderSceneGraph(const SceneNode & root) {
 
 		// Get the BatchInfo corresponding to the GeometryNode's unique MeshId.
 		BatchInfo batchInfo = m_batchInfoMap[geometryNode->meshId];
-    cout << batchInfo.startIndex << endl;
+    cout << batchInfo.numIndices << endl;
 		//-- Now render the mesh:
 		m_shader.enable();
 		glDrawArrays(GL_TRIANGLES, batchInfo.startIndex, batchInfo.numIndices);
