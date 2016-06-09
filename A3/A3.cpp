@@ -409,7 +409,7 @@ void A3::renderNode(const SceneNode * node) {
 		m_shader.disable();
   }
   for (const SceneNode* child : root.children) {
-    renderNode(*child);
+    renderNode(child);
   }
 }
 
