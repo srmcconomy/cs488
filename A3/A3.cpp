@@ -250,7 +250,7 @@ void A3::initPerspectiveMatrix()
 
 //----------------------------------------------------------------------------------------
 void A3::initViewMatrix() {
-	m_view = glm::lookAt(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, -1.0f),
+	m_view = glm::lookAt(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 0.0f, -10.0f),
 			vec3(0.0f, 1.0f, 0.0f));
 }
 
