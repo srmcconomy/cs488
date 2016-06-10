@@ -32,6 +32,7 @@ A3::A3(const std::string & luaSceneFile)
 	  m_vao_arcCircle(0),
 	  m_vbo_arcCircle(0),
     translateTrans(1.0f),
+    rotationTrans(1.0f),
     mouseLeftDown(false),
     mouseMiddleDown(false),
     mouseRightDown(false)
@@ -509,6 +510,12 @@ bool A3::mouseMoveEvent (
 
   if (mouseMiddleDown) {
     translateTrans = translate(translateTrans, vec3(0, 0, yOffset * TRANSLATE_FACTOR));
+    eventHandled = true;
+  }
+
+  if (mouseMiddleDown) {
+    rotationTrans = rotate(rotationTrans, yOffset * 0.001f, vec3(1.0f, 0, 0));
+    rotationTrans = rotate(rotationTrans, xOffset * 0.001f, vec3(0, 1.0f, 0));
     eventHandled = true;
   }
   mouseLastX = xPos;

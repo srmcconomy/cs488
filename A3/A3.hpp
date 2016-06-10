@@ -82,6 +82,7 @@ protected:
 
 	std::stack<glm::mat4> matrixStack;
   glm::mat4 translateTrans;
+  glm::mat4 rotationTrans;
   double mouseLastX;
   double mouseLastY;
   bool mouseLeftDown;
