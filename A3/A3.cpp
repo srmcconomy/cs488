@@ -514,8 +514,8 @@ bool A3::mouseMoveEvent (
   }
 
   if (mouseRightDown) {
-    rotationTrans *= rotate(mat4(1.0f), (float)yOffset * 0.001f, vec3(1.0f, 0, 0));
-    rotationTrans *= rotate(mat4(1.0f), (float)xOffset * 0.001f, vec3(0, 1.0f, 0));
+    rotationTrans = rotate(mat4(1.0f), (float)yOffset * 0.001f, vec3(1.0f, 0, 0)) * rotationTrans;
+    rotationTrans = rotate(mat4(1.0f), (float)xOffset * 0.001f, vec3(0, 1.0f, 0)) * rotationTrans;
     eventHandled = true;
   }
   mouseLastX = xPos;
