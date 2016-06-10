@@ -84,5 +84,7 @@ protected:
   glm::mat4 translateTrans;
   double mouseLastX;
   double mouseLastY;
-  bool mouseDown;
+  bool mouseLeftDown;
+  bool mouseMiddleDown;
+  bool mouseRightDown;
 };

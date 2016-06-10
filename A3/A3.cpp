@@ -496,13 +496,17 @@ bool A3::mouseMoveEvent (
 ) {
 	bool eventHandled(false);
 
-  if (mouseDown) {
-    double xOffset = xPos - mouseLastX;
-    double yOffset = yPos - mouseLastY;
+  double xOffset = xPos - mouseLastX;
+  double yOffset = yPos - mouseLastY;
 
+  if (mouseLeftDown) {
   	// Fill in with event handling code...
     translateTrans = translate(translateTrans, vec3(xOffset * TRANSLATE_FACTOR, -yOffset * TRANSLATE_FACTOR, 0));
+    eventHandled = true;
+  }
 
+  if (mouseMiddleDown) {
+    translateTrans = translate(translateTrans, vec3(0, 0, yOffset * TRANSLATE_FACTOR));
     eventHandled = true;
   }
   mouseLastX = xPos;
@@ -524,11 +528,23 @@ bool A3::mouseButtonInputEvent (
 
   if (actions == GLFW_PRESS) {
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-      mouseDown = true;
+      mouseLeftDown = true;
+    }
+    if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
+      mouseMiddleDown = true;
+    }
+    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+      mouseRightDown = true;
     }
   } else if (actions == GLFW_RELEASE) {
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
-      mouseDown = false;
+      mouseLeftDown = false;
+    }
+    if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
+      mouseMiddleDown = false;
+    }
+    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+      mouseRightDown = false;
     }
   }
 
