@@ -18,7 +18,7 @@ using namespace glm;
 static bool show_gui = true;
 
 const size_t CIRCLE_PTS = 48;
-const float TRANSLATE_FACTOR = 0.01f;
+const float TRANSLATE_FACTOR = 0.001f;
 
 //----------------------------------------------------------------------------------------
 // Constructor
