@@ -505,13 +505,12 @@ bool A3::mouseMoveEvent (
   double yOffset = yPos - mouseLastY;
 
   vec3 trackball = vec3(xPos - trackballOrigin.x, yPos - trackballOrigin.y, 0);
+  trackball /= trackballRadius;
   float sqlength = trackball.x * trackball.x + trackball.y * trackball.y;
-  float sqradius = trackballRadius * trackballRadius;
-  if (sqlength > sqradius) {
-    trackball = trackballRadius / sqrt(sqlength) * trackball;
+  if (sqlength > 1) {
+    trackball = sqrt(sqlength) * trackball;
   }
-  trackball.z = sqrt(sqradius - sqlength);
-  vec3 trackballOffset = trackball - lastTrackball;
+  trackball.z = sqrt(1 - sqlength);
 
   if (mouseLeftDown) {
   	// Fill in with event handling code...
