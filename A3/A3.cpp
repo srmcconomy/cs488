@@ -513,7 +513,7 @@ bool A3::mouseMoveEvent (
     eventHandled = true;
   }
 
-  if (mouseMiddleDown) {
+  if (mouseRightDown) {
     rotationTrans = rotate(rotationTrans, (float)yOffset * 0.001f, vec3(1.0f, 0, 0));
     rotationTrans = rotate(rotationTrans, (float)xOffset * 0.001f, vec3(0, 1.0f, 0));
     eventHandled = true;
