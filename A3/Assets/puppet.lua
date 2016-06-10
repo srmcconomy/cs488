@@ -16,7 +16,6 @@ torso = gr.mesh('cube', 'torso')
 rootnode:add_child(torso)
 torso:set_material(white)
 torso:scale(0.5,1.0,0.5);
-torso:translate(0.0, 0.0, -1.0)
 
 head = gr.mesh('cube', 'head')
 torso:add_child(head)
