@@ -81,4 +81,5 @@ protected:
 	std::shared_ptr<SceneNode> m_rootNode;
 
 	std::stack<glm::mat4> matrixStack;
+  glm::mat4 translateTrans;
 };

@@ -29,9 +29,10 @@ A3::A3(const std::string & luaSceneFile)
 	  m_vbo_vertexPositions(0),
 	  m_vbo_vertexNormals(0),
 	  m_vao_arcCircle(0),
-	  m_vbo_arcCircle(0)
+	  m_vbo_arcCircle(0),
+    translateTrans(1.0f)
 {
-  matrixStack.push(mat4(1));
+  matrixStack.push(mat4(1.0f));
 }
 
 //----------------------------------------------------------------------------------------
@@ -398,11 +399,10 @@ void A3::renderNode(const SceneNode * node) {
   if (node->m_nodeType == NodeType::GeometryNode) {
     const GeometryNode * geometryNode = static_cast<const GeometryNode *>(node);
 
-		updateShaderUniforms(m_shader, *geometryNode, m_view * matrixStack.top());
+		updateShaderUniforms(m_shader, *geometryNode, m_view * translateTrans * matrixStack.top());
 
 		// Get the BatchInfo corresponding to the GeometryNode's unique MeshId.
 		BatchInfo batchInfo = m_batchInfoMap[geometryNode->meshId];
-    cout << geometryNode->m_name << endl;
 		//-- Now render the mesh:
 		m_shader.enable();
 		glDrawArrays(GL_TRIANGLES, batchInfo.startIndex, batchInfo.numIndices);
@@ -495,6 +495,7 @@ bool A3::mouseMoveEvent (
 	bool eventHandled(false);
 
 	// Fill in with event handling code...
+  translate(translateTrans, vec3(1.0f, 0, 0));
 
 	return eventHandled;
 }
