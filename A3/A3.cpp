@@ -491,6 +491,13 @@ bool A3::cursorEnterWindowEvent (
 	return eventHandled;
 }
 
+
+float clampf(float a, float min, float max) {
+  if (a > max) return max;
+  if (a < min) return main;
+  return a;
+}
+
 //----------------------------------------------------------------------------------------
 /*
  * Event handler.  Handles mouse cursor movement events.
@@ -538,11 +545,6 @@ bool A3::mouseMoveEvent (
 	return eventHandled;
 }
 
-float clampf(float a, float min, float max) {
-  if (a > max) return max;
-  if (a < min) return main;
-  return a;
-}
 
 //----------------------------------------------------------------------------------------
 /*
