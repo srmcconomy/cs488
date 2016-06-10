@@ -18,6 +18,7 @@ using namespace glm;
 static bool show_gui = true;
 
 const size_t CIRCLE_PTS = 48;
+const float TRANSLATE_FACTOR = 0.01f;
 
 //----------------------------------------------------------------------------------------
 // Constructor
@@ -30,7 +31,8 @@ A3::A3(const std::string & luaSceneFile)
 	  m_vbo_vertexNormals(0),
 	  m_vao_arcCircle(0),
 	  m_vbo_arcCircle(0),
-    translateTrans(1.0f)
+    translateTrans(1.0f),
+    mouseDown(false)
 {
   matrixStack.push(mat4(1.0f));
 }
@@ -494,8 +496,17 @@ bool A3::mouseMoveEvent (
 ) {
 	bool eventHandled(false);
 
-	// Fill in with event handling code...
-  translateTrans = translate(translateTrans, vec3(1.0f, 0, 0));
+  if (mouseDown) {
+    xOffset = xPos - mouseLastX;
+    yOffset = yPos - mouseLastY;
+
+  	// Fill in with event handling code...
+    translateTrans = translate(translateTrans, vec3(xOffset * TRANSLATE_FACTOR, yOffset * TRANSLATE_FACTOR, 0));
+
+    eventHandled = true;
+  }
+  mouseLastX = xPos;
+  mouseLastY = yPos;
 
 	return eventHandled;
 }
@@ -510,6 +521,13 @@ bool A3::mouseButtonInputEvent (
 		int mods
 ) {
 	bool eventHandled(false);
+
+  if (action == GLFW_PRESS) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+      mouseDown = true;
+    }
+  }
+
 
 	// Fill in with event handling code...
 
