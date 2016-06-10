@@ -511,7 +511,7 @@ bool A3::mouseMoveEvent (
   double xOffset = xPos - mouseLastX;
   double yOffset = yPos - mouseLastY;
 
-  vec3 trackball = vec3(xPos - trackballOrigin.x, yPos - trackballOrigin.y, 0);
+  vec3 trackball = vec3(xPos - trackballOrigin.x, -yPos + trackballOrigin.y, 0);
   trackball /= trackballRadius;
   float sqlength = trackball.x * trackball.x + trackball.y * trackball.y;
   if (sqlength > 1) {
@@ -534,7 +534,7 @@ bool A3::mouseMoveEvent (
   if (mouseRightDown) {
     float angle = acos(clampf(dot(trackball, lastTrackball), 0, 1.0f));
     if (angle > 0)
-      rotationTrans = rotate(mat4(1.0f), angle, -1.0f * cross(trackball, lastTrackball)) * rotationTrans;
+      rotationTrans = rotate(mat4(1.0f), angle, cross(trackball, lastTrackball)) * rotationTrans;
     eventHandled = true;
   }
   mouseLastX = xPos;
