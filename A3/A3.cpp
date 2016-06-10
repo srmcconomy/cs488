@@ -504,12 +504,14 @@ bool A3::mouseMoveEvent (
   double xOffset = xPos - mouseLastX;
   double yOffset = yPos - mouseLastY;
 
-  vec2 trackball = vec2(xPos, yPos) - trackballOrigin;
+  vec3 trackball = vec3(xPos - trackballOrigin.x, yPos - trackballOrigin.y, 0);
   float sqlength = trackball.x * trackball.x + trackball.y * trackball.y;
-  if (sqlength > trackballRadius * trackballRadius) {
+  float sqradius = trackballRadius * trackballRadius;
+  if (sqlength > sqradius) {
     trackball = trackballRadius / sqrt(sqlength) * trackball;
   }
-  vec2 trackballOffset = trackball - lastTrackball;
+  trackball.z = sqrt(sqradius - sqlength);
+  vec3 trackballOffset = trackball - lastTrackball;
 
   if (mouseLeftDown) {
   	// Fill in with event handling code...
@@ -523,8 +525,8 @@ bool A3::mouseMoveEvent (
   }
 
   if (mouseRightDown) {
-    rotationTrans = rotate(mat4(1.0f), trackballOffset.y * 1.57f / trackballRadius, vec3(1.0f, 0, 0)) * rotationTrans;
-    rotationTrans = rotate(mat4(1.0f), trackballOffset.x * 1.57f / trackballRadius, vec3(0, 1.0f, 0)) * rotationTrans;
+    float angle = acos(dot(trackball, lastTrackball));
+    rotationTrans = rotate(mat4(1.0f), angle, cross(trackball, lastTrackball)) * rotationTrans;
     eventHandled = true;
   }
   mouseLastX = xPos;

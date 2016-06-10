@@ -89,6 +89,6 @@ protected:
   bool mouseMiddleDown;
   bool mouseRightDown;
   glm::vec2 trackballOrigin;
-  glm::vec2 lastTrackball;
+  glm::vec3 lastTrackball;
   float trackballRadius;
 };
