@@ -32,7 +32,9 @@ A3::A3(const std::string & luaSceneFile)
 	  m_vao_arcCircle(0),
 	  m_vbo_arcCircle(0),
     translateTrans(1.0f),
-    mouseDown(false)
+    mouseLeftDown(false),
+    mouseMiddleDown(false),
+    mouseRightDown(false)
 {
   matrixStack.push(mat4(1.0f));
 }
