@@ -501,7 +501,7 @@ bool A3::mouseMoveEvent (
     double yOffset = yPos - mouseLastY;
 
   	// Fill in with event handling code...
-    translateTrans = translate(translateTrans, vec3(xOffset * TRANSLATE_FACTOR, yOffset * TRANSLATE_FACTOR, 0));
+    translateTrans = translate(translateTrans, vec3(xOffset * TRANSLATE_FACTOR, -yOffset * TRANSLATE_FACTOR, 0));
 
     eventHandled = true;
   }
@@ -525,6 +525,10 @@ bool A3::mouseButtonInputEvent (
   if (actions == GLFW_PRESS) {
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
       mouseDown = true;
+    }
+  } else if (actions == GLFW_RELEASE) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+      mouseDown = false;
     }
   }
 
