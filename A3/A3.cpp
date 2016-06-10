@@ -404,7 +404,7 @@ void A3::renderNode(const SceneNode * node) {
   if (node->m_nodeType == NodeType::GeometryNode) {
     const GeometryNode * geometryNode = static_cast<const GeometryNode *>(node);
 
-		updateShaderUniforms(m_shader, *geometryNode, m_view * rotationTrans * matrixStack.top() * translateTrans);
+		updateShaderUniforms(m_shader, *geometryNode, m_view * translateTrans * matrixStack.top() * rotationTrans);
 
 		// Get the BatchInfo corresponding to the GeometryNode's unique MeshId.
 		BatchInfo batchInfo = m_batchInfoMap[geometryNode->meshId];
