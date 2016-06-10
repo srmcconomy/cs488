@@ -494,7 +494,7 @@ bool A3::cursorEnterWindowEvent (
 
 float clampf(float a, float min, float max) {
   if (a > max) return max;
-  if (a < min) return main;
+  if (a < min) return min;
   return a;
 }
 
