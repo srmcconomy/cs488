@@ -53,6 +53,10 @@ A3::~A3()
  */
 void A3::init()
 {
+  float width2 = m_framebufferWidth / 2.0f;
+  float height2 = m_framebufferHeight / 2.0f;
+  trackballOrigin = vec2(width2, height2);
+  trackballRadius = min(width2, height2);
 	// Set the background colour.
 	glClearColor(0.35, 0.35, 0.35, 1.0);
 
@@ -502,6 +506,13 @@ bool A3::mouseMoveEvent (
   double xOffset = xPos - mouseLastX;
   double yOffset = yPos - mouseLastY;
 
+  vec2 trackball = vec2(xPos, yPos) - trackballOrigin;
+  float sqlength = trackball.x * trackball.x + trackball.y * trackball.y;
+  if (sqlength > trackballRadius * trackballRadius) {
+    trackball = trackballRadius / sqrt(sqlength) * trackball;
+  }
+  vec2 trackballOffset = trackball - lastTrackball;
+
   if (mouseLeftDown) {
   	// Fill in with event handling code...
     translateTrans = translate(translateTrans, vec3(xOffset * TRANSLATE_FACTOR, -yOffset * TRANSLATE_FACTOR, 0));
@@ -514,12 +525,13 @@ bool A3::mouseMoveEvent (
   }
 
   if (mouseRightDown) {
-    rotationTrans = rotate(mat4(1.0f), (float)yOffset * 0.001f, vec3(1.0f, 0, 0)) * rotationTrans;
-    rotationTrans = rotate(mat4(1.0f), (float)xOffset * 0.001f, vec3(0, 1.0f, 0)) * rotationTrans;
+    rotationTrans = rotate(mat4(1.0f), trackballOffset.y * 1.57f / trackballRadius, vec3(1.0f, 0, 0)) * rotationTrans;
+    rotationTrans = rotate(mat4(1.0f), trackballOffset.x * 1.57f / trackballRadius, vec3(0, 1.0f, 0)) * rotationTrans;
     eventHandled = true;
   }
   mouseLastX = xPos;
   mouseLastY = yPos;
+  lastTrackball = trackball;
 
 	return eventHandled;
 }
