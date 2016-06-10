@@ -508,7 +508,7 @@ bool A3::mouseMoveEvent (
   trackball /= trackballRadius;
   float sqlength = trackball.x * trackball.x + trackball.y * trackball.y;
   if (sqlength > 1) {
-    trackball = sqrt(sqlength) * trackball;
+    trackball /= sqrt(sqlength);
   } else {
     trackball.z = sqrt(1 - sqlength);
   }
