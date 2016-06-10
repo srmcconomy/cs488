@@ -53,10 +53,8 @@ A3::~A3()
  */
 void A3::init()
 {
-  float width2 = m_framebufferWidth / 2.0f;
-  float height2 = m_framebufferHeight / 2.0f;
-  trackballOrigin = vec2(width2, height2);
-  trackballRadius = std::min(width2, height2);
+  trackballOrigin = vec2(m_framebufferWidth / 2.0f, m_framebufferHeight / 2.0f);
+  trackballRadius = std::min(m_framebufferWidth / 4.0f, m_framebufferHeight / 2.0f);
 	// Set the background colour.
 	glClearColor(0.35, 0.35, 0.35, 1.0);
 
