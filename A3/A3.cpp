@@ -509,8 +509,9 @@ bool A3::mouseMoveEvent (
   float sqlength = trackball.x * trackball.x + trackball.y * trackball.y;
   if (sqlength > 1) {
     trackball = sqrt(sqlength) * trackball;
+  } else {
+    trackball.z = sqrt(1 - sqlength);
   }
-  trackball.z = sqrt(1 - sqlength);
 
   if (mouseLeftDown) {
   	// Fill in with event handling code...
