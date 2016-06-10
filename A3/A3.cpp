@@ -31,7 +31,7 @@ A3::A3(const std::string & luaSceneFile)
 	  m_vao_arcCircle(0),
 	  m_vbo_arcCircle(0)
 {
-
+  matrixStack.push(mat4(1));
 }
 
 //----------------------------------------------------------------------------------------
@@ -395,12 +395,10 @@ void A3::draw() {
 }
 
 void A3::renderNode(const SceneNode * node) {
-  glPushMatrix();
-  glMultMatrix(node->trans)
   if (node->m_nodeType == NodeType::GeometryNode) {
     const GeometryNode * geometryNode = static_cast<const GeometryNode *>(node);
 
-		updateShaderUniforms(m_shader, *geometryNode, m_view);
+		updateShaderUniforms(m_shader, *geometryNode, m_view * matrixStack.top());
 
 		// Get the BatchInfo corresponding to the GeometryNode's unique MeshId.
 		BatchInfo batchInfo = m_batchInfoMap[geometryNode->meshId];
@@ -410,10 +408,11 @@ void A3::renderNode(const SceneNode * node) {
 		glDrawArrays(GL_TRIANGLES, batchInfo.startIndex, batchInfo.numIndices);
 		m_shader.disable();
   }
+  matrixStack.push(matrixStack.top() * node->trans)
   for (const SceneNode* child : node->children) {
     renderNode(child);
   }
-  glPopMatrix();
+  matrixStack.pop();
 }
 
 //----------------------------------------------------------------------------------------
