@@ -8,6 +8,7 @@
 #include "SceneNode.hpp"
 
 #include <glm/glm.hpp>
+#include <stack>
 #include <memory>
 
 struct LightSource {
