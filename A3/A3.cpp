@@ -495,7 +495,7 @@ bool A3::mouseMoveEvent (
 	bool eventHandled(false);
 
 	// Fill in with event handling code...
-  translate(translateTrans, vec3(1.0f, 0, 0));
+  translateTrans = translate(translateTrans, vec3(1.0f, 0, 0));
 
 	return eventHandled;
 }
