@@ -422,7 +422,7 @@ void A3::renderNode(const SceneNode * node, const ShaderProgram& shader) {
   }
   matrixStack.push(matrixStack.top() * node->trans);
   for (const SceneNode* child : node->children) {
-    renderNode(child);
+    renderNode(child, shader);
   }
   matrixStack.pop();
 }
