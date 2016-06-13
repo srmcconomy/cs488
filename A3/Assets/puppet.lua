@@ -56,7 +56,7 @@ leftShoulder:scale(0.2, 0.2, 0.2)
 leftShoulder:translate(-0.4, 0.35, 0.0)
 leftShoulder:set_material(blue)
 
-leftShoulderJoint = gr.joint('leftShoulderJoint', {-90, 0, 90}, {-20, 0, 90})
+leftShoulderJoint = gr.joint('leftShoulderJoint', {-90, -50, 90}, {-20, 0, 90})
 torso:add_child(leftShoulderJoint)
 leftShoulderJoint:scale(1/0.5, 1.0, 1/0.5);
 leftShoulderJoint:translate(0.0, 0.0, -1.0)
@@ -64,7 +64,7 @@ leftShoulderJoint:rotate('y', 90);
 
 leftArm = gr.mesh('cube', 'leftArm')
 leftShoulderJoint:add_child(leftArm)
-leftArm:scale(0.1, 0.1, 0.4)
+leftArm:scale(0.1, 0.1, 0.5)
 leftArm:set_material(red)
 
 rightShoulder = gr.mesh('sphere', 'rightShoulder')
