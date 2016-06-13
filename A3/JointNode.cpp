@@ -1,10 +1,12 @@
 #include "JointNode.hpp"
-
+using namespace glm;
 //---------------------------------------------------------------------------------------
 JointNode::JointNode(const std::string& name)
 	: SceneNode(name)
 {
 	m_nodeType = NodeType::JointNode;
+  trans = rotate(trans, m_joint_x.init, vec3(1.0f, 0, 0));
+  trans = rotate(trans, m_joint_y.init, vec3(0, 1.0f, 0));
 }
 
 //---------------------------------------------------------------------------------------
