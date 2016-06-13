@@ -513,7 +513,7 @@ bool A3::mouseMoveEvent (
 
 	cout << xPos << endl;
 	cout << yPos << endl;
-	cout << m_framebufferWidth << end;
+	cout << m_framebufferWidth << endl;
 	cout << m_framebufferHeight << endl;
 	cout << trackballOrigin << endl;
 	cout << trackballRadius << endl;
