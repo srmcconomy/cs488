@@ -151,6 +151,22 @@ void A3::enableVertexShaderInputSlots()
 		CHECK_GL_ERRORS;
 	}
 
+	{
+		glBindVertexArray(m_vao_meshData);
+
+		// Enable the vertex shader attribute location for "position" when rendering.
+		m_positionAttribLocation = m_shader.getAttribLocation("position");
+		glEnableVertexAttribArray(m_positionAttribLocation);
+
+		CHECK_GL_ERRORS;
+	}
+
+	{
+		glBindVertexArray(m_vao_meshData);
+
+
+	}
+
 
 	//-- Enable input slots for m_vao_arcCircle:
 	{
@@ -302,6 +318,14 @@ void A3::uploadCommonSceneUniforms() {
 		}
 	}
 	m_shader.disable();
+
+	m_picking_shader.enable();
+	{
+		GLint Location = m_picking_shader.getUniformLocation("Perspective");
+		glUniformMatrix4fv(location, 1, GL_FALSE, value_ptr(m_perpsective));
+		CHECK_GL_ERRORS;
+	}
+	m_picking_shader.disable();
 }
 
 //----------------------------------------------------------------------------------------
