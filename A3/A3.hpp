@@ -65,6 +65,9 @@ protected:
 	GLint m_normalAttribLocation;
 	ShaderProgram m_shader;
 
+	ShaderProgram m_picking_shader;
+
+
 	//-- GL resources for trackball circle geometry:
 	GLuint m_vbo_arcCircle;
 	GLuint m_vao_arcCircle;

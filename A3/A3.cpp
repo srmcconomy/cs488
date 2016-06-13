@@ -126,6 +126,11 @@ void A3::createShaderProgram()
 	m_shader_arcCircle.attachVertexShader( getAssetFilePath("arc_VertexShader.vs").c_str() );
 	m_shader_arcCircle.attachFragmentShader( getAssetFilePath("arc_FragmentShader.fs").c_str() );
 	m_shader_arcCircle.link();
+
+	m_picking_shader.generateProgramObject();
+	m_picking_shader.attachVertexShader( getAssetFilePath("PickingVertexShader.vs").c_str() );
+	m_picking_shader.attachFragmentShader( getAssetFilePath("PickingFragmentShader.vs").c_str() );
+
 }
 
 //----------------------------------------------------------------------------------------
@@ -402,18 +407,18 @@ void A3::draw() {
 	renderArcCircle();
 }
 
-void A3::renderNode(const SceneNode * node) {
+void A3::renderNode(const SceneNode * node, const ShaderProgram& shader) {
   if (node->m_nodeType == NodeType::GeometryNode) {
     const GeometryNode * geometryNode = static_cast<const GeometryNode *>(node);
 
-		updateShaderUniforms(m_shader, *geometryNode, m_view * translateTrans * rotationTrans * matrixStack.top());
+		updateShaderUniforms(shader, *geometryNode, m_view * translateTrans * rotationTrans * matrixStack.top());
 
 		// Get the BatchInfo corresponding to the GeometryNode's unique MeshId.
 		BatchInfo batchInfo = m_batchInfoMap[geometryNode->meshId];
 		//-- Now render the mesh:
-		m_shader.enable();
+		shader.enable();
 		glDrawArrays(GL_TRIANGLES, batchInfo.startIndex, batchInfo.numIndices);
-		m_shader.disable();
+		shader.disable();
   }
   matrixStack.push(matrixStack.top() * node->trans);
   for (const SceneNode* child : node->children) {
@@ -427,7 +432,7 @@ void A3::renderSceneGraph(const SceneNode & root) {
 
 	// Bind the VAO once here, and reuse for all GeometryNode rendering below.
 	glBindVertexArray(m_vao_meshData);
-  renderNode(&root);
+  renderNode(&root, m_shader);
 
 	// This is emphatically *not* how you should be drawing the scene graph in
 	// your final implementation.  This is a non-hierarchical demonstration
