@@ -1,4 +1,6 @@
 #include "JointNode.hpp"
+#include <glm/gtc/matrix_transform.hpp>
+
 using namespace glm;
 //---------------------------------------------------------------------------------------
 JointNode::JointNode(const std::string& name)
