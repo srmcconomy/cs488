@@ -534,6 +534,7 @@ bool A3::mouseMoveEvent (
   if (mouseRightDown) {
     float angle = acos(clampf(dot(trackball, lastTrackball), 0, 1.0f));
 		cout << angle << endl;
+		cout << cross(trackball, lastTrackball) << endl;
     if (angle > 0)
       rotationTrans = rotate(mat4(1.0f), angle, -1.0f * cross(trackball, lastTrackball)) * rotationTrans;
     eventHandled = true;
