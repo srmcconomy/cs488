@@ -411,9 +411,9 @@ static void updateShaderUniforms(
 		// glUniformMatrix3fv(location, 1, GL_FALSE, value_ptr(normalMatrix));
 		// CHECK_GL_ERRORS;
 
-		location = shader.getUniformLocation("PickingColour");
-		vec3 colour = vec3((float)node.m_nodeId / 255.0f, 0, 0);
-		glUniform3fv(location, 1, value_ptr(colour));
+		location = shader.getUniformLocation("PickingColor");
+		vec3 colour = vec4((float)node.m_nodeId / 255.0f, 0, 0, 0);
+		glUniform4fv(location, 1, value_ptr(colour));
 
 
 		//-- Set Material values:
