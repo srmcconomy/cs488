@@ -381,27 +381,27 @@ void A3::guiLogic()
 	ImGui::Begin("Properties", &showDebugWindow, ImVec2(100,100), opacity,
 			windowFlags);
 
-			if (ImGui::BeginMenuBar()) {
-				if (ImGui::BeginMenu("Application")) {
-					if (ImGui::MenuItem("Reset Position")) {
-						resetPosition();
-					}
-					// if( ImGui::Button( "Reset Orientation" ) ) {
-					// 	resetOrientation();
-					// }
-					// if( ImGui::Button( "Reset Joints" ) ) {
-					// 	resetJoints();
-					// }
-					// if( ImGui::Button( "Reset All" ) ) {
-					// 	resetAll();
-					// }
-					// if( ImGui::Button( "Quit Application" ) ) {
-					// 	glfwSetWindowShouldClose(m_window, GL_TRUE);
-					// }
-					ImGui::EndMenu();
+		if (ImGui::BeginMenuBar()) {
+			if (ImGui::BeginMenu("Application")) {
+				if (ImGui::MenuItem("Reset Position")) {
+					resetPosition();
 				}
-				ImGui::EndMenuBar();
+				// if( ImGui::Button( "Reset Orientation" ) ) {
+				// 	resetOrientation();
+				// }
+				// if( ImGui::Button( "Reset Joints" ) ) {
+				// 	resetJoints();
+				// }
+				// if( ImGui::Button( "Reset All" ) ) {
+				// 	resetAll();
+				// }
+				// if( ImGui::Button( "Quit Application" ) ) {
+				// 	glfwSetWindowShouldClose(m_window, GL_TRUE);
+				// }
+				ImGui::EndMenu();
 			}
+			ImGui::EndMenuBar();
+		}
 
 
 		// Add more gui elements here here ...
