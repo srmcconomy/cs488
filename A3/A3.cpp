@@ -321,7 +321,7 @@ void A3::uploadCommonSceneUniforms() {
 
 	m_picking_shader.enable();
 	{
-		GLint Location = m_picking_shader.getUniformLocation("Perspective");
+		GLint location = m_picking_shader.getUniformLocation("Perspective");
 		glUniformMatrix4fv(location, 1, GL_FALSE, value_ptr(m_perpsective));
 		CHECK_GL_ERRORS;
 	}
