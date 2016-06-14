@@ -730,7 +730,7 @@ bool A3::mouseButtonInputEvent (
 				glReadPixels(xPos, m_framebufferHeight - yPos, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
 				if (data[1] == 0) {
 					SceneNode* node = SceneNode::getNode((unsigned int)data[0]);
-					if (node->parent->m_nodeType == JointNode) {
+					if (node->parent->m_nodeType == NodeType::JointNode) {
 						node->isSelected = !node->isSelected;
 					}
 				}
