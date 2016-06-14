@@ -60,5 +60,5 @@ public:
 private:
 	// The number of SceneNode instances.
 	static unsigned int nodeInstanceCount;
-	static map<unsigned int, SceneNode*> nodes;
+	static std::map<unsigned int, SceneNode*> nodes;
 };

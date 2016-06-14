@@ -729,7 +729,7 @@ bool A3::mouseButtonInputEvent (
 				unsigned char data[4];
 				glReadPixels(xPos, m_framebufferHeight - yPos, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
 				if (data[1] == 0) {
-					SceneNode.getNode((unsigned int)data[0])->isSelected = true;
+					SceneNode::getNode((unsigned int)data[0])->isSelected = true;
 				}
 			}
 			break;
