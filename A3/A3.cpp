@@ -383,10 +383,9 @@ void A3::guiLogic()
 
 			if (ImGui::BeginMenuBar()) {
 				if (ImGui::BeginMenu("Application")) {
-					ImGui::MenuItem("Reset Position");
-					// if( ImGui::Button( "Reset Position" ) ) {
-					// 	resetPosition();
-					// }
+					if (ImGui::MenuItem("Reset Position")) {
+						resetPosition();
+					}
 					// if( ImGui::Button( "Reset Orientation" ) ) {
 					// 	resetOrientation();
 					// }
