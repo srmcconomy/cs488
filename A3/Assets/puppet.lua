@@ -127,7 +127,7 @@ rightArm:translate(0.0, 0.0, 0.5)
 rightArm:scale(0.1, 0.1, 0.4)
 rightArm:set_material(red)
 
-rightElbowNode = gr.node('rightShoulderNode')
+rightElbowNode = gr.node('rightElbowNode')
 rightArm:add_child(rightElbowNode);
 rightElbowNode:scale(10, 10, 2.25);
 rightElbowNode:translate(0, 0, 0.4);
