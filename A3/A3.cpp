@@ -449,7 +449,7 @@ void A3::draw() {
 
 	glEnable( GL_DEPTH_TEST );
 	glEnable(GL_CULL_FACE);
-	glCullFace(GL_FRONT);
+	glCullFace(culling);
 	renderSceneGraph(*m_rootNode, false);
 
 
