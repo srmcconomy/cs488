@@ -447,6 +447,8 @@ static void updateShaderUniforms(
 void A3::draw() {
 
 	glEnable( GL_DEPTH_TEST );
+	glEnable(GL_CULL_FACE);
+	glCullDace(GL_FRONT);
 	renderSceneGraph(*m_rootNode, false);
 
 
