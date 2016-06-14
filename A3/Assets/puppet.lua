@@ -78,7 +78,7 @@ leftArm:translate(0.0, 0.0, 0.5)
 leftArm:scale(0.1, 0.1, 0.4)
 leftArm:set_material(red)
 
-leftElbowNode = gr.node('leftShoulderNode')
+leftElbowNode = gr.node('leftElbowNode')
 leftArm:add_child(leftElbowNode);
 leftElbowNode:scale(10, 10, 2.25);
 leftElbowNode:translate(0, 0, 0.4);
@@ -90,6 +90,20 @@ leftForearm = gr.mesh('cube', 'leftForearm')
 leftElbowJoint:add_child(leftForearm)
 leftForearm:translate(0.0, 0.0, 0.5)
 leftForearm:scale(0.1, 0.1, 0.4)
+leftForearm:set_material(red)
+
+leftWristNode = gr.node('leftWristNode')
+leftForearm:add_child(leftWristNode);
+leftWristNode:scale(10, 10, 2.25);
+leftWristNode:translate(0, 0, 0.4);
+
+leftWristJoint = gr.joint('leftWristJoint', {-90, 0, 90}, {0, 0, 0})
+leftWristNode:add_child(leftWristJoint)
+
+leftHand = gr.mesh('cube', 'leftHand')
+leftWristJoint:add_child(leftHand)
+leftForearm:translate(0.0, 0.0, 0.5)
+leftForearm:scale(0.1, 0.1, 0.2)
 leftForearm:set_material(red)
 
 rightShoulder = gr.mesh('sphere', 'rightShoulder')
