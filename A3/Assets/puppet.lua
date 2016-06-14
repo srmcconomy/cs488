@@ -15,11 +15,11 @@ white = gr.material({1.0, 1.0, 1.0}, {0.1, 0.1, 0.1}, 10)
 torso = gr.mesh('cube', 'torso')
 rootnode:add_child(torso)
 torso:set_material(white)
-torso:scale(0.5,1.0,0.5);
+torso:scale(0.5,0.5,0.5);
 
 neck = gr.mesh('sphere', 'neck')
 torso:add_child(neck)
-neck:scale(1.0/0.5, 1.0, 1.0/0.5)
+neck:scale(1.0/0.5, 2, 1.0/0.5)
 neck:scale(0.15, 0.3, 0.15)
 neck:translate(0.0, 0.6, 0.0)
 neck:set_material(blue)
@@ -57,7 +57,7 @@ rightEye:set_material(blue)
 
 leftShoulder = gr.mesh('sphere', 'leftShoulder')
 torso:add_child(leftShoulder)
-leftShoulder:scale(1/0.5,1.0,1/0.5);
+leftShoulder:scale(1/0.5,2,1/0.5);
 leftShoulder:scale(0.2, 0.2, 0.2)
 leftShoulder:translate(-0.4, 0.35, 0.0)
 leftShoulder:set_material(blue)
@@ -106,7 +106,7 @@ leftHand:set_material(red)
 
 rightShoulder = gr.mesh('sphere', 'rightShoulder')
 torso:add_child(rightShoulder)
-rightShoulder:scale(1/0.5,1.0,1/0.5);
+rightShoulder:scale(1/0.5,2,1/0.5);
 rightShoulder:scale(0.2, 0.2, 0.2)
 rightShoulder:translate(0.4, 0.35, 0.0)
 rightShoulder:set_material(blue)
@@ -155,7 +155,7 @@ rightHand:set_material(red)
 
 waistNode = gr.node('waistNode')
 torso:add_child(waistNode)
-waistNode:scale(1/0.5, 1, 1/.5)
+waistNode:scale(1/0.5, 2, 1/.5)
 waistNode:translate(0, -0.5, 0)
 
 waistJoint = gr.joint('waistJoint', {0, 0, 0}, {-90, 20, 90})
@@ -163,11 +163,12 @@ waistNode:add_child(waistJoint);
 
 lowerTorso = gr.mesh('cube', 'lowerTorso')
 waistJoint:add_child(lowerTorso)
+lowerTorso:scale(0.5, 0.5, 0.5)
 lowerTorso:translate(0, -0.5, 0)
 
 leftHip = gr.mesh('sphere', 'leftHip')
 lowerTorso:add_child(leftHip)
-leftHip:scale(1/0.5,1.0,1/0.5);
+leftHip:scale(1/0.5,2,1/0.5);
 leftHip:scale(0.21, 0.21, 0.21)
 leftHip:translate(-0.38, -0.5, 0.0)
 leftHip:set_material(blue)
@@ -201,7 +202,7 @@ leftCalf:set_material(red)
 
 rightHip = gr.mesh('sphere', 'rightHip')
 lowerTorso:add_child(rightHip)
-rightHip:scale(1/0.5,1.0,1/0.5);
+rightHip:scale(1/0.5,2,1/0.5);
 rightHip:scale(0.21, 0.21, 0.21)
 rightHip:translate(0.38, -0.5, 0.0)
 rightHip:set_material(blue)
