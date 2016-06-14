@@ -636,11 +636,14 @@ bool A3::mouseButtonInputEvent (
 		  }
 			break;
 		case JOINTS:
-			glEnable( GL_DEPTH_TEST );	
+			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glEnable( GL_DEPTH_TEST );
 			renderSceneGraph(*m_rootNode, true);
 			glDisable( GL_DEPTH_TEST );
 			glFlush();
 			glFinish();
+			glPixelStori(GL_UNPACK_ALIGNMENT, 1);
 			unsigned char data[4];
 			glReadPixels(xPos, yPos, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			cout << (int)data[0] << ", " << (int)data[1] << ", " << (int)data[2] << ", " << (int)data[3] <<  endl;
