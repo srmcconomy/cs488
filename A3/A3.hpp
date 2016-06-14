@@ -97,4 +97,5 @@ protected:
   float trackballRadius;
 	enum Mode { POSITION, JOINTS };
 	Mode mode;
+	GLenum culling;
 };
