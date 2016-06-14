@@ -406,24 +406,28 @@ static void updateShaderUniforms(
 		CHECK_GL_ERRORS;
 
 		//-- Set NormMatrix:
-		location = shader.getUniformLocation("NormalMatrix");
-		mat3 normalMatrix = glm::transpose(glm::inverse(mat3(modelView)));
-		glUniformMatrix3fv(location, 1, GL_FALSE, value_ptr(normalMatrix));
-		CHECK_GL_ERRORS;
+		// location = shader.getUniformLocation("NormalMatrix");
+		// mat3 normalMatrix = glm::transpose(glm::inverse(mat3(modelView)));
+		// glUniformMatrix3fv(location, 1, GL_FALSE, value_ptr(normalMatrix));
+		// CHECK_GL_ERRORS;
+
+		location = shader.getUniformLocation("colour");
+		vec3 colour = vec3((float)node.m_nodeId / 255.0f, 0, 0);
+		glUniform3fv(location, 1, value_ptr(colour));
 
 
 		//-- Set Material values:
-		location = shader.getUniformLocation("material.kd");
-		vec3 kd = node.material.kd;
-		glUniform3fv(location, 1, value_ptr(kd));
-		CHECK_GL_ERRORS;
-		location = shader.getUniformLocation("material.ks");
-		vec3 ks = node.material.ks;
-		glUniform3fv(location, 1, value_ptr(ks));
-		CHECK_GL_ERRORS;
-		location = shader.getUniformLocation("material.shininess");
-		glUniform1f(location, node.material.shininess);
-		CHECK_GL_ERRORS;
+		// location = shader.getUniformLocation("material.kd");
+		// vec3 kd = node.material.kd;
+		// glUniform3fv(location, 1, value_ptr(kd));
+		// CHECK_GL_ERRORS;
+		// location = shader.getUniformLocation("material.ks");
+		// vec3 ks = node.material.ks;
+		// glUniform3fv(location, 1, value_ptr(ks));
+		// CHECK_GL_ERRORS;
+		// location = shader.getUniformLocation("material.shininess");
+		// glUniform1f(location, node.material.shininess);
+		// CHECK_GL_ERRORS;
 
 	}
 	shader.disable();
