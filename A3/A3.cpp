@@ -37,7 +37,7 @@ A3::A3(const std::string & luaSceneFile)
     mouseLeftDown(false),
     mouseMiddleDown(false),
     mouseRightDown(false),
-		mode(POSITION)
+		mode(JOINTS)
 {
   matrixStack.push(mat4(1.0f));
 }
