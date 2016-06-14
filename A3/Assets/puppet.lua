@@ -164,7 +164,7 @@ waistNode:add_child(waistJoint);
 lowerTorso = gr.mesh('cube', 'lowerTorso')
 waistJoint:add_child(lowerTorso)
 lowerTorso:scale(0.5, 0.5, 0.5)
-lowerTorso:translate(0, -0.5, 0)
+lowerTorso:set_material(white);
 
 leftHip = gr.mesh('sphere', 'leftHip')
 lowerTorso:add_child(leftHip)
