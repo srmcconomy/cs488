@@ -39,23 +39,23 @@ void JointNode::rotate(char axis, float angle) {
 	vec3 rot_axis;
 	switch (axis) {
 		case 'x':
-			rotationX += angle;
 			if (rotationX + angle > m_joint_x.max) {
 				angle = m_joint_x.max - rotationX;
 			}
 			if (rotationX + angle < m_joint_x.min) {
 				angle = m_joint_x.min - rotationX;
 			}
+			rotationX += angle;
 			rot_axis = vec3(1,0,0);
 			break;
 		case 'y':
-			angle;
 			if (rotationY + angle > m_joint_y.max) {
 				angle = m_joint_y.max - rotationY;
 			}
 			if (rotationY + angle < m_joint_y.min) {
 				angle = m_joint_y.min - rotationY;
 			}
+			rotationY += angle;
 			rot_axis = vec3(0,1,0);
       break;
 		case 'z':
