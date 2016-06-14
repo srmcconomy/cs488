@@ -672,7 +672,7 @@ bool A3::mouseMoveEvent (
 	} else if (mode == JOINTS) {
 		if (mouseRightDown) {
 			for (map<unsigned int, SceneNode*>::iterator it = selectedJoints.begin(); it != selectedJoints.end(); it++) {
-				it->second->rotate('x', yOffset * 0.001f);
+				//it->second->rotate('x', yOffset * 0.001f);
 			}
 		}
 	}
