@@ -25,6 +25,7 @@ const float TRANSLATE_FACTOR = 0.001f;
 A3::A3(const std::string & luaSceneFile)
 	: m_luaSceneFile(luaSceneFile),
 	  m_positionAttribLocation(0),
+		m_pickingPositionAttribLocation(0),
 	  m_normalAttribLocation(0),
 	  m_vao_meshData(0),
 	  m_vbo_vertexPositions(0),
@@ -130,6 +131,7 @@ void A3::createShaderProgram()
 	m_picking_shader.generateProgramObject();
 	m_picking_shader.attachVertexShader( getAssetFilePath("PickingVertexShader.vs").c_str() );
 	m_picking_shader.attachFragmentShader( getAssetFilePath("PickingFragmentShader.vs").c_str() );
+	m_picking_shader.link();
 
 }
 
@@ -163,7 +165,8 @@ void A3::enableVertexShaderInputSlots()
 
 	{
 		glBindVertexArray(m_vao_meshData);
-
+		m_pickingPositionAttribLocation = m_shader.getAttribLocation("position");
+		glEnableVertexAttribArray(m_pickingPositionAttribLocation);
 
 	}
 
@@ -263,6 +266,16 @@ void A3::mapVboDataToVertexShaderInputLocations()
 	glVertexAttribPointer(m_arc_positionAttribLocation, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
 
 	//-- Unbind target, and restore default values:
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+	CHECK_GL_ERRORS;
+
+	glBindVertexArray(m_vao_meshData);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_vbo_vertexPositions);
+	glVertexAttribPointer(m_pickingPositionAttribLocation, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 

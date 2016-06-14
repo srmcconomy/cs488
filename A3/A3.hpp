@@ -62,6 +62,7 @@ protected:
 	GLuint m_vbo_vertexPositions;
 	GLuint m_vbo_vertexNormals;
 	GLint m_positionAttribLocation;
+	GLint m_pickingPositionAttribLocation;
 	GLint m_normalAttribLocation;
 	ShaderProgram m_shader;
 
