@@ -601,7 +601,19 @@ void A3::resetOrientation() {
 }
 
 void A3::resetJoints() {
+	resetAngle(m_rootNode);
+}
 
+void resetAngle(SceneNode* node) {
+	if (node->m_nodeType == NodeType::JointNode) {
+		JointNode* jointNode = (JointNode*)node;
+		jointNode->rotationX = jointNode->m_joint_x.init;
+		jointNode->rotationY = jointNode->m_joint_y.init;
+		jointNode->trans = mat4(1.0f);
+	}
+	for (const SceneNode* child : node->children) {
+		resetAngle(child);
+	}
 }
 
 void A3::resetAll() {
