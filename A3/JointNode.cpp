@@ -2,6 +2,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "cs488-framework/MathUtils.hpp"
+
 using namespace glm;
 //---------------------------------------------------------------------------------------
 JointNode::JointNode(const std::string& name)
