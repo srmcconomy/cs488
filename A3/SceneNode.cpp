@@ -78,7 +78,7 @@ void SceneNode::remove_child(SceneNode* child) {
 //---------------------------------------------------------------------------------------
 void SceneNode::rotate(char axis, float angle) {
 	vec3 rot_axis;
-
+  cout << angle << endl;
 	switch (axis) {
 		case 'x':
 			rot_axis = vec3(1,0,0);
