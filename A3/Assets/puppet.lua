@@ -75,7 +75,7 @@ leftArm:add_child(leftElbowNode);
 leftElbowNode:scale(10, 10, 2.25);
 leftElbowNode:translate(0, 0, 0.4);
 
-leftElbowJoint = gr.joint('leftElbowJoint', {-80, 90, 90}, {0, 0, 0})
+leftElbowJoint = gr.joint('leftElbowJoint', {-170, 0, 0}, {0, 0, 0})
 leftElbowNode:add_child(leftElbowJoint)
 
 leftForearm = gr.mesh('cube', 'leftForearm')
