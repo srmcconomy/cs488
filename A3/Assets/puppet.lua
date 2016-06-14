@@ -201,6 +201,20 @@ leftCalf:translate(0, -0.5, 0)
 leftCalf:scale(0.1, 0.7, 0.1)
 leftCalf:set_material(red)
 
+leftAnkleNode = gr.node('leftAnkleNode')
+leftCalf:add_child(leftAnkleNode)
+leftAnkleNode:scale(10, 1/0.7, 10)
+leftAnkleNode:translate(0, -0.5, 0)
+
+leftAnkleJoint = gr.joint('leftAnkleJoint', {-120, -90, -20}, {0, 0, 0})
+leftAnkleNode:add_child(leftAnkleJoint)
+
+leftFoot = gr.mesh('cube', 'leftFoot')
+leftAnkleJoint:add_child(leftFoot)
+leftFoot:translate(0, -0.5, 0)
+leftFoot:scale(0.1, 0.3, 0.1)
+leftFoot:set_material(red)
+
 rightHip = gr.mesh('sphere', 'rightHip')
 lowerTorso:add_child(rightHip)
 rightHip:scale(1/0.5,2,1/0.5);
