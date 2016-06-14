@@ -14,6 +14,7 @@ using namespace glm;
 
 // Static class variable
 unsigned int SceneNode::nodeInstanceCount = 0;
+map<unsigned int, SceneNode*> SceneNode::nodes;
 
 
 //---------------------------------------------------------------------------------------
@@ -24,7 +25,7 @@ SceneNode::SceneNode(const std::string& name)
 	isSelected(false),
 	m_nodeId(nodeInstanceCount++)
 {
-  SceneNode::nodes[this->m_nodeId] = this;
+  nodes[this->m_nodeId] = this;
 }
 
 //---------------------------------------------------------------------------------------
@@ -112,7 +113,7 @@ int SceneNode::totalSceneNodes() const {
 }
 
 SceneNode* SceneNode::getNode(unsigned int id) {
-  return SceneNode::nodes[id];
+  return nodes[id];
 }
 
 //---------------------------------------------------------------------------------------
