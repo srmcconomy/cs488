@@ -419,14 +419,6 @@ void A3::guiLogic()
 			ImGui::EndMenuBar();
 		}
 
-
-		// Add more gui elements here here ...
-
-		ImGui::Checkbox("Circle", &drawCircle);
-		ImGui::Checkbox("Z-buffer", &zbuffering);
-		ImGui::Checkbox("Backface Culling", &backCulling);
-		ImGui::Checkbox("Frontface Culling", &frontCulling);
-
 		ImGui::RadioButton( "Position/Orientation", (int*)&mode, POSITION );
 		ImGui::RadioButton( "Joints", (int*)&mode, JOINTS );
 
@@ -473,6 +465,9 @@ static void updateShaderUniforms(
 			CHECK_GL_ERRORS;
 			location = shader.getUniformLocation("material.ks");
 			vec3 ks = node.material.ks;
+			if (node.isSelected) {
+				ks = {1.0f, 1.0f, 1.0f};
+			}
 			glUniform3fv(location, 1, value_ptr(ks));
 			CHECK_GL_ERRORS;
 			location = shader.getUniformLocation("material.shininess");
@@ -733,7 +728,9 @@ bool A3::mouseButtonInputEvent (
 				glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 				unsigned char data[4];
 				glReadPixels(xPos, m_framebufferHeight - yPos, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
-				cout << (int)data[0] << ", " << (int)data[1] << ", " << (int)data[2] << ", " << (int)data[3] <<  endl;
+				if (data[1] == 0) {
+					SceneNode.getNode((unsigned int)data[0])->isSelected = true;
+				}
 			}
 			break;
 	}

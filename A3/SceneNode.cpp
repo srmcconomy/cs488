@@ -24,7 +24,7 @@ SceneNode::SceneNode(const std::string& name)
 	isSelected(false),
 	m_nodeId(nodeInstanceCount++)
 {
-
+  nodes[this->m_nodeId] = this;
 }
 
 //---------------------------------------------------------------------------------------
@@ -66,6 +66,7 @@ const glm::mat4& SceneNode::get_inverse() const {
 //---------------------------------------------------------------------------------------
 void SceneNode::add_child(SceneNode* child) {
 	children.push_back(child);
+  child->parent = this;
 }
 
 //---------------------------------------------------------------------------------------
@@ -108,6 +109,10 @@ void SceneNode::translate(const glm::vec3& amount) {
 //---------------------------------------------------------------------------------------
 int SceneNode::totalSceneNodes() const {
 	return nodeInstanceCount;
+}
+
+SceneNode* getNode(unsigned int id) {
+  return nodes[id];
 }
 
 //---------------------------------------------------------------------------------------
