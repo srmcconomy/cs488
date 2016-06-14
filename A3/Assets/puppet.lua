@@ -151,7 +151,7 @@ leftCalf = gr.mesh('cube', 'leftCalf')
 leftKneeJoint:add_child(leftCalf)
 leftCalf:translate(0, -0.5, 0)
 leftCalf:scale(0.1, 0.7, 0.1)
-
+rightCalf:set_material(red)
 
 rightHip = gr.mesh('sphere', 'rightHip')
 torso:add_child(rightHip)
@@ -185,19 +185,6 @@ rightCalf = gr.mesh('cube', 'rightCalf')
 rightKneeJoint:add_child(rightCalf)
 rightCalf:translate(0, -0.5, 0)
 rightCalf:scale(0.1, 0.7, 0.1)
-
-rightHip = gr.mesh('sphere', 'rightHip')
-torso:add_child(rightHip)
-rightHip:scale(1/0.5,1.0,1/0.5);
-rightHip:scale(0.21, 0.21, 0.21)
-rightHip:translate(0.38, -0.5, 0.0)
-rightHip:set_material(blue)
-
-rightLeg = gr.mesh('cube', 'rightLeg')
-rightHip:add_child(rightLeg)
-rightLeg:scale(0.5,4,0.5)
-rightLeg:translate(0,-2.8,0)
-rightLeg:set_material(red)
-
+rightCalf:set_material(red)
 
 return rootnode
