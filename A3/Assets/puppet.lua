@@ -37,8 +37,6 @@ head:scale(0.4, 0.4, 0.4)
 head:translate(0.0, 0.3, 0.0)
 head:set_material(red)
 
-
-
 ears = gr.mesh('sphere', 'ears')
 head:add_child(ears)
 ears:scale(1.2, 0.08, 0.08)
@@ -155,8 +153,20 @@ rightHand:translate(0.0, 0.0, 0.5)
 rightHand:scale(0.1, 0.1, 0.2)
 rightHand:set_material(red)
 
+waistNode = gr.node('waistNode')
+torso:add_child(waistNode)
+waistNode:scale(1/0.5, 1, 1/.5)
+waistNode:translate(0, -0.5, 0)
+
+waistJoint = gr.joint('waistJoint', {0, 0, 0}, {-90, 20, 90})
+waistNode:add_child(waistJoint);
+
+lowerTorso = gr.mesh('cube', 'lowerTorso')
+waistJoint:add_child(lowerTorso)
+lowerTorso:translate(0, -0.5, 0)
+
 leftHip = gr.mesh('sphere', 'leftHip')
-torso:add_child(leftHip)
+lowerTorso:add_child(leftHip)
 leftHip:scale(1/0.5,1.0,1/0.5);
 leftHip:scale(0.21, 0.21, 0.21)
 leftHip:translate(-0.38, -0.5, 0.0)
@@ -190,7 +200,7 @@ leftCalf:scale(0.1, 0.7, 0.1)
 leftCalf:set_material(red)
 
 rightHip = gr.mesh('sphere', 'rightHip')
-torso:add_child(rightHip)
+lowerTorso:add_child(rightHip)
 rightHip:scale(1/0.5,1.0,1/0.5);
 rightHip:scale(0.21, 0.21, 0.21)
 rightHip:translate(0.38, -0.5, 0.0)
