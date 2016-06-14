@@ -374,7 +374,7 @@ void A3::guiLogic()
 	}
 
 	static bool showDebugWindow(true);
-	ImGuiWindowFlags windowFlags(ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_enableMenuBar);
+	ImGuiWindowFlags windowFlags(ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
 	float opacity(0.5f);
 
 
