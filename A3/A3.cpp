@@ -40,7 +40,7 @@ A3::A3(const std::string & luaSceneFile)
 		mode(JOINTS),
 		backCulling(false),
 		frontCulling(false),
-		drawCircle(true),
+		drawCircle(false),
 		zbuffering(true)
 {
   matrixStack.push(mat4(1.0f));
@@ -388,6 +388,10 @@ void A3::guiLogic()
 		if( ImGui::Button( "Quit Application" ) ) {
 			glfwSetWindowShouldClose(m_window, GL_TRUE);
 		}
+		ImGui::CheckBox("Circle", &drawCircle);
+		ImGui::CheckBox("Z-buffer", &zbuffering);
+		ImGui::CheckBox("Backface Culling", &backCulling);
+		ImGui::CheckBox("Frontface Culling", &frontCulling);
 
 		ImGui::Text( "Framerate: %.1f FPS", ImGui::GetIO().Framerate );
 
