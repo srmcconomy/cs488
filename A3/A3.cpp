@@ -636,7 +636,9 @@ bool A3::mouseButtonInputEvent (
 		  }
 			break;
 		case JOINTS:
+			glEnable( GL_DEPTH_TEST );	
 			renderSceneGraph(*m_rootNode, true);
+			glDisable( GL_DEPTH_TEST );
 			glFlush();
 			glFinish();
 			unsigned char data[4];
