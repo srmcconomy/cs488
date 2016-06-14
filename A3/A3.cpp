@@ -710,6 +710,28 @@ bool A3::keyInputEvent (
 			show_gui = !show_gui;
 			eventHandled = true;
 		}
+		if( key == GLFW_KEY_B ) {
+			if (culling == GL_NONE) {
+				culling = GL_BACK;
+			} else if (culling == GL_FRONT) {
+				culling = GL_FRONT_AND_BACK;
+			} else if (culling == GL_BACK) {
+				culling = GL_NONE;
+			} else {
+				culling = GL_FRONT;
+			}
+		}
+		if( key == GLFW_KEY_F ) {
+			if (culling == GL_NONE) {
+				culling = GL_FRONT;
+			} else if (culling == GL_FRONT) {
+				culling = GL_NONE;
+			} else if (culling == GL_BACK) {
+				culling = GL_FRONT_AND_BACK;
+			} else {
+				culling = GL_BACK;
+			}
+		}
 	}
 	// Fill in with event handling code...
 
