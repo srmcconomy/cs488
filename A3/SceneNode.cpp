@@ -24,7 +24,7 @@ SceneNode::SceneNode(const std::string& name)
 	isSelected(false),
 	m_nodeId(nodeInstanceCount++)
 {
-  nodes[this->m_nodeId] = this;
+  SceneNode::nodes[this->m_nodeId] = this;
 }
 
 //---------------------------------------------------------------------------------------
@@ -112,7 +112,7 @@ int SceneNode::totalSceneNodes() const {
 }
 
 SceneNode* SceneNode::getNode(unsigned int id) {
-  return nodes[id];
+  return SceneNode::nodes[id];
 }
 
 //---------------------------------------------------------------------------------------
