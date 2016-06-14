@@ -388,10 +388,10 @@ void A3::guiLogic()
 		if( ImGui::Button( "Quit Application" ) ) {
 			glfwSetWindowShouldClose(m_window, GL_TRUE);
 		}
-		ImGui::CheckBox("Circle", &drawCircle);
-		ImGui::CheckBox("Z-buffer", &zbuffering);
-		ImGui::CheckBox("Backface Culling", &backCulling);
-		ImGui::CheckBox("Frontface Culling", &frontCulling);
+		ImGui::Checkbox("Circle", &drawCircle);
+		ImGui::Checkbox("Z-buffer", &zbuffering);
+		ImGui::Checkbox("Backface Culling", &backCulling);
+		ImGui::Checkbox("Frontface Culling", &frontCulling);
 
 		ImGui::Text( "Framerate: %.1f FPS", ImGui::GetIO().Framerate );
 
