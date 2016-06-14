@@ -614,7 +614,7 @@ void resetAngle(const SceneNode* node) {
 }
 
 void A3::resetJoints() {
-	resetAngle(m_rootNode);
+	resetAngle(&(*m_rootNode));
 }
 
 
