@@ -643,7 +643,7 @@ bool A3::mouseButtonInputEvent (
 			glDisable( GL_DEPTH_TEST );
 			glFlush();
 			glFinish();
-			glPixelStori(GL_UNPACK_ALIGNMENT, 1);
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 			unsigned char data[4];
 			glReadPixels(xPos, yPos, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			cout << (int)data[0] << ", " << (int)data[1] << ", " << (int)data[2] << ", " << (int)data[3] <<  endl;
