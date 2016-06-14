@@ -38,7 +38,8 @@ A3::A3(const std::string & luaSceneFile)
     mouseMiddleDown(false),
     mouseRightDown(false),
 		mode(JOINTS),
-		culling(GL_FRONT)
+		backCulling(false),
+		frontCulling(false)
 {
   matrixStack.push(mat4(1.0f));
 }
@@ -448,16 +449,22 @@ static void updateShaderUniforms(
 void A3::draw() {
 
 	glEnable( GL_DEPTH_TEST );
-	if (culling != GL_NONE) {
+	if (frontCulling && backCulling) {
 		glEnable(GL_CULL_FACE);
-		glCullFace(culling);
+		glCullFace(GL_FRONT_AND_BACK);
+	} else if (frontCulling) {
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_FRONT);
+	} else if (backCulling) {
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
 	}
 	renderSceneGraph(*m_rootNode, false);
 
 
 	glDisable( GL_DEPTH_TEST );
 
-	if (culling != GL_NONE) {
+	if (frontCulling || backCulling) {
 		glDisable( GL_CULL_FACE );
 	}
 	renderArcCircle();
@@ -711,26 +718,10 @@ bool A3::keyInputEvent (
 			eventHandled = true;
 		}
 		if( key == GLFW_KEY_B ) {
-			if (culling == GL_NONE) {
-				culling = GL_BACK;
-			} else if (culling == GL_FRONT) {
-				culling = GL_FRONT_AND_BACK;
-			} else if (culling == GL_BACK) {
-				culling = GL_NONE;
-			} else {
-				culling = GL_FRONT;
-			}
+			backCulling = !backCulling;
 		}
 		if( key == GLFW_KEY_F ) {
-			if (culling == GL_NONE) {
-				culling = GL_FRONT;
-			} else if (culling == GL_FRONT) {
-				culling = GL_NONE;
-			} else if (culling == GL_BACK) {
-				culling = GL_FRONT_AND_BACK;
-			} else {
-				culling = GL_BACK;
-			}
+			frontCulling = !frontCulling;
 		}
 	}
 	// Fill in with event handling code...
