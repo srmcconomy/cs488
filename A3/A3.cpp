@@ -638,38 +638,46 @@ bool A3::mouseMoveEvent (
 ) {
 	bool eventHandled(false);
 
-  double xOffset = xPos - mouseLastX;
-  double yOffset = yPos - mouseLastY;
+	  double xOffset = xPos - mouseLastX;
+	  double yOffset = yPos - mouseLastY;
+	if (mode == POSITION) {
 
-  vec3 trackball = vec3(xPos - trackballOrigin.x, -yPos + trackballOrigin.y, 0);
-  trackball /= trackballRadius;
-  float sqlength = trackball.x * trackball.x + trackball.y * trackball.y;
-  if (sqlength > 1) {
-    trackball /= sqrt(sqlength);
-  } else {
-    trackball.z = sqrt(1 - sqlength);
-  }
+	  vec3 trackball = vec3(xPos - trackballOrigin.x, -yPos + trackballOrigin.y, 0);
+	  trackball /= trackballRadius;
+	  float sqlength = trackball.x * trackball.x + trackball.y * trackball.y;
+	  if (sqlength > 1) {
+	    trackball /= sqrt(sqlength);
+	  } else {
+	    trackball.z = sqrt(1 - sqlength);
+	  }
 
-  if (mouseLeftDown) {
-  	// Fill in with event handling code...
-    translateTrans = translate(translateTrans, vec3(xOffset * TRANSLATE_FACTOR, -yOffset * TRANSLATE_FACTOR, 0));
-    eventHandled = true;
-  }
+	  if (mouseLeftDown) {
+	  	// Fill in with event handling code...
+	    translateTrans = translate(translateTrans, vec3(xOffset * TRANSLATE_FACTOR, -yOffset * TRANSLATE_FACTOR, 0));
+	    eventHandled = true;
+	  }
 
-  if (mouseMiddleDown) {
-    translateTrans = translate(translateTrans, vec3(0, 0, yOffset * TRANSLATE_FACTOR));
-    eventHandled = true;
-  }
+	  if (mouseMiddleDown) {
+	    translateTrans = translate(translateTrans, vec3(0, 0, yOffset * TRANSLATE_FACTOR));
+	    eventHandled = true;
+	  }
 
-  if (mouseRightDown) {
-    float angle = acos(clampf(dot(trackball, lastTrackball), 0, 1.0f));
-    if (angle > 0)
-      rotationTrans = rotate(mat4(1.0f), angle, -1.0f * cross(trackball, lastTrackball)) * rotationTrans;
-    eventHandled = true;
-  }
+	  if (mouseRightDown) {
+	    float angle = acos(clampf(dot(trackball, lastTrackball), 0, 1.0f));
+	    if (angle > 0)
+	      rotationTrans = rotate(mat4(1.0f), angle, -1.0f * cross(trackball, lastTrackball)) * rotationTrans;
+	    eventHandled = true;
+	  }
+	  lastTrackball = trackball;
+	} else if (mode == JOINTS) {
+		if (mouseRightDown) {
+			for (map<unsigned int, SceneNode*>::iterator it = selectedJoints.begin(); it != selectedJoints.end(); it++) {
+				*it->rotate('x', yOffset * 0.001f);
+			}
+		}
+	}
   mouseLastX = xPos;
   mouseLastY = yPos;
-  lastTrackball = trackball;
 
 	return eventHandled;
 }
@@ -740,6 +748,21 @@ bool A3::mouseButtonInputEvent (
 					}
 				}
 			}
+			if (actions == GLFW_PRESS) {
+		    if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
+		      mouseMiddleDown = true;
+		    }
+		    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+		      mouseRightDown = true;
+		    }
+		  } else if (actions == GLFW_RELEASE) {
+		    if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
+		      mouseMiddleDown = false;
+		    }
+		    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+		      mouseRightDown = false;
+		    }
+		  }
 			break;
 	}
 

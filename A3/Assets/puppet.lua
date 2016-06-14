@@ -84,8 +84,6 @@ leftForearm:translate(0.0, 0.0, 0.5)
 leftForearm:scale(0.1, 0.1, 0.4)
 leftForearm:set_material(red)
 
-
-
 rightShoulder = gr.mesh('sphere', 'rightShoulder')
 torso:add_child(rightShoulder)
 rightShoulder:scale(1/0.5,1.0,1/0.5);
