@@ -17,19 +17,28 @@ rootnode:add_child(torso)
 torso:set_material(white)
 torso:scale(0.5,1.0,0.5);
 
-head = gr.mesh('cube', 'head')
-torso:add_child(head)
-head:scale(1.0/0.5, 1.0, 1.0/0.5)
-head:scale(0.4, 0.4, 0.4)
-head:translate(0.0, 0.9, 0.0)
-head:set_material(red)
-
 neck = gr.mesh('sphere', 'neck')
 torso:add_child(neck)
 neck:scale(1.0/0.5, 1.0, 1.0/0.5)
 neck:scale(0.15, 0.3, 0.15)
 neck:translate(0.0, 0.6, 0.0)
 neck:set_material(blue)
+
+neckNode = gr.node('neckNode')
+neck:add_child(neckNode)
+neckNode:scale(1/0.15, 1/0.3, 1/0.15)
+
+neckJoint = gr.joint('neckJoint', {-90, 0, 10}, {-110, 0, 110});
+neckNode:add_child(neckJoint)
+
+head = gr.mesh('cube', 'head')
+neckJoint:add_child(head)
+head:scale(1.0/0.5, 1.0, 1.0/0.5)
+head:scale(0.4, 0.4, 0.4)
+head:translate(0.0, 0.9, 0.0)
+head:set_material(red)
+
+
 
 ears = gr.mesh('sphere', 'ears')
 head:add_child(ears)
