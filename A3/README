@@ -1,0 +1,54 @@
+The puppet is set up in a logical way.  One thing that I did was I made sure
+that every joint node has no transformations initially, so any translations/
+scaling I needed to do on joints was instead done on an invisible node that is
+a parent to the joint.
+
+                                                eyes - head - ears
+                                                        |
+                                                        neckJoint
+                                                        |
+                                                        neckNode
+                                                        |
+                                                        neck
+                                                        |
+leftShoulderJoint - leftShoulderNode - leftShoulder - torso - rightShoulder - rightShoulderNode - rightShoulderJoint
+        |                                               |                                               |
+      leftArm                                       waistNode                                       rightArm
+        |                                               |                                               |
+      leftElbowNode                                 waistJoint                                   rightElbowNode
+        |                                               |                                               |
+    leftElbowJoint                                 lowerTorso                                   rightElbowJoint
+        |                                       /              \                                        |
+    leftForearm                              leftHip       rightHip                               rightForearm
+        |                                      |                |                                       |
+    leftWristNode                        leftHipNode       rightHipNode                           rightWristNode
+        |                                      |                |                                       |
+    leftWristJoint                      leftHipJoint       rightHipJoint                          rightWristJoint
+        |                                      |                |                                       |
+    leftHand                               leftThigh       rightThigh                               rightHand
+                                               |                |
+                                        leftKneeNode       rightKneeNode
+                                               |                |
+                                       leftKneeJoint       rightKneeJoint
+                                               |                |
+                                            leftCalf       rightCalf
+                                               |                |
+                                       leftAnkleNode       rightAnkleNode
+                                               |                |
+                                      leftAnkleJoint       rightAnkleJoint
+                                               |                |
+                                            leftFoot       rightFoot
+
+Each joint has a degree of freedom, except for the neckJoint which has two
+The waistJoint rotates around the Y axis (so it is controlled by the middle mouse button)
+
+
+Changes that I made to the data structures:
+I added a parent SceneNode to each SceneNode
+I created a static map of SceneNodes that I can access using their id
+I overrode rotate in JointNode to prevent rotating too far
+
+I did not have time to implement undoing and redoing.
+Other than that there are no additional or missing features.
+
+I ran this program on gl29.student.cs.uwaterloo.ca
