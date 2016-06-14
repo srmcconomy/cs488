@@ -412,7 +412,7 @@ static void updateShaderUniforms(
 		// CHECK_GL_ERRORS;
 
 		location = shader.getUniformLocation("PickingColor");
-		vec3 colour = vec4((float)node.m_nodeId / 255.0f, 0, 0, 0);
+		vec4 colour = vec4((float)node.m_nodeId / 255.0f, 0, 0, 0);
 		glUniform4fv(location, 1, value_ptr(colour));
 
 
