@@ -398,6 +398,7 @@ void A3::guiLogic()
 					if( ImGui::Button( "Quit Application" ) ) {
 						glfwSetWindowShouldClose(m_window, GL_TRUE);
 					}
+					ImGui::EndMenu();
 				}
 				ImGui::EndMenuBar();
 			}
