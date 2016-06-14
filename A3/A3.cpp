@@ -607,6 +607,9 @@ bool A3::mouseButtonInputEvent (
 		int mods
 ) {
 	bool eventHandled(false);
+	double xPos;
+	double yPos;
+	glfwGetCursorPos(m_window, &xPos, &yPos);
 
 	switch(mode) {
 		case POSITION:
@@ -637,8 +640,8 @@ bool A3::mouseButtonInputEvent (
 			glFlush();
 			glFinish();
 			unsigned char data[4];
-			glReadPixels(mouseLastX, mouseLastY, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
-			cout << (int)data[0] << endl;
+			glReadPixels(xPos, yPos, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			cout << (int)data[0] << ", " << (int)data[1] << ", " << (int)data[2] << ", " << (int)data[3] <<  endl;
 			break;
 	}
 
