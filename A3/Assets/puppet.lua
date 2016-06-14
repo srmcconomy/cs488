@@ -249,4 +249,20 @@ rightCalf:translate(0, -0.5, 0)
 rightCalf:scale(0.1, 0.7, 0.1)
 rightCalf:set_material(red)
 
+
+rightAnkleNode = gr.node('rightAnkleNode')
+rightCalf:add_child(rightAnkleNode)
+rightAnkleNode:scale(10, 1/0.7, 10)
+rightAnkleNode:translate(0, -0.5, 0)
+
+rightAnkleJoint = gr.joint('rightAnkleJoint', {-120, -90, -20}, {0, 0, 0})
+rightAnkleNode:add_child(rightAnkleJoint)
+
+rightFoot = gr.mesh('cube', 'rightFoot')
+rightAnkleJoint:add_child(rightFoot)
+rightFoot:translate(0, -0.5, 0)
+rightFoot:scale(0.1, 0.3, 0.1)
+rightFoot:set_material(red)
+
+
 return rootnode
