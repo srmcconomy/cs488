@@ -466,7 +466,7 @@ static void updateShaderUniforms(
 			location = shader.getUniformLocation("material.ks");
 			vec3 ks = node.material.ks;
 			if (node.isSelected) {
-				ks = {1.0f, 1.0f, 1.0f};
+				ks = {0, 0, 1.0f};
 			}
 			glUniform3fv(location, 1, value_ptr(ks));
 			CHECK_GL_ERRORS;
@@ -729,7 +729,8 @@ bool A3::mouseButtonInputEvent (
 				unsigned char data[4];
 				glReadPixels(xPos, m_framebufferHeight - yPos, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
 				if (data[1] == 0) {
-					SceneNode::getNode((unsigned int)data[0])->isSelected = true;
+					SceneNode* node = SceneNode::getNode((unsigned int)data[0]);
+					node->isSelected = !node->isSelected;
 				}
 			}
 			break;
