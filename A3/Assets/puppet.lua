@@ -80,9 +80,9 @@ leftElbowNode:add_child(leftElbowJoint)
 
 leftForearm = gr.mesh('cube', 'leftForearm')
 leftElbowJoint:add_child(leftForearm)
-leftArm:translate(0.0, 0.0, 0.5)
-leftArm:scale(0.1, 0.1, 0.4)
-leftArm:set_material(red)
+leftForearm:translate(0.0, 0.0, 0.5)
+leftForearm:scale(0.1, 0.1, 0.4)
+leftForearm:set_material(red)
 
 
 
