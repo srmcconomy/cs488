@@ -37,7 +37,7 @@ A3::A3(const std::string & luaSceneFile)
     mouseLeftDown(false),
     mouseMiddleDown(false),
     mouseRightDown(false),
-		mode(JOINTS),
+		mode(POSITION),
 		backCulling(false),
 		frontCulling(false),
 		drawCircle(false),
@@ -404,6 +404,9 @@ void A3::guiLogic()
 		ImGui::Checkbox("Z-buffer", &zbuffering);
 		ImGui::Checkbox("Backface Culling", &backCulling);
 		ImGui::Checkbox("Frontface Culling", &frontCulling);
+
+		ImGui::RadioButton( "Position/Orientation", (int*)&mode, POSITION );
+		ImGui::RadioButton( "Joints", (int*)&mode, JOINTS );
 
 		ImGui::Text( "Framerate: %.1f FPS", ImGui::GetIO().Framerate );
 
@@ -789,6 +792,12 @@ bool A3::keyInputEvent (
 		}
 		if (key == GLFW_KEY_Q) {
 			glfwSetWindowShouldClose(m_window, GL_TRUE);
+		}
+		if (key == GLFW_KEY_P) {
+			mode = POSITION;
+		}
+		if (key == GLFW_KEY_J) {
+			mode = JOINTS;
 		}
 	}
 	// Fill in with event handling code...
