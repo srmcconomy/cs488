@@ -14,6 +14,8 @@ public:
 		double min, init, max;
 	};
 
+float rotationX;
+float rotationY;
 
 	JointRange m_joint_x, m_joint_y;
 };
