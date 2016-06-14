@@ -95,4 +95,6 @@ protected:
   glm::vec2 trackballOrigin;
   glm::vec3 lastTrackball;
   float trackballRadius;
+	enum Mode { POSITION, JOINTS };
+	Mode mode;
 };

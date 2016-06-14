@@ -36,7 +36,8 @@ A3::A3(const std::string & luaSceneFile)
     rotationTrans(1.0f),
     mouseLeftDown(false),
     mouseMiddleDown(false),
-    mouseRightDown(false)
+    mouseRightDown(false),
+		mode(POSITION)
 {
   matrixStack.push(mat4(1.0f));
 }
@@ -478,7 +479,7 @@ void A3::renderSceneGraph(const SceneNode & root, bool picking) {
 
 	// Bind the VAO once here, and reuse for all GeometryNode rendering below.
 	glBindVertexArray(m_vao_meshData);
-  renderNode(&root, m_shader, picking);
+  renderNode(&root, picking ? m_picking_shader : m_shader, picking);
 
 	// This is emphatically *not* how you should be drawing the scene graph in
 	// your final implementation.  This is a non-hierarchical demonstration
@@ -562,13 +563,6 @@ bool A3::mouseMoveEvent (
   double xOffset = xPos - mouseLastX;
   double yOffset = yPos - mouseLastY;
 
-	cout << xPos << endl;
-	cout << yPos << endl;
-	cout << m_framebufferWidth << endl;
-	cout << m_framebufferHeight << endl;
-	cout << trackballOrigin << endl;
-	cout << trackballRadius << endl;
-
   vec3 trackball = vec3(xPos - trackballOrigin.x, -yPos + trackballOrigin.y, 0);
   trackball /= trackballRadius;
   float sqlength = trackball.x * trackball.x + trackball.y * trackball.y;
@@ -614,27 +608,37 @@ bool A3::mouseButtonInputEvent (
 ) {
 	bool eventHandled(false);
 
-  if (actions == GLFW_PRESS) {
-    if (button == GLFW_MOUSE_BUTTON_LEFT) {
-      mouseLeftDown = true;
-    }
-    if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
-      mouseMiddleDown = true;
-    }
-    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-      mouseRightDown = true;
-    }
-  } else if (actions == GLFW_RELEASE) {
-    if (button == GLFW_MOUSE_BUTTON_LEFT) {
-      mouseLeftDown = false;
-    }
-    if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
-      mouseMiddleDown = false;
-    }
-    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-      mouseRightDown = false;
-    }
-  }
+	switch(mode) {
+		case POSITION:
+		  if (actions == GLFW_PRESS) {
+		    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+		      mouseLeftDown = true;
+		    }
+		    if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
+		      mouseMiddleDown = true;
+		    }
+		    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+		      mouseRightDown = true;
+		    }
+		  } else if (actions == GLFW_RELEASE) {
+		    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+		      mouseLeftDown = false;
+		    }
+		    if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
+		      mouseMiddleDown = false;
+		    }
+		    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+		      mouseRightDown = false;
+		    }
+		  }
+			break;
+		case JOINTS:
+			renderSceneGraph(root, true);
+			glFlush();
+			glFinish();
+			unsigned char data[4];
+			glReadPixels(mouseLastX, mouseLastY, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			cout << data[0] << endl;
 
 
 	// Fill in with event handling code...
