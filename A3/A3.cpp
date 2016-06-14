@@ -376,6 +376,27 @@ void A3::guiLogic()
 	static bool showDebugWindow(true);
 	ImGuiWindowFlags windowFlags(ImGuiWindowFlags_AlwaysAutoResize);
 	float opacity(0.5f);
+	if (ImGui::BeginMenuBar()) {
+		if (ImGui::BeginMenu("Application")) {
+			if( ImGui::Button( "Reset Position" ) ) {
+				resetPosition();
+			}
+			if( ImGui::Button( "Reset Orientation" ) ) {
+				resetOrientation();
+			}
+			if( ImGui::Button( "Reset Joints" ) ) {
+				resetJoints();
+			}
+			if( ImGui::Button( "Reset All" ) ) {
+				resetAll();
+			}
+			if( ImGui::Button( "Quit Application" ) ) {
+				glfwSetWindowShouldClose(m_window, GL_TRUE);
+			}
+		}
+		ImGui::EndMenuBar();
+	}
+
 
 	ImGui::Begin("Properties", &showDebugWindow, ImVec2(100,100), opacity,
 			windowFlags);
@@ -383,23 +404,6 @@ void A3::guiLogic()
 
 		// Add more gui elements here here ...
 
-
-		// Create Button, and check if it was clicked:
-		if( ImGui::Button( "Reset Position" ) ) {
-			resetPosition();
-		}
-		if( ImGui::Button( "Reset Orientation" ) ) {
-			resetOrientation();
-		}
-		if( ImGui::Button( "Reset Joints" ) ) {
-			resetJoints();
-		}
-		if( ImGui::Button( "Reset All" ) ) {
-			resetAll();
-		}
-		if( ImGui::Button( "Quit Application" ) ) {
-			glfwSetWindowShouldClose(m_window, GL_TRUE);
-		}
 		ImGui::Checkbox("Circle", &drawCircle);
 		ImGui::Checkbox("Z-buffer", &zbuffering);
 		ImGui::Checkbox("Backface Culling", &backCulling);
