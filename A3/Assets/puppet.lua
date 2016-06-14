@@ -144,7 +144,7 @@ leftThigh:add_child(leftKneeNode)
 leftKneeNode:scale(10, 1/0.7, 10)
 leftKneeNode:translate(0, -0.5, 0)
 
-leftKneeJoint = gr.joint('leftKneeJoint', {-70, 0, 0}, {0, 0, 0})
+leftKneeJoint = gr.joint('leftKneeJoint', {0, 0, 170}, {0, 0, 0})
 leftKneeNode:add_child(leftKneeJoint)
 
 leftCalf = gr.mesh('cube', 'leftCalf')
@@ -178,7 +178,7 @@ rightThigh:add_child(rightKneeNode)
 rightKneeNode:scale(10, 1/0.7, 10)
 rightKneeNode:translate(0, -0.5, 0)
 
-rightKneeJoint = gr.joint('rightKneeJoint', {-70, 0, 0}, {0, 0, 0})
+rightKneeJoint = gr.joint('rightKneeJoint', {0, 0, 170}, {0, 0, 0})
 rightKneeNode:add_child(rightKneeJoint)
 
 rightCalf = gr.mesh('cube', 'rightCalf')
