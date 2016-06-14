@@ -604,7 +604,7 @@ void A3::resetJoints() {
 	resetAngle(m_rootNode);
 }
 
-void resetAngle(SceneNode* node) {
+void resetAngle(const SceneNode* node) {
 	if (node->m_nodeType == NodeType::JointNode) {
 		JointNode* jointNode = (JointNode*)node;
 		jointNode->rotationX = jointNode->m_joint_x.init;
