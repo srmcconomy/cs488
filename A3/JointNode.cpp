@@ -34,7 +34,6 @@ void JointNode::set_joint_y(double min, double init, double max) {
 
 void JointNode::rotate(char axis, float angle) {
 	vec3 rot_axis;
-  cout << angle << endl;
 	switch (axis) {
 		case 'x':
 			rotationX += angle;
