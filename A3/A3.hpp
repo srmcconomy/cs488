@@ -99,4 +99,6 @@ protected:
 	Mode mode;
 	bool frontCulling;
 	bool backCulling;
+	bool drawCircle;
+	bool zbuffering;
 };

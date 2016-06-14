@@ -39,7 +39,9 @@ A3::A3(const std::string & luaSceneFile)
     mouseRightDown(false),
 		mode(JOINTS),
 		backCulling(false),
-		frontCulling(false)
+		frontCulling(false),
+		drawCircle(true),
+		zbuffering(true)
 {
   matrixStack.push(mat4(1.0f));
 }
@@ -448,7 +450,9 @@ static void updateShaderUniforms(
  */
 void A3::draw() {
 
-	glEnable( GL_DEPTH_TEST );
+	if (zbuffering) {
+		glEnable( GL_DEPTH_TEST );
+	}
 	if (frontCulling && backCulling) {
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_FRONT_AND_BACK);
@@ -461,13 +465,16 @@ void A3::draw() {
 	}
 	renderSceneGraph(*m_rootNode, false);
 
-
-	glDisable( GL_DEPTH_TEST );
+	if (zbuffering) {
+		glDisable( GL_DEPTH_TEST );
+	}
 
 	if (frontCulling || backCulling) {
 		glDisable( GL_CULL_FACE );
 	}
-	renderArcCircle();
+	if (drawCircle) {
+		renderArcCircle();
+	}
 }
 
 void A3::renderNode(const SceneNode * node, const ShaderProgram& shader, bool picking) {
@@ -654,9 +661,13 @@ bool A3::mouseButtonInputEvent (
 		case JOINTS:
 			if (actions == GLFW_RELEASE && button == GLFW_MOUSE_BUTTON_LEFT) {
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				glEnable( GL_DEPTH_TEST );
+				if (zbuffering) {
+					glEnable( GL_DEPTH_TEST );
+				}
 				renderSceneGraph(*m_rootNode, true);
-				glDisable( GL_DEPTH_TEST );
+				if (zbuffering) {
+					glDisable( GL_DEPTH_TEST );
+				}
 				glFlush();
 				glFinish();
 				glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -722,6 +733,12 @@ bool A3::keyInputEvent (
 		}
 		if( key == GLFW_KEY_F ) {
 			frontCulling = !frontCulling;
+		}
+		if( key == GLFW_KEY_C ) {
+			drawCircle = !drawCircle;
+		}
+		if( key == GLFW_KEY_Z ) {
+			zbuffering = !zbuffering;
 		}
 	}
 	// Fill in with event handling code...
