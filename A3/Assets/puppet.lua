@@ -151,7 +151,7 @@ leftCalf = gr.mesh('cube', 'leftCalf')
 leftKneeJoint:add_child(leftCalf)
 leftCalf:translate(0, -0.5, 0)
 leftCalf:scale(0.1, 0.7, 0.1)
-rightCalf:set_material(red)
+leftCalf:set_material(red)
 
 rightHip = gr.mesh('sphere', 'rightHip')
 torso:add_child(rightHip)
