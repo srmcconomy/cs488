@@ -139,6 +139,19 @@ leftThigh:translate(0, -0.5, 0)
 leftThigh:scale(0.1, 0.7, 0.1)
 leftThigh:set_material(red)
 
+leftKneeNode = gr.node('leftKneeNode')
+leftThigh:add_child(leftKneeNode)
+leftKneeNode:translate(0, 0.5, 0)
+leftKneeNode:scale(10, 1/0.7, 10)
+
+leftKneeJoint = gr.joint('leftKneeJoint', {-70, 0, 0}, {0, 0, 0})
+leftKneeNode:add_child(leftKneeJoint)
+
+leftCalf = gr.mesh('cube', 'leftCalf')
+leftKneeJoint:add_child(leftCalf)
+leftCalf:translate(0, 0.5, 0)
+leftCalf:scale(0.1, 0.7, 0.1)
+
 rightHip = gr.mesh('sphere', 'rightHip')
 torso:add_child(rightHip)
 rightHip:scale(1/0.5,1.0,1/0.5);
