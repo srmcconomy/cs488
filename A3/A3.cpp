@@ -462,7 +462,7 @@ static void updateShaderUniforms(
 			location = shader.getUniformLocation("material.kd");
 			vec3 kd = node.material.kd;
 			if (node.isSelected) {
-				ks = {0, 0, 0};
+				kd = {0, 0, 0};
 			}
 			glUniform3fv(location, 1, value_ptr(kd));
 			CHECK_GL_ERRORS;
