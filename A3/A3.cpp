@@ -448,12 +448,18 @@ static void updateShaderUniforms(
 void A3::draw() {
 
 	glEnable( GL_DEPTH_TEST );
-	glEnable(GL_CULL_FACE);
-	glCullFace(culling);
+	if (culling != GL_NONE) {
+		glEnable(GL_CULL_FACE);
+		glCullFace(culling);
+	}
 	renderSceneGraph(*m_rootNode, false);
 
 
 	glDisable( GL_DEPTH_TEST );
+
+	if (culling != GL_NONE) {
+		glDisable( GL_CULL_FACE );
+	}
 	renderArcCircle();
 }
 
