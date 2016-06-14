@@ -141,8 +141,8 @@ leftThigh:set_material(red)
 
 leftKneeNode = gr.node('leftKneeNode')
 leftThigh:add_child(leftKneeNode)
-leftKneeNode:translate(0, -0.5, 0)
 leftKneeNode:scale(10, 1/0.7, 10)
+leftKneeNode:translate(0, -0.5, 0)
 
 leftKneeJoint = gr.joint('leftKneeJoint', {-70, 0, 0}, {0, 0, 0})
 leftKneeNode:add_child(leftKneeJoint)
