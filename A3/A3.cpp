@@ -38,7 +38,7 @@ A3::A3(const std::string & luaSceneFile)
     mouseMiddleDown(false),
     mouseRightDown(false),
 		mode(JOINTS),
-		culling(GL_BACK)
+		culling(GL_FRONT)
 {
   matrixStack.push(mat4(1.0f));
 }
