@@ -447,7 +447,7 @@ static void updateShaderUniforms(
 void A3::draw() {
 
 	glEnable( GL_DEPTH_TEST );
-	renderSceneGraph(*m_rootNode, true);
+	renderSceneGraph(*m_rootNode, false);
 
 
 	glDisable( GL_DEPTH_TEST );
