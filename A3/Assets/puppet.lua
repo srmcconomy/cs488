@@ -152,6 +152,40 @@ leftKneeJoint:add_child(leftCalf)
 leftCalf:translate(0, -0.5, 0)
 leftCalf:scale(0.1, 0.7, 0.1)
 
+
+rightHip = gr.mesh('sphere', 'rightHip')
+torso:add_child(rightHip)
+rightHip:scale(1/0.5,1.0,1/0.5);
+rightHip:scale(0.21, 0.21, 0.21)
+rightHip:translate(0.38, -0.5, 0.0)
+rightHip:set_material(blue)
+
+rightHipNode = gr.node('rightHipNode')
+rightHip:add_child(rightHipNode)
+rightHipNode:scale(1/0.21, 1/0.21, 1/0.21);
+
+rightHipJoint = gr.joint('rightHipJoint', {-90, 0, 90}, {0, 0, 0})
+rightHipNode:add_child(rightHipJoint)
+
+rightThigh = gr.mesh('cube', 'rightThigh')
+rightHipJoint:add_child(rightThigh)
+rightThigh:translate(0, -0.5, 0)
+rightThigh:scale(0.1, 0.7, 0.1)
+rightThigh:set_material(red)
+
+rightKneeNode = gr.node('rightKneeNode')
+rightThigh:add_child(rightKneeNode)
+rightKneeNode:scale(10, 1/0.7, 10)
+rightKneeNode:translate(0, -0.5, 0)
+
+rightKneeJoint = gr.joint('rightKneeJoint', {-70, 0, 0}, {0, 0, 0})
+rightKneeNode:add_child(rightKneeJoint)
+
+rightCalf = gr.mesh('cube', 'rightCalf')
+rightKneeJoint:add_child(rightCalf)
+rightCalf:translate(0, -0.5, 0)
+rightCalf:scale(0.1, 0.7, 0.1)
+
 rightHip = gr.mesh('sphere', 'rightHip')
 torso:add_child(rightHip)
 rightHip:scale(1/0.5,1.0,1/0.5);
