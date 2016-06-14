@@ -402,10 +402,8 @@ void A3::guiLogic()
 			}
 			if (ImGui::BeginMenu("Edit")) {
 				if (ImGui::MenuItem("Undo")) {
-					resetPosition();
 				}
 				if (ImGui::MenuItem("Redo")) {
-					resetOrientation();
 				}
 				ImGui::EndMenu();
 			}
