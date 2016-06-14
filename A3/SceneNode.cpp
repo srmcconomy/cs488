@@ -111,7 +111,7 @@ int SceneNode::totalSceneNodes() const {
 	return nodeInstanceCount;
 }
 
-SceneNode* getNode(unsigned int id) {
+SceneNode* SceneNode::getNode(unsigned int id) {
   return nodes[id];
 }
 
