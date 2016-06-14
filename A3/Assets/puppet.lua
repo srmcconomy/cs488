@@ -135,7 +135,7 @@ leftHipNode:add_child(leftHipJoint)
 
 leftThigh = gr.mesh('cube', 'leftThigh')
 leftHipNode:add_child(leftThigh)
-leftThigh:translate(0, 0.5, 0)
+leftThigh:translate(0, -0.5, 0)
 leftThigh:scale(0.1, 0.5, 0.1)
 leftThigh:set_material(red)
 
