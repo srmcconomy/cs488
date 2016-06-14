@@ -446,8 +446,9 @@ static void updateShaderUniforms(
  */
 void A3::draw() {
 
+	glClearColor(0.35f, 0.35f, 0.35f, 1.0f);
 	glEnable( GL_DEPTH_TEST );
-	renderSceneGraph(*m_rootNode, false);
+	renderSceneGraph(*m_rootNode, true);
 
 
 	glDisable( GL_DEPTH_TEST );
