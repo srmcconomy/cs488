@@ -446,7 +446,6 @@ static void updateShaderUniforms(
  */
 void A3::draw() {
 
-	glClearColor(0.35f, 0.35f, 0.35f, 1.0f);
 	glEnable( GL_DEPTH_TEST );
 	renderSceneGraph(*m_rootNode, true);
 
@@ -637,7 +636,6 @@ bool A3::mouseButtonInputEvent (
 		  }
 			break;
 		case JOINTS:
-			glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glEnable( GL_DEPTH_TEST );
 			renderSceneGraph(*m_rootNode, true);
