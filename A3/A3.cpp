@@ -394,7 +394,8 @@ void A3::guiLogic()
 static void updateShaderUniforms(
 		const ShaderProgram & shader,
 		const GeometryNode & node,
-		const glm::mat4 & viewMatrix
+		const glm::mat4 & viewMatrix,
+		bool picking
 ) {
 
 	shader.enable();
@@ -405,29 +406,33 @@ static void updateShaderUniforms(
 		glUniformMatrix4fv(location, 1, GL_FALSE, value_ptr(modelView));
 		CHECK_GL_ERRORS;
 
-		//-- Set NormMatrix:
-		// location = shader.getUniformLocation("NormalMatrix");
-		// mat3 normalMatrix = glm::transpose(glm::inverse(mat3(modelView)));
-		// glUniformMatrix3fv(location, 1, GL_FALSE, value_ptr(normalMatrix));
-		// CHECK_GL_ERRORS;
+		if (picking) {
+			location = shader.getUniformLocation("PickingColor");
+			vec4 colour = vec4((float)node.m_nodeId / 255.0f, 0, 0, 1.0f);
+			glUniform4fv(location, 1, value_ptr(colour));
+		} else {
 
-		location = shader.getUniformLocation("PickingColor");
-		vec4 colour = vec4((float)node.m_nodeId / 255.0f, 0, 0, 1.0f);
-		glUniform4fv(location, 1, value_ptr(colour));
+			-- Set NormMatrix:
+			location = shader.getUniformLocation("NormalMatrix");
+			mat3 normalMatrix = glm::transpose(glm::inverse(mat3(modelView)));
+			glUniformMatrix3fv(location, 1, GL_FALSE, value_ptr(normalMatrix));
+			CHECK_GL_ERRORS;
 
 
-		//-- Set Material values:
-		// location = shader.getUniformLocation("material.kd");
-		// vec3 kd = node.material.kd;
-		// glUniform3fv(location, 1, value_ptr(kd));
-		// CHECK_GL_ERRORS;
-		// location = shader.getUniformLocation("material.ks");
-		// vec3 ks = node.material.ks;
-		// glUniform3fv(location, 1, value_ptr(ks));
-		// CHECK_GL_ERRORS;
-		// location = shader.getUniformLocation("material.shininess");
-		// glUniform1f(location, node.material.shininess);
-		// CHECK_GL_ERRORS;
+
+			-- Set Material values:
+			location = shader.getUniformLocation("material.kd");
+			vec3 kd = node.material.kd;
+			glUniform3fv(location, 1, value_ptr(kd));
+			CHECK_GL_ERRORS;
+			location = shader.getUniformLocation("material.ks");
+			vec3 ks = node.material.ks;
+			glUniform3fv(location, 1, value_ptr(ks));
+			CHECK_GL_ERRORS;
+			location = shader.getUniformLocation("material.shininess");
+			glUniform1f(location, node.material.shininess);
+			CHECK_GL_ERRORS;
+		}
 
 	}
 	shader.disable();
@@ -441,18 +446,18 @@ static void updateShaderUniforms(
 void A3::draw() {
 
 	glEnable( GL_DEPTH_TEST );
-	renderSceneGraph(*m_rootNode);
+	renderSceneGraph(*m_rootNode, false);
 
 
 	glDisable( GL_DEPTH_TEST );
 	renderArcCircle();
 }
 
-void A3::renderNode(const SceneNode * node, const ShaderProgram& shader) {
+void A3::renderNode(const SceneNode * node, const ShaderProgram& shader, bool picking) {
   if (node->m_nodeType == NodeType::GeometryNode) {
     const GeometryNode * geometryNode = static_cast<const GeometryNode *>(node);
 
-		updateShaderUniforms(shader, *geometryNode, m_view * translateTrans * rotationTrans * matrixStack.top());
+		updateShaderUniforms(shader, *geometryNode, m_view * translateTrans * rotationTrans * matrixStack.top(), picking);
 
 		// Get the BatchInfo corresponding to the GeometryNode's unique MeshId.
 		BatchInfo batchInfo = m_batchInfoMap[geometryNode->meshId];
@@ -463,17 +468,17 @@ void A3::renderNode(const SceneNode * node, const ShaderProgram& shader) {
   }
   matrixStack.push(matrixStack.top() * node->trans);
   for (const SceneNode* child : node->children) {
-    renderNode(child, shader);
+    renderNode(child, shader, picking);
   }
   matrixStack.pop();
 }
 
 //----------------------------------------------------------------------------------------
-void A3::renderSceneGraph(const SceneNode & root) {
+void A3::renderSceneGraph(const SceneNode & root, bool picking) {
 
 	// Bind the VAO once here, and reuse for all GeometryNode rendering below.
 	glBindVertexArray(m_vao_meshData);
-  renderNode(&root, m_picking_shader);
+  renderNode(&root, m_picking_shader, picking);
 
 	// This is emphatically *not* how you should be drawing the scene graph in
 	// your final implementation.  This is a non-hierarchical demonstration
