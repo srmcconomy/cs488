@@ -574,7 +574,7 @@ void A3::resetPosition() {
 }
 
 void A3::resetOrientation() {
-	rotateTrans = mat4(1.0f);
+	rotationTrans = mat4(1.0f);
 }
 
 void A3::resetJoints() {
