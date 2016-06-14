@@ -639,6 +639,8 @@ bool A3::mouseButtonInputEvent (
 			unsigned char data[4];
 			glReadPixels(mouseLastX, mouseLastY, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			cout << data[0] << endl;
+			break;
+	}
 
 
 	// Fill in with event handling code...
