@@ -400,7 +400,6 @@ void A3::guiLogic()
 				}
 				ImGui::EndMenu();
 			}
-			ImGui::EndMenuBar();
 			if (ImGui::BeginMenu("Edit")) {
 				if (ImGui::MenuItem("Undo")) {
 					resetPosition();
@@ -410,14 +409,13 @@ void A3::guiLogic()
 				}
 				ImGui::EndMenu();
 			}
-			if (ImGui::BeginMenu("Options")) {	
-				ImGui::Checkbox("Circle", &drawCircle);
-				ImGui::Checkbox("Z-buffer", &zbuffering);
-				ImGui::Checkbox("Backface Culling", &backCulling);
-				ImGui::Checkbox("Frontface Culling", &frontCulling);
+			if (ImGui::BeginMenu("Options")) {
+				ImGui::MenuItem("Circle", &drawCircle);
+				ImGui::MenuItem("Z-buffer", &zbuffering);
+				ImGui::MenuItem("Backface Culling", &backCulling);
+				ImGui::MenuItem("Frontface Culling", &frontCulling);
 				ImGui::EndMenu();
 			}
-			ImGui::EndMenuBar();
 			ImGui::EndMenuBar();
 		}
 
