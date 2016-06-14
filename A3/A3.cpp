@@ -383,21 +383,21 @@ void A3::guiLogic()
 
 			if (ImGui::BeginMenuBar()) {
 				if (ImGui::BeginMenu("Application")) {
-					if( ImGui::Button( "Reset Position" ) ) {
-						resetPosition();
-					}
-					if( ImGui::Button( "Reset Orientation" ) ) {
-						resetOrientation();
-					}
-					if( ImGui::Button( "Reset Joints" ) ) {
-						resetJoints();
-					}
-					if( ImGui::Button( "Reset All" ) ) {
-						resetAll();
-					}
-					if( ImGui::Button( "Quit Application" ) ) {
-						glfwSetWindowShouldClose(m_window, GL_TRUE);
-					}
+					// if( ImGui::Button( "Reset Position" ) ) {
+					// 	resetPosition();
+					// }
+					// if( ImGui::Button( "Reset Orientation" ) ) {
+					// 	resetOrientation();
+					// }
+					// if( ImGui::Button( "Reset Joints" ) ) {
+					// 	resetJoints();
+					// }
+					// if( ImGui::Button( "Reset All" ) ) {
+					// 	resetAll();
+					// }
+					// if( ImGui::Button( "Quit Application" ) ) {
+					// 	glfwSetWindowShouldClose(m_window, GL_TRUE);
+					// }
 					ImGui::EndMenu();
 				}
 				ImGui::EndMenuBar();
