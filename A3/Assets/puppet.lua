@@ -59,16 +59,32 @@ leftShoulder:set_material(blue)
 leftShoulderNode = gr.node('leftShoulderNode')
 leftShoulder:add_child(leftShoulderNode)
 leftShoulderNode:scale(5, 5, 5);
+leftShoulderNode:rotate('y', -90);
 
 leftShoulderJoint = gr.joint('leftShoulderJoint', {-90, 50, 90}, {-20, 0, 90})
 leftShoulderNode:add_child(leftShoulderJoint)
-leftShoulderJoint:rotate('y', -90);
 
 leftArm = gr.mesh('cube', 'leftArm')
 leftShoulderJoint:add_child(leftArm)
 leftArm:translate(0.0, 0.0, 0.5)
-leftArm:scale(0.1, 0.1, 4)
+leftArm:scale(0.1, 0.1, 0.4)
 leftArm:set_material(red)
+
+leftElbowNode = gr.node('leftShoulderNode')
+leftArm:add_child(leftElbowNode);
+leftElbowNode:scale(10, 10, 2.25);
+leftElbowNode:translate(0, 0, 0.4);
+
+leftElbowJoint = gr.joint('leftElbowJoint', {-80, 90, 90}, {0, 0, 0})
+leftElbowNode:add_child(leftElbowJoint)
+
+leftForearm = gr.mesh('cube', 'leftForearm')
+leftElbowJoint:add_child(leftForearm)
+leftArm:translate(0.0, 0.0, 0.5)
+leftArm:scale(0.1, 0.1, 0.4)
+leftArm:set_material(red)
+
+
 
 rightShoulder = gr.mesh('sphere', 'rightShoulder')
 torso:add_child(rightShoulder)
