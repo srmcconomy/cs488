@@ -412,7 +412,7 @@ static void updateShaderUniforms(
 			glUniform4fv(location, 1, value_ptr(colour));
 		} else {
 
-			-- Set NormMatrix:
+			// -- Set NormMatrix:
 			location = shader.getUniformLocation("NormalMatrix");
 			mat3 normalMatrix = glm::transpose(glm::inverse(mat3(modelView)));
 			glUniformMatrix3fv(location, 1, GL_FALSE, value_ptr(normalMatrix));
@@ -420,7 +420,7 @@ static void updateShaderUniforms(
 
 
 
-			-- Set Material values:
+			// -- Set Material values:
 			location = shader.getUniformLocation("material.kd");
 			vec3 kd = node.material.kd;
 			glUniform3fv(location, 1, value_ptr(kd));
