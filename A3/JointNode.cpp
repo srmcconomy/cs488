@@ -1,6 +1,7 @@
 #include "JointNode.hpp"
 #include <glm/glm.hpp>
-#include <glm/gtx/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
 
 #include "cs488-framework/MathUtils.hpp"
 
