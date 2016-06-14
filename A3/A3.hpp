@@ -52,6 +52,11 @@ protected:
 	void renderArcCircle();
 	void renderNode(const SceneNode *node, const ShaderProgram& shader, bool picking);
 
+	void resetPosition();
+	void resetOrientation();
+	void resetJoints();
+	void resetAll();
+
 	glm::mat4 m_perpsective;
 	glm::mat4 m_view;
 
