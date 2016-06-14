@@ -410,10 +410,10 @@ void A3::guiLogic()
 				ImGui::EndMenu();
 			}
 			if (ImGui::BeginMenu("Options")) {
-				ImGui::MenuItem("Circle", &drawCircle);
-				ImGui::MenuItem("Z-buffer", &zbuffering);
-				ImGui::MenuItem("Backface Culling", &backCulling);
-				ImGui::MenuItem("Frontface Culling", &frontCulling);
+				ImGui::Checkbox("Circle", &drawCircle);
+				ImGui::Checkbox("Z-buffer", &zbuffering);
+				ImGui::Checkbox("Backface Culling", &backCulling);
+				ImGui::Checkbox("Frontface Culling", &frontCulling);
 				ImGui::EndMenu();
 			}
 			ImGui::EndMenuBar();
