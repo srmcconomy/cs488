@@ -28,7 +28,7 @@ neckNode = gr.node('neckNode')
 neck:add_child(neckNode)
 neckNode:scale(1/0.15, 1/0.3, 1/0.15)
 
-neckJoint = gr.joint('neckJoint', {-90, 0, 10}, {-110, 0, 110});
+neckJoint = gr.joint('neckJoint', {-10, 0, 90}, {-110, 0, 110});
 neckNode:add_child(neckJoint)
 
 head = gr.mesh('cube', 'head')
