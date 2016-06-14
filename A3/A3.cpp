@@ -385,6 +385,18 @@ void A3::guiLogic()
 
 
 		// Create Button, and check if it was clicked:
+		if( ImGui::Button( "Reset Position" ) ) {
+			resetPosition();
+		}
+		if( ImGui::Button( "Reset Orientation" ) ) {
+			resetOrientation();
+		}
+		if( ImGui::Button( "Reset Joints" ) ) {
+			resetJoints();
+		}
+		if( ImGui::Button( "Reset All" ) ) {
+			resetAll();
+		}
 		if( ImGui::Button( "Quit Application" ) ) {
 			glfwSetWindowShouldClose(m_window, GL_TRUE);
 		}
@@ -554,6 +566,25 @@ void A3::renderArcCircle() {
 void A3::cleanup()
 {
 
+}
+
+
+void A3::resetPosition() {
+	translateTrans = mat4(1.0f);
+}
+
+void A3::resetOrientation() {
+	rotateTrans = mat4(1.0f);
+}
+
+void A3::resetJoints() {
+
+}
+
+void A3::resetAll() {
+	resetPosition();
+	resetOrientation();
+	resetJoints();
 }
 
 //----------------------------------------------------------------------------------------
@@ -743,6 +774,21 @@ bool A3::keyInputEvent (
 		}
 		if( key == GLFW_KEY_Z ) {
 			zbuffering = !zbuffering;
+		}
+		if( key == GLFW_KEY_I) {
+			resetPosition();
+		}
+		if( key == GLFW_KEY_O) {
+			resetOrientation();
+		}
+		if( key == GLFW_KEY_N) {
+			resetJoints();
+		}
+		if( key == GLFW_KEY_A) {
+			resetAll();
+		}
+		if (key == GLFW_KEY_Q) {
+			glfwSetWindowShouldClose(m_window, GL_TRUE);
 		}
 	}
 	// Fill in with event handling code...
