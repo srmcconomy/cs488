@@ -34,7 +34,7 @@ neckNode:add_child(neckJoint)
 head = gr.mesh('cube', 'head')
 neckJoint:add_child(head)
 head:scale(0.4, 0.4, 0.4)
-head:translate(0.0, 0.5, 0.0)
+head:translate(0.0, 0.3, 0.0)
 head:set_material(red)
 
 
