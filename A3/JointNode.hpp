@@ -14,6 +14,8 @@ public:
 		double min, init, max;
 	};
 
+	void rotate(char, float);
+
 float rotationX;
 float rotationY;
 
