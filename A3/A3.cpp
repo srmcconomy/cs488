@@ -478,7 +478,7 @@ void A3::renderSceneGraph(const SceneNode & root, bool picking) {
 
 	// Bind the VAO once here, and reuse for all GeometryNode rendering below.
 	glBindVertexArray(m_vao_meshData);
-  renderNode(&root, m_picking_shader, picking);
+  renderNode(&root, m_shader, picking);
 
 	// This is emphatically *not* how you should be drawing the scene graph in
 	// your final implementation.  This is a non-hierarchical demonstration
