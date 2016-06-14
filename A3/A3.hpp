@@ -6,10 +6,12 @@
 #include "cs488-framework/MeshConsolidator.hpp"
 
 #include "SceneNode.hpp"
+#include "JointNode.hpp"
 
 #include <glm/glm.hpp>
 #include <stack>
 #include <memory>
+#include <map>
 
 struct LightSource {
 	glm::vec3 position;
@@ -106,4 +108,5 @@ protected:
 	bool backCulling;
 	bool drawCircle;
 	bool zbuffering;
+	std::map<unsigned int, JointNode*> selectedJoints;
 };

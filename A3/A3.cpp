@@ -732,6 +732,11 @@ bool A3::mouseButtonInputEvent (
 					SceneNode* node = SceneNode::getNode((unsigned int)data[0]);
 					if (node->parent->m_nodeType == NodeType::JointNode) {
 						node->isSelected = !node->isSelected;
+						if (node->isSelected) {
+							selectedJoints[node->parent->m_nodeId] = (JointNode*)node->parent;
+						} else {
+							selectedJoints.erase(node->parent->m_nodeId);
+						}
 					}
 				}
 			}

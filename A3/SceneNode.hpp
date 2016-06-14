@@ -51,6 +51,7 @@ public:
 
     std::list<SceneNode*> children;
     SceneNode* parent;
+    
 
 	NodeType m_nodeType;
 	std::string m_name;
