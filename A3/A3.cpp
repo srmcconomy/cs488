@@ -675,6 +675,11 @@ bool A3::mouseMoveEvent (
 				it->second->rotate('x', yOffset * 0.1f);
 			}
 		}
+		if (mouseMiddleDown) {
+			for (map<unsigned int, JointNode*>::iterator it = selectedJoints.begin(); it != selectedJoints.end(); it++) {
+				it->second->rotate('y', yOffset * 0.1f);
+			}
+		}
 	}
   mouseLastX = xPos;
   mouseLastY = yPos;
