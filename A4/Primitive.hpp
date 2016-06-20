@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 #include "polyroots.hpp"
 #include <iostream>
-using namespace std;
+using namespace glm;
 
 class Primitive {
 public:
