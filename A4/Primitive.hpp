@@ -32,7 +32,6 @@ public:
   }
   virtual ~NonhierSphere();
   size_t intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
-    return 0;
     double roots[2];
     size_t i = quadraticRoots(dot(ray, ray),
       2 * dot(ray, eye - m_pos),
