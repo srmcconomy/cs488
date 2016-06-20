@@ -25,9 +25,10 @@ public:
   }
   virtual ~NonhierSphere();
 
+    glm::vec3 m_pos;
+    double m_radius;
+
 private:
-  glm::vec3 m_pos;
-  double m_radius;
 };
 
 class NonhierBox : public Primitive {
@@ -36,7 +37,7 @@ public:
     : m_pos(pos), m_size(size)
   {
   }
-  
+
   virtual ~NonhierBox();
 
 private:
