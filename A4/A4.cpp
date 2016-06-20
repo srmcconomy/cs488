@@ -41,17 +41,32 @@ void A4_Render(
 	size_t h = image.height();
 	size_t w = image.width();
 
+  double fovx = fovy / h * w;
+  vec3 mainRay = view - eye;
+
 	for (uint y = 0; y < h; ++y) {
 		for (uint x = 0; x < w; ++x) {
-			// Red: increasing from top to bottom
-			image(x, y, 0) = (double)y / h;
-			// Green: increasing from left to right
-			image(x, y, 1) = (double)x / w;
-			// Blue: in lower-left and upper-right corners
-			image(x, y, 2) = ((y < h/2 && x < w/2)
-						  || (y >= h/2 && x >= w/2)) ? 1.0 : 0.0;
+      image(x, y, 0) = 0;
+      image(x, y, 1) = 0;
+      image(x, y, 2) = 0;
+      double angley = (y - h / 2) / h * fovy;
+      double anglex = (x - w / 2) / w * fovx;
+      vec3 ray = rotate(mainRay, anglex, up);
+      ray = rotate(ray, angley, cross(up, mainRay));
+      for (SceneNode* node : root->children) {
+        if (node->m_nodeType == NodeType::GeometryNode) {
+          NonhierSphere sphere = (NonhierSphere)node->m_primitive;
+          double roots[2];
+          size_t intersect = quadraticRoots(dot(ray, ray),
+            2 * dot(ray, eye - sphere.m_pos)),
+            dot(eye - sphere.m_pos, eye - sphere.m_pos) - sphere.m_radius * sphere.m_radius,
+            roots);
+          if (intersect > 0) {
+            image(x, y, 0) = 1.0;
+          }
+        }
+      }
 		}
 	}
-  image.savePng("image.png");
 
 }
