@@ -59,7 +59,7 @@ public:
     vec3 p = m_pos + n;
     double d = dot(p - eye, n) / dot(ray, n);
     point = eye + ray * d;
-    if ((point - p).x > -m_pos && (point - p).x < m_pos) {
+    if ((point - p).x > -m_size && (point - p).x < m_size) {
       return 1;
     }
     return 0;
