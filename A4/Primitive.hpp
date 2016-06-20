@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 #include "polyroots.hpp"
+#include <iostream>
 
 class Primitive {
 public:
@@ -36,13 +37,14 @@ public:
       roots);
     point = eye + (float)roots[0] * ray;
     normal = point - m_pos;
+    std::cout << i << endl;
     return i;
   }
 
-    glm::vec3 m_pos;
-    double m_radius;
-
 private:
+
+  glm::vec3 m_pos;
+  double m_radius;
 };
 
 class NonhierBox : public Primitive {
