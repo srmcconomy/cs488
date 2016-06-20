@@ -57,7 +57,7 @@ public:
   size_t intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
     vec3 n = vec3((float)m_size, 0, 0);
     vec3 p = m_pos + n;
-    double d = dot(p - origin, n) / dot(ray, n);
+    double d = dot(p - eye, n) / dot(ray, n);
     point = eye + ray * d;
     if ((point - p).x > -m_pos && (point - p).x < m_pos) {
       return 1;
