@@ -72,7 +72,7 @@ public:
       std::cout << "d " << d << std::endl;
       point = eye + ray * d;
       if ((point - p).x > -m_size && (point - p).x < m_size
-        && (point - p).y > -m_size && (point - p).y < m_size)
+        && (point - p).y > -m_size && (point - p).y < m_size) {
       } else {
         isect = false;
       }
