@@ -59,8 +59,8 @@ public:
     float d = dot(p - eye, n) / dot(ray, n);
     std::cout << "d " << d << std::endl;
     point = eye + ray * d;
-    std::cout << "point " << point.x << std::endl;
-    std::cout << "diff " << (point - p).x << std::endl;
+    std::cout << "point " << glm::to_string(point) << std::endl;
+    std::cout << "diff " << glm::to_string(point - p) << std::endl;
     if ((point - p).x > -m_size && (point - p).x < m_size) {
       return 1;
     }
