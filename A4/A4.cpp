@@ -64,13 +64,10 @@ void A4_Render(
       ray = rotate(ray, radians((float)angley), cross(up, mainRay));
       for (SceneNode* node : root->children) {
         if (node->m_nodeType == NodeType::GeometryNode) {
-          NonhierSphere* sphere = (NonhierSphere*)((GeometryNode*)node)->m_primitive;
-          double roots[2];
-          size_t intersect = quadraticRoots(dot(ray, ray),
-            2 * dot(ray, eye - sphere->m_pos),
-            dot(eye - sphere->m_pos, eye - sphere->m_pos) - sphere->m_radius * sphere->m_radius,
-            roots);
-          if (intersect > 0) {
+          vec3 point;
+          vec3 normal;
+          size_t i = ((GeometryNode*)node)->m_primitive->intersect(eye, ray, point, normal);
+          if (i > 0) {
             image(x, y, 0) = 1.0;
           }
         }
