@@ -4,7 +4,6 @@
 #include "Primitive.hpp"
 #include "polyroots.hpp"
 #include "GeometryNode.hpp"
-#include <glm/gtc/matrix_transform.hpp>
 
 using namespace glm;
 using namespace std;

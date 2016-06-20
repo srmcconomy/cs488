@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <glm/ext.hpp>
 #include "polyroots.hpp"
 #include <iostream>
 using namespace glm;
