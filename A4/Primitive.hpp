@@ -66,7 +66,7 @@ public:
     };
     bool isect = true;
     for (uint i = 0; i < 6; i++) {
-      vec3 n n[i];
+      vec3 n = n[i];
       vec3 p = m_pos + n;
       float d = dot(p - eye, n) / dot(ray, n);
       std::cout << "d " << d << std::endl;
