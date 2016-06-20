@@ -69,7 +69,6 @@ public:
       vec3 n = ns[i];
       vec3 p = m_pos + n;
       float d = dot(p - eye, n) / dot(ray, n);
-      std::cout << "d " << d << std::endl;
       point = eye + ray * d;
       if ((point - p).x > -m_size && (point - p).x < m_size
         && (point - p).y > -m_size && (point - p).y < m_size) {
