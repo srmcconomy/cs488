@@ -32,7 +32,7 @@ public:
       2 * dot(ray, eye - m_pos),
       dot(eye - m_pos, eye - m_pos) - m_radius * m_radius,
       roots);
-    point = eye + roots[0] * ray;
+    point = eye + (float)roots[0] * ray;
     normal = point - m_pos;
     return i;
   }
