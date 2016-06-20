@@ -59,7 +59,7 @@ void A4_Render(
       image(x, y, 2) = 0;
       double angley = (y - h / 2) / h * fovy;
       double anglex = (x - w / 2) / w * fovx;
-      mat4 rotation = rotate(mat4(1.0), anglex, up4);
+      //mat4 rotation = rotate(mat4(1.0), anglex, up4);
       //rotation = rotate(rotation, angley, cross(up4, mainRay4));
       vec4 ray4 = mainRay4;
       vec3 ray(ray4.x, ray4.y, ray4.z);
