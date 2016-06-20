@@ -1,11 +1,12 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include "polyroots.hpp"
 
 class Primitive {
 public:
   virtual ~Primitive();
-  virtual size_t intersect(const vec3& eye, vec3& ray, vec3& point, vec3& normal);
+  virtual size_t intersect(const glm::vec3& eye, glm::vec3& ray, glm::vec3& point, glm::vec3& normal);
 };
 
 class Sphere : public Primitive {
@@ -25,7 +26,7 @@ public:
   {
   }
   virtual ~NonhierSphere();
-  size_t intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal) {
+  size_t intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
     double roots[2];
     size_t i = quadraticRoots(dot(ray, ray),
       2 * dot(ray, eye - m_pos),
