@@ -5,6 +5,7 @@
 class Primitive {
 public:
   virtual ~Primitive();
+  virtual size_t intersect(const vec3& eye, vec3& ray, vec3& point, vec3& normal);
 };
 
 class Sphere : public Primitive {
@@ -24,6 +25,16 @@ public:
   {
   }
   virtual ~NonhierSphere();
+  size_t intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal) {
+    double roots[2];
+    size_t i = quadraticRoots(dot(ray, ray),
+      2 * dot(ray, eye - m_pos),
+      dot(eye - m_pos, eye - m_pos) - m_radius * m_radius,
+      roots);
+    point = eye + roots[0] * ray;
+    normal = point - m_pos;
+    return i;
+  }
 
     glm::vec3 m_pos;
     double m_radius;
