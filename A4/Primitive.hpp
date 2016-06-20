@@ -56,7 +56,7 @@ public:
   {
   }
   size_t intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
-    vec3 n[6] {
+    vec3 n[6] = {
       vec3(0, 0, (float)m_size),
       vec3(0, 0, -(float)m_size),
       vec3(0, (float)m_size, 0),
