@@ -58,8 +58,8 @@ public:
     vec3 p = m_pos + n;
     float d = dot(p - eye, n) / dot(ray, n);
     point = eye + ray * d;
-    std::cout << "point " << point << std::endl;
-    std::cout << "diff " << point - p << std::endl;
+    std::cout << "point "  << std::endl;
+    std::cout << "diff "  << std::endl;
     if ((point - p).x > -m_size && (point - p).x < m_size) {
       return 1;
     }
