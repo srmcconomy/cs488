@@ -1,6 +1,7 @@
 #include <glm/ext.hpp>
 
 #include "A4.hpp"
+#include "Primitive.hpp"
 
 void A4_Render(
 		// What to render
