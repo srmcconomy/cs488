@@ -69,9 +69,9 @@ public:
       vec3 p = m_pos + n;
       float d = dot(p - eye, n) / dot(ray, n);
       point = eye + ray * d;
-      if ((point - p).x > -m_size / 2.0f && (point - p).x < m_size / 2.0f
-        && (point - p).y > -m_size / 2.0f && (point - p).y < m_size / 2.0f
-        && (point - p).z > -m_size / 2.0f && (point - p).z < m_size / 2.0f) {
+      if ((point - p).x > 0 && (point - p).x < m_size
+        && (point - p).y > 0 && (point - p).y < m_size
+        && (point - p).z > 0 && (point - p).z < m_size) {
         return i + 1;
       }
     }
