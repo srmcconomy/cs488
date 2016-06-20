@@ -58,8 +58,8 @@ void A4_Render(
       image(x, y, 0) = 0;
       image(x, y, 1) = 0;
       image(x, y, 2) = 0;
-      double angley = (y - h / 2) / h * fovy;
-      double anglex = (x - w / 2) / w * fovx;
+      double angley = ((double)y - (double)h / 2.0) / (double)h * fovy;
+      double anglex = ((double)x - (double)w / 2.0) / (double)w * fovx;
       cout << "X: " << anglex << endl;
       cout << "Y: " << angley << endl;
       vec3 ray = rotate(mainRay, (float)anglex, up);
