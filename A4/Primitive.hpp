@@ -38,7 +38,6 @@ public:
       roots);
     point = eye + (float)roots[0] * ray;
     normal = point - m_pos;
-    std::cout << i << std::endl;
     return i;
   }
 
@@ -59,6 +58,8 @@ public:
     vec3 p = m_pos + n;
     float d = dot(p - eye, n) / dot(ray, n);
     point = eye + ray * d;
+    std::cout << "point " << point << std::endl;
+    std::cout << "diff " << point - p << std::endl;
     if ((point - p).x > -m_size && (point - p).x < m_size) {
       return 1;
     }
