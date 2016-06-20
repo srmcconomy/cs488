@@ -4,7 +4,7 @@
 #include "Primitive.hpp"
 #include "polyroots.hpp"
 #include "GeometryNode.hpp"
-#include <glm/gtx/rotate_vector.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 using namespace glm;
 
@@ -57,8 +57,9 @@ void A4_Render(
       image(x, y, 2) = 0;
       double angley = (y - h / 2) / h * fovy;
       double anglex = (x - w / 2) / w * fovx;
-      vec3 ray = rotate(mainRay, anglex, up);
-      ray = rotate(ray, angley, cross(up, mainRay));
+      mat4 rotation = rotate(mat4(1.0), anglex, up);
+      rotation = rotate(rotation, angley, cross(up, mainRay));
+      vec3 ray = rotation * mainRay;
       for (SceneNode* node : root->children) {
         if (node->m_nodeType == NodeType::GeometryNode) {
           NonhierSphere* sphere = (NonhierSphere*)((GeometryNode*)node)->m_primitive;
