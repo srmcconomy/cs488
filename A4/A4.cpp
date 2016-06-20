@@ -62,8 +62,8 @@ void A4_Render(
       double anglex = ((double)x - (double)w / 2.0) / (double)w * fovx;
       cout << "X: " << anglex << endl;
       cout << "Y: " << angley << endl;
-      vec3 ray = rotate(mainRay, (float)anglex, up);
-      ray = rotate(ray, (float)angley, cross(up, mainRay));
+      vec3 ray = rotate(mainRay, radians((float)anglex), up);
+      ray = rotate(ray, radians((float)angley), cross(up, mainRay));
       for (SceneNode* node : root->children) {
         if (node->m_nodeType == NodeType::GeometryNode) {
           NonhierSphere* sphere = (NonhierSphere*)((GeometryNode*)node)->m_primitive;
