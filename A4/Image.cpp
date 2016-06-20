@@ -1,6 +1,7 @@
 #include "Image.hpp"
 
 #include <iostream>
+#include <cstring>
 
 #include <lodepng/lodepng.h>
 
