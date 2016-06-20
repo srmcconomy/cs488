@@ -57,6 +57,7 @@ public:
     vec3 n = vec3((float)m_size, 0, 0);
     vec3 p = m_pos + n;
     float d = dot(p - eye, n) / dot(ray, n);
+    std::cout << "d " << d << std::endl;
     point = eye + ray * d;
     std::cout << "point " << point.x << std::endl;
     std::cout << "diff " << (point - p).x << std::endl;
