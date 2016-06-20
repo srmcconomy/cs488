@@ -3,6 +3,8 @@
 #include "A4.hpp"
 #include "Primitive.hpp"
 
+using namespace glm;
+
 void A4_Render(
 		// What to render
 		SceneNode * root,
