@@ -56,16 +56,28 @@ public:
   {
   }
   size_t intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
-    vec3 n = vec3(0, 0, (float)m_size);
-    vec3 p = m_pos + n;
-    float d = dot(p - eye, n) / dot(ray, n);
-    std::cout << "d " << d << std::endl;
-    point = eye + ray * d;
-    if ((point - p).x > -m_size && (point - p).x < m_size
-      && (point - p).y > -m_size && (point - p).y < m_size) {
-      return 1;
+    vec3 n[6] {
+      vec3(0, 0, (float)m_size),
+      vec3(0, 0, -(float)m_size),
+      vec3(0, (float)m_size, 0),
+      vec3(0, -(float)m_size, 0),
+      vec3((float)m_size, 0, 0),
+      vec3(-(float)m_size, 0, 0)
     }
-    return 0;
+    bool isect = true;
+    for (uint i = 0; i < 6; i++) {
+      vec3 n n[i];
+      vec3 p = m_pos + n;
+      float d = dot(p - eye, n) / dot(ray, n);
+      std::cout << "d " << d << std::endl;
+      point = eye + ray * d;
+      if ((point - p).x > -m_size && (point - p).x < m_size
+        && (point - p).y > -m_size && (point - p).y < m_size)
+      } else {
+        isect = false;
+      }
+    }
+    return isect ? 1 : 0;
   }
 
   virtual ~NonhierBox();
