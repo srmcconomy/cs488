@@ -59,7 +59,8 @@ void A4_Render(
       double anglex = (x - w / 2) / w * fovx;
       mat4 rotation = rotate(mat4(1.0), anglex, up);
       rotation = rotate(rotation, angley, cross(up, mainRay));
-      vec3 ray = rotation * mainRay;
+      vec4 ray4 = rotation * mainRay;
+      vec3 ray(ray4.x, ray4.y, ray4.z);
       for (SceneNode* node : root->children) {
         if (node->m_nodeType == NodeType::GeometryNode) {
           NonhierSphere* sphere = (NonhierSphere*)((GeometryNode*)node)->m_primitive;
