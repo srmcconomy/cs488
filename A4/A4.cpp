@@ -52,5 +52,6 @@ void A4_Render(
 						  || (y >= h/2 && x >= w/2)) ? 1.0 : 0.0;
 		}
 	}
+  image.savePng("image.png");
 
 }
