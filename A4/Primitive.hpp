@@ -56,12 +56,12 @@ public:
   }
   size_t intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
     vec3 ns[6] = {
-      vec3(0, 0, (float)m_size),
-      vec3(0, 0, -(float)m_size),
-      vec3(0, (float)m_size, 0),
-      vec3(0, -(float)m_size, 0),
-      vec3((float)m_size, 0, 0),
-      vec3(-(float)m_size, 0, 0)
+      vec3(0, 0, (float)m_size / 2.0f),
+      vec3(0, 0, -(float)m_size / 2.0f),
+      vec3(0, (float)m_size / 2.0f, 0),
+      vec3(0, -(float)m_size / 2.0f, 0),
+      vec3((float)m_size / 2.0f, 0, 0),
+      vec3(-(float)m_size / 2.0f, 0, 0)
     };
     bool isect = false;
     for (uint i = 0; i < 6; i++) {
@@ -69,9 +69,9 @@ public:
       vec3 p = m_pos + n;
       float d = dot(p - eye, n) / dot(ray, n);
       point = eye + ray * d;
-      if ((point - p).x > -m_size && (point - p).x < m_size
-        && (point - p).y > -m_size && (point - p).y < m_size
-        && (point - p).z > -m_size && (point - p).z < m_size) {
+      if ((point - p).x > -m_size / 2.0f && (point - p).x < m_size / 2.0f
+        && (point - p).y > -m_size / 2.0f && (point - p).y < m_size / 2.0f
+        && (point - p).z > -m_size / 2.0f && (point - p).z < m_size / 2.0f) {
         isect = true;
       }
     }
