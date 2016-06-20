@@ -72,7 +72,7 @@ public:
       if ((point - p).x > -m_size / 2.0f && (point - p).x < m_size / 2.0f
         && (point - p).y > -m_size / 2.0f && (point - p).y < m_size / 2.0f
         && (point - p).z > -m_size / 2.0f && (point - p).z < m_size / 2.0f) {
-        isect = true;
+        return i + 1;
       }
     }
     return isect ? 1 : 0;

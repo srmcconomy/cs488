@@ -67,7 +67,7 @@ void A4_Render(
           vec3 normal;
           size_t i = ((GeometryNode*)node)->m_primitive->intersect(eye, ray, point, normal);
           if (i > 0) {
-            image(x, y, 0) = 1.0;
+            image(x, y, 0) = 6.0f / (float)i;
           }
         }
       }
