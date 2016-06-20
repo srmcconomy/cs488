@@ -1,4 +1,4 @@
-#include "image.hpp"
+#include "Image.hpp"
 
 #include <iostream>
 
@@ -49,7 +49,7 @@ Image::~Image()
 Image & Image::operator=(const Image& other)
 {
   delete [] m_data;
-  
+
   m_width = other.m_width;
   m_height = other.m_height;
   m_data = (other.m_data ? new double[m_width * m_height * m_colorComponents] : 0);
@@ -60,7 +60,7 @@ Image & Image::operator=(const Image& other)
                 m_width * m_height * m_colorComponents * sizeof(double)
     );
   }
-  
+
   return *this;
 }
 
