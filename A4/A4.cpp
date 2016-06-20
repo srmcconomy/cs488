@@ -49,6 +49,7 @@ void A4_Render(
 
   double fovx = fovy / h * w;
   vec3 mainRay = view - eye;
+  vec4 mainRay4(mainRay.x, mainRay.y, mainRay.z, 0);
 
 	for (uint y = 0; y < h; ++y) {
 		for (uint x = 0; x < w; ++x) {
@@ -59,7 +60,7 @@ void A4_Render(
       double anglex = (x - w / 2) / w * fovx;
       mat4 rotation = rotate(mat4(1.0), anglex, up);
       rotation = rotate(rotation, angley, cross(up, mainRay));
-      vec4 ray4 = rotation * mainRay;
+      vec4 ray4 = rotation * mainRay4;
       vec3 ray(ray4.x, ray4.y, ray4.z);
       for (SceneNode* node : root->children) {
         if (node->m_nodeType == NodeType::GeometryNode) {
