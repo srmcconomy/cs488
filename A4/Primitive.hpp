@@ -63,7 +63,7 @@ public:
       vec3(0, -(float)m_size, 0),
       vec3((float)m_size, 0, 0),
       vec3(-(float)m_size, 0, 0)
-    }
+    };
     bool isect = true;
     for (uint i = 0; i < 6; i++) {
       vec3 n n[i];
