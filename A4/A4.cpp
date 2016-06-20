@@ -2,7 +2,7 @@
 
 #include "A4.hpp"
 #include "Primitive.hpp"
-#include "polyroots.h"
+#include "polyroots.hpp"
 #include <glm/gtx/rotate_vector.hpp>
 
 using namespace glm;
