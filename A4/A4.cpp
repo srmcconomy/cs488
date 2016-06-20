@@ -3,6 +3,7 @@
 #include "A4.hpp"
 #include "Primitive.hpp"
 #include "polyroots.hpp"
+#include "GeometryNode.hpp"
 #include <glm/gtx/rotate_vector.hpp>
 
 using namespace glm;
