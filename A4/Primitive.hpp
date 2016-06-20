@@ -64,7 +64,7 @@ public:
       vec3((float)m_size, 0, 0),
       vec3(-(float)m_size, 0, 0)
     };
-    bool isect = true;
+    bool isect = false;
     for (uint i = 0; i < 6; i++) {
       vec3 n = ns[i];
       vec3 p = m_pos + n;
@@ -73,8 +73,7 @@ public:
       point = eye + ray * d;
       if ((point - p).x > -m_size && (point - p).x < m_size
         && (point - p).y > -m_size && (point - p).y < m_size) {
-      } else {
-        isect = false;
+        isect = true;
       }
     }
     return isect ? 1 : 0;
