@@ -56,7 +56,7 @@ public:
   {
   }
   size_t intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
-    vec3 n[6] = {
+    vec3 ns[6] = {
       vec3(0, 0, (float)m_size),
       vec3(0, 0, -(float)m_size),
       vec3(0, (float)m_size, 0),
@@ -66,7 +66,7 @@ public:
     };
     bool isect = true;
     for (uint i = 0; i < 6; i++) {
-      vec3 n = n[i];
+      vec3 n = ns[i];
       vec3 p = m_pos + n;
       float d = dot(p - eye, n) / dot(ray, n);
       std::cout << "d " << d << std::endl;
