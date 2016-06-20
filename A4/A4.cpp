@@ -63,7 +63,7 @@ void A4_Render(
           NonhierSphere sphere = (NonhierSphere)node->m_primitive;
           double roots[2];
           size_t intersect = quadraticRoots(dot(ray, ray),
-            2 * dot(ray, eye - sphere.m_pos)),
+            2 * dot(ray, eye - sphere.m_pos),
             dot(eye - sphere.m_pos, eye - sphere.m_pos) - sphere.m_radius * sphere.m_radius,
             roots);
           if (intersect > 0) {
