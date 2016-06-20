@@ -59,9 +59,7 @@ void A4_Render(
       image(x, y, 1) = 0;
       image(x, y, 2) = 0;
       double angley = ((double)y - (double)h / 2.0) / (double)h * fovy;
-      double anglex = ((double)x - (double)w / 2.0) / (double)w * fovx;
-      cout << "X: " << anglex << endl;
-      cout << "Y: " << angley << endl;
+      double anglex = -((double)x - (double)w / 2.0) / (double)w * fovx;
       vec3 ray = rotate(mainRay, radians((float)anglex), up);
       ray = rotate(ray, radians((float)angley), cross(up, mainRay));
       for (SceneNode* node : root->children) {
