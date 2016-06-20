@@ -37,7 +37,7 @@ public:
       roots);
     point = eye + (float)roots[0] * ray;
     normal = point - m_pos;
-    std::cout << i << endl;
+    std::cout << i << std::endl;
     return i;
   }
 
