@@ -75,7 +75,7 @@ public:
     : m_pos(pos), m_size(size)
   {
   }
-  float intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d) {
+  bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d) {
     vec3 ns[6] = {
       vec3(0, 0, (float)m_size / 2.0f),
       vec3(0, 0, -(float)m_size / 2.0f),
