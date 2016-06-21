@@ -41,7 +41,7 @@ plane:set_material(grass)
 -- sphere
 poly = gr.mesh( 'poly', 'Assets/smstdodeca.obj' )
 scene:add_child(poly)
-poly:scale(1, 2, 1)
+poly:scale(0.5, 1, 0.5)
 poly:set_material(blue)
 
 -- The lights
