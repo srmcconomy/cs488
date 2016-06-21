@@ -98,7 +98,7 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal
 			}
 			d = d2;
 			point = pt;
-			normal = n;
+			normal = -n;
 			isect = true;
 		}
 	}
