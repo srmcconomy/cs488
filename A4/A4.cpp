@@ -9,6 +9,8 @@
 using namespace glm;
 using namespace std;
 
+#define EPSILON 0.0001f
+
 void A4_Render(
 		// What to render
 		SceneNode * root,
@@ -84,19 +86,24 @@ void A4_Render(
 							vec3 normal2;
 							float dNode;
 							geonode->m_primitive->intersect(light->position, l, point2, normal2, dNode);
-							for (SceneNode* node2 : root->children) {
-								if (node2->m_nodeType != NodeType::GeometryNode) {
-									continue;
-								}
-								GeometryNode* geonode2 = (GeometryNode*)node2;
+              vec3 distance = point2 - point
+              if (abs(dot(distance, distance)) > EPSILON) {
+                lightHits = false;
+              } else {
+                for (SceneNode* node2 : root->children) {
+  								if (node2->m_nodeType != NodeType::GeometryNode || node2->m_nodeId == node->m_nodeId) {
+  									continue;
+  								}
+  								GeometryNode* geonode2 = (GeometryNode*)node2;
 
-			          float d2;
-								bool isect2 = geonode2->m_primitive->intersect(light->position, l, point2, normal2, d2);
-								if (isect2 && d2 * dNode > 0 && abs(d2) < abs(dNode)) {
-									lightHits = false;
-									break;
-								}
-							}
+  			          float d2;
+  								bool isect2 = geonode2->m_primitive->intersect(light->position, l, point2, normal2, d2);
+  								if (isect2 && d2 * dNode > 0 && abs(d2) < abs(dNode)) {
+  									lightHits = false;
+  									break;
+  								}
+  							}
+              }
 							if (lightHits) {
 								vec3 r = reflect(-l, normal);
 								for (int c = 0; c < 3; c++) {
