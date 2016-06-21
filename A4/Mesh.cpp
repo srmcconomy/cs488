@@ -49,20 +49,21 @@ std::ostream& operator<<(std::ostream& out, const Mesh& mesh)
 
 bool Mesh::intersect(const vec3& eye, const vec3& ray, const mat4& transform, vec3& point, vec3& normal, float& d) {
   // mat4 inv = inverse(transform);
-  vec4 eye4(eye.x, eye.y, eye.z, 1.0f);
-  vec4 ray4(ray.x, ray.y, ray.z, 0);
+  // vec4 eye4(eye.x, eye.y, eye.z, 1.0f);
+  // vec4 ray4(ray.x, ray.y, ray.z, 0);
   // eye4 = inv * eye4;
   // ray4 = inv * ray4;
-  vec3 eye3 = vec3(eye4.y, eye4.x, eye4.z);
-  vec3 ray3 = normalize(vec3(ray4.x, ray4.y, ray4.z));
-  bool ret = intersect(eye3, ray3, point, normal, d);
+  // vec3 eye3 = vec3(eye4.y, eye4.x, eye4.z);
+  // vec3 ray3 = normalize(vec3(ray4.x, ray4.y, ray4.z));
+  // bool ret = intersect(eye3, ray3, point, normal, d);
   // vec4 point4 = transform * vec4(point.x, point.y, point.z, 1.0f);
   // mat3 sub = mat3(vec3(transform[0]), vec3(transform[1]), vec3(transform[2]));
   // sub = transpose(inverse(sub));
   // normal = normalize(sub * normal);
   // point = vec3(point4.x, point4.y, point4.z);
   // d = length(point - eye);
-  return ret;
+  // return ret;
+  return intersect(eye, ray, point, normal, d);
 
 }
 
