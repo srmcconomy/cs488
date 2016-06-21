@@ -7,7 +7,7 @@ blue = gr.material({0.7, 0.6, 1}, {0.5, 0.4, 0.8}, 25)
 
 scene = gr.node('scene')
 scene:rotate('X', 23)
-scene:translate(0, 0, -15)
+scene:translate(0, 0, -5)
 --
 -- -- the arc
 -- arc = gr.node('arc')
@@ -33,10 +33,10 @@ scene:translate(0, 0, -15)
 -- s:translate(0, 4, 0)
 
 -- the floor
-plane = gr.mesh( 'plane', 'Assets/plane.obj' )
-scene:add_child(plane)
-plane:set_material(grass)
-plane:scale(30, 30, 30)
+-- plane = gr.mesh( 'plane', 'Assets/plane.obj' )
+-- scene:add_child(plane)
+-- plane:set_material(grass)
+-- plane:scale(30, 30, 30)
 
 -- sphere
 poly = gr.mesh( 'poly', 'Assets/mickey.obj' )
