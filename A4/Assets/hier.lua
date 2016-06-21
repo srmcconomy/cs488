@@ -39,7 +39,7 @@ plane:set_material(grass)
 -- plane:scale(30, 30, 30)
 
 -- sphere
-poly = gr.mesh( 'poly', 'Assets/smstdodeca.obj' )
+poly = gr.mesh( 'poly', 'Assets/dodeca.obj' )
 scene:add_child(poly)
 poly:scale(0.5, 1, 0.5)
 poly:set_material(blue)
