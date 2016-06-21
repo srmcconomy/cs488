@@ -105,7 +105,9 @@ void A4_Render(
   								GeometryNode* geonode2 = (GeometryNode*)node2;
 
   			          float d2;
-  								bool isect2 = geonode2->m_primitive->intersect(light->position, l, trans, point2, normal2, d2);
+
+									mat4 trans2 = transStack.top() * node2->trans;
+  								bool isect2 = geonode2->m_primitive->intersect(light->position, l, trans2, point2, normal2, d2);
   								if (isect2 && d2 * dNode > 0 && abs(d2) < abs(dNode)) {
   									lightHits = false;
   									break;
