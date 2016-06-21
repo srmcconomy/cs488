@@ -69,7 +69,7 @@ void A4_Render(
           vec3 normal;
           size_t i = geonode->m_primitive->intersect(eye, ray, point, normal);
 					vec3 colour;
-					PhongMaterial* phong = (PhongMaterial*)geonode->m_material
+					PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
 					for (Light* light : lights) {
 						vec3 l = light->position - point;
 						for (int c = 0; c < 3; c++) {
