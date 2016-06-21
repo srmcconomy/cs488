@@ -68,6 +68,7 @@ void A4_Render(
       bool anyobj = false;
 			stack<mat4> transStack;
 			transStack.push(root->trans);
+			std::cout << root->trans << std::endl;
       for (SceneNode* node : root->children) {
         if (node->m_nodeType == NodeType::GeometryNode) {
 					GeometryNode* geonode = (GeometryNode*)node;
