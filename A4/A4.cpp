@@ -65,8 +65,9 @@ void A4_Render(
 					GeometryNode* geonode = (GeometryNode*)node;
           vec3 point;
           vec3 normal;
-          float d = geonode->m_primitive->intersect(eye, ray, point, normal);
-					if (d > 0) {
+          float d;
+					bool isect = geonode->m_primitive->intersect(eye, ray, point, normal);
+					if (isect) {
 						// image(x, y, 0) = 1;
 						vec3 colour;
 						PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
@@ -75,16 +76,18 @@ void A4_Render(
 							vec3 l = normalize(light->position - point);
 							vec3 point2;
 							vec3 normal2;
-							float dNode = geonode->m_primitive->intersect(light->position, l, point2, normal2);
+							float dNode;
+							geonode->m_primitive->intersect(light->position, l, point2, normal2, dNode);
 							for (SceneNode* node2 : root->children) {
 								if (node2->m_nodeType != NodeType::GeometryNode || node2->m_nodeId == node->m_nodeId) {
 									continue;
 								}
 								GeometryNode* geonode2 = (GeometryNode*)node2;
 
-			          float d2 = geonode2->m_primitive->intersect(light->position, l, point2, normal2);
-								if (d2 < -1.0f) cout << dNode << " v " << d2 << endl;
-								if (d2 * dNode > 0 && abs(d2) < abs(dNode)) {
+			          float d2
+								bool isect2 = geonode2->m_primitive->intersect(light->position, l, point2, normal2, d2);
+								if (isect2) cout << dNode << " v " << d2 << endl;
+								if (isect2 && d2 * dNode > 0 && abs(d2) < abs(dNode)) {
 									lightHits = false;
 									break;
 								}
