@@ -4,6 +4,7 @@
 #include "Primitive.hpp"
 #include "polyroots.hpp"
 #include "GeometryNode.hpp"
+#include "PhongMaterial.hpp"
 
 using namespace glm;
 using namespace std;
@@ -63,12 +64,22 @@ void A4_Render(
       ray = rotate(ray, radians((float)angley), cross(up, mainRay));
       for (SceneNode* node : root->children) {
         if (node->m_nodeType == NodeType::GeometryNode) {
+					GeometryNode* geonode = (GeometryNode*)node;
           vec3 point;
           vec3 normal;
-          size_t i = ((GeometryNode*)node)->m_primitive->intersect(eye, ray, point, normal);
-          if (i > 0) {
-            image(x, y, 0) = (float)i / 6.0f;
-          }
+          size_t i = geonode->m_primitive->intersect(eye, ray, point, normal);
+					vec3 colour;
+					PhongMaterial* phong = (PhongMaterial*)geonode->m_material
+					for (Light* light : lights) {
+						vec3 l = light->position - point;
+						for (int c = 0; c < 3; c++) {
+							colour[c] += phong->kd * dot(l, normal) * light->colour[c];
+						}
+					}
+
+					for (int c = 0; c < 3; c++) {
+						image(x, y, c) = colour[c];
+					}
         }
       }
 		}
