@@ -39,7 +39,7 @@ scene:translate(0, 0, -10)
 -- plane:scale(30, 30, 30)
 
 -- sphere
-poly = gr.mesh( 'poly', 'Assets/dodeca.obj' )
+poly = gr.mesh( 'poly', 'Assets/buckyball.obj' )
 scene:add_child(poly)
 -- poly:scale(1, 1, 1)
 poly:set_material(blue)
