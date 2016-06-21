@@ -12,7 +12,7 @@ public:
   virtual bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d) {
     return 0;
   }
-  virtual bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::mat4& transform, glm::vec3& point, glm::vec3& normal, float& d) {
+  virtual bool intersect(const glm::vec3& eye, const glm::vec3& ray, const glm::mat4& transform, glm::vec3& point, glm::vec3& normal, float& d) {
     return 0;
   }
 };
