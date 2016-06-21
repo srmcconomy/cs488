@@ -55,6 +55,8 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, const mat4& transform, ve
   // ray4 = inv * ray4;
   vec3 eye3 = vec3(eye4.y, eye4.x, eye4.z);
   vec3 ray3 = normalize(vec3(ray4.x, ray4.y, ray4.z));
+  std::cout << to_string(eye) << to_string(eye3) << std::endl;
+  std::cout << to_string(ray) << to_string(ray3) << std::endl;
   bool ret = intersect(eye3, ray3, point, normal, d);
   // vec4 point4 = transform * vec4(point.x, point.y, point.z, 1.0f);
   // mat3 sub = mat3(vec3(transform[0]), vec3(transform[1]), vec3(transform[2]));
