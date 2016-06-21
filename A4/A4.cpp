@@ -105,15 +105,16 @@ void A4_Render(
   							}
               }
 							if (lightHits) {
+                float attenuation = 1.0f / (falloff[0] + dNode * falloff[1] + dNode * dNode * falloff[2]);
 								vec3 r = reflect(l, normal);
 								for (int c = 0; c < 3; c++) {
 									float dotp = dot(-l, normal);
 									if (dotp < 0) dotp = 0;
-									colour[c] += phong->m_kd[c] * dotp * light->colour[c];
+									colour[c] += phong->m_kd[c] * dotp * light->colour[c] / attenuation;
 
 									dotp = dot(r, -ray);
 									if (dotp < 0) dotp = 0;
-									colour[c] += phong->m_ks[c] * pow(dotp, phong->m_shininess) * light->colour[c];
+									colour[c] += phong->m_ks[c] * pow(dotp, phong->m_shininess) * light->colour[c] / attenuation;
 								}
 							}
 
