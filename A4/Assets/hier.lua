@@ -41,7 +41,7 @@ scene:translate(0, 0, -10)
 -- sphere
 poly = gr.mesh( 'poly', 'Assets/cube.obj' )
 scene:add_child(poly)
-poly:scale(1, 1, 1)
+-- poly:scale(1, 1, 1)
 poly:set_material(blue)
 
 -- The lights
