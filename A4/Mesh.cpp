@@ -89,8 +89,8 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal
 				continue;
 			}
 			float t = (uv * wu - uu * wv) / D;
-      std::cout << t << std::endl;
-      if (t < 0.0f || s + t  - 10.0f> 1.0f) {
+      // std::cout << t << std::endl;
+      if (t < 0.0f || s + t  - 1.0f> 1.0f) {
 				continue;
 			}
 			d = d2;
