@@ -7,7 +7,7 @@ blue = gr.material({0.7, 0.6, 1}, {0.5, 0.4, 0.8}, 25)
 
 scene = gr.node('scene')
 scene:rotate('X', 23)
-scene:translate(0, 0, -5)
+scene:translate(0, 0, -2)
 --
 -- -- the arc
 -- arc = gr.node('arc')
@@ -41,7 +41,7 @@ scene:translate(0, 0, -5)
 -- sphere
 poly = gr.mesh( 'poly', 'Assets/mickey.obj' )
 scene:add_child(poly)
-poly:scale(5, 5, 5)
+poly:scale(1, 1, 1)
 poly:set_material(blue)
 
 -- The lights
