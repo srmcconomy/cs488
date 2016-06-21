@@ -50,6 +50,7 @@ void A4_Render(
 
   double fovx = fovy / h * w;
   vec3 mainRay = normalize(view - eye);
+	std::cout << to_string << std::endl;
 
 	for (uint y = 0; y < h; ++y) {
 		for (uint x = 0; x < w; ++x) {
