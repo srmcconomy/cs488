@@ -85,7 +85,7 @@ void A4_Render(
 							float dNode;
 							geonode->m_primitive->intersect(light->position, l, point2, normal2, dNode);
 							for (SceneNode* node2 : root->children) {
-								if (node2->m_nodeType != NodeType::GeometryNode || node2->m_nodeId == node->m_nodeId) {
+								if (node2->m_nodeType != NodeType::GeometryNode) {
 									continue;
 								}
 								GeometryNode* geonode2 = (GeometryNode*)node2;
