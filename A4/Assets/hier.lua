@@ -33,15 +33,15 @@ scene:translate(0, 0, -15)
 -- s:translate(0, 4, 0)
 
 -- the floor
--- plane = gr.mesh( 'plane', 'Assets/plane.obj' )
--- scene:add_child(plane)
--- plane:set_material(grass)
--- plane:scale(30, 30, 30)
+plane = gr.mesh( 'plane', 'Assets/plane.obj' )
+scene:add_child(plane)
+plane:set_material(grass)
+plane:scale(30, 30, 30)
 
 -- sphere
-poly = gr.mesh( 'poly', 'Assets/mickey.obj' )
+poly = gr.mesh( 'poly', 'Assets/dodeca.obj' )
 scene:add_child(poly)
--- poly:scale(1, 1, 1)
+poly:scale(1, 0.5, 1)
 poly:set_material(blue)
 
 -- The lights
