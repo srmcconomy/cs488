@@ -77,7 +77,6 @@ void A4_Render(
 								if (dotp < 0) dotp = 0;
 								colour[c] += phong->m_kd[c] * dotp * light->colour[c];
 							}
-							break;
 						}
 
 
