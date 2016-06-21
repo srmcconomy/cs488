@@ -1,0 +1,16 @@
+# Mesh Id
+o cube
+
+# Vertex Positions
+v 0 0 1
+v 0 0 0
+v 1 0 0
+v 1 0 1
+v 0 1 1
+v 0 1 0
+v 1 1 0
+v 1 1 1
+
+# Triangle face indices: vertexormal
+# Indices start at 1
+f 2 3 6
