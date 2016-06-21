@@ -69,21 +69,21 @@ void A4_Render(
           vec3 normal;
           size_t i = geonode->m_primitive->intersect(eye, ray, point, normal);
 					if (i > 0) {
-						image(x, y, 0) = 1;
-						// vec3 colour;
-						// PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
-						// for (Light* light : lights) {
-						// 	vec3 l = light->position - point;
-						// 	for (int c = 0; c < 3; c++) {
-						// 		colour[c] += phong->m_kd[c] * dot(l, normal) * light->colour[c];
-						// 	}
-						// }
-						// cout << to_string(colour) << endl;
-						//
-						//
-						// for (int c = 0; c < 3; c++) {
-						// 	image(x, y, c) = colour[c];
-						// }
+						// image(x, y, 0) = 1;
+						vec3 colour;
+						PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
+						for (Light* light : lights) {
+							vec3 l = light->position - point;
+							for (int c = 0; c < 3; c++) {
+								colour[c] += phong->m_kd[c] * dot(l, normal) * light->colour[c];
+							}
+						}
+						cout << to_string(colour) << endl;
+
+
+						for (int c = 0; c < 3; c++) {
+							image(x, y, c) = colour[c];
+						}
 					}
         }
       }
