@@ -41,7 +41,7 @@ scene:translate(0, 0, -5)
 -- sphere
 poly = gr.mesh( 'poly', 'Assets/mickey.obj' )
 scene:add_child(poly)
-poly:scale(0.5, 1, 0.5)
+poly:scale(5, 5, 5)
 poly:set_material(blue)
 
 -- The lights
