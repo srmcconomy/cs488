@@ -49,9 +49,7 @@ void A4_Render(
 	size_t w = image.width();
 
   double fovx = fovy / h * w;
-  vec3 mainRay = view - eye;
-  vec4 mainRay4(mainRay.x, mainRay.y, mainRay.z, 0);
-  vec4 up4(up.x, up.y, up.z, 0);
+  vec3 mainRay = normalize(view - eye);
 
 	for (uint y = 0; y < h; ++y) {
 		for (uint x = 0; x < w; ++x) {
@@ -73,7 +71,7 @@ void A4_Render(
 						vec3 colour;
 						PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
 						for (Light* light : lights) {
-							vec3 l = light->position - point;
+							vec3 l = normalize(light->position - point);
 							for (int c = 0; c < 3; c++) {
 								colour[c] += phong->m_kd[c] * dot(l, normal) * light->colour[c];
 							}
