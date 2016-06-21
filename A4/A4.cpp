@@ -96,6 +96,7 @@ void A4_Render(
 							float dNode;
 						  geonode->m_primitive->intersect(light->position, l, trans, point2, normal2, dNode);
               vec3 distance = point2 - point;
+              std::cout << to_string(distance) << std::endl;
               if (abs(dot(distance, distance)) > EPSILON) {
                 lightHits = false;
               } else {
@@ -115,7 +116,6 @@ void A4_Render(
   								}
   							}
               }
-              std::cout << lightHits << std::endl;
 							if (lightHits) {
                 float attenuation = 1.0f / (light->falloff[0] + dNode * light->falloff[1] + dNode * dNode * light->falloff[2]);
 								vec3 r = reflect(l, normal);
