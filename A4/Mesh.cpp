@@ -53,7 +53,6 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, const mat4& transform, ve
   vec4 ray4(ray.x, ray.y, ray.z, 0);
   eye4 = inv * eye4;
   ray4 = inv * ray4;
-  std::cout << to_string(inv) << std::endl;
   vec3 eye3 = vec3(eye4.y, eye4.x, eye4.z);
   vec3 ray3 = normalize(vec3(ray4.x, ray4.y, ray4.z));
   bool ret = intersect(eye3, ray3, point, normal, d);
@@ -66,8 +65,6 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, const mat4& transform, ve
 }
 
 bool Mesh::intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal, float& d) {
-  std::cout << "eye " << to_string(eye) << std::endl;
-  std::cout << "ray " << to_string(ray) << std::endl;
   bool isect = false;
 	for (Triangle face : m_faces) {
 		vec3 u = m_vertices[face.v1] - m_vertices[face.v2];
@@ -79,7 +76,6 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal
 
 		if (d2 > 0 && (!isect || d2 < d)) {
 			vec3 pt = eye + ray * d2;
-          std::cout << to_string(pt) << std::endl;
 			vec3 w = pt - m_vertices[face.v2];
 
 			float uv = dot(u, v);
@@ -93,7 +89,8 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal
 				continue;
 			}
 			float t = (uv * wu - uu * wv) / D;
-			if (t < 0.0f || s + t > 1.0f) {
+      std::cout << t << std::endl;
+      if (t < 0.0f || s + t > 1.0f) {
 				continue;
 			}
 			d = d2;
