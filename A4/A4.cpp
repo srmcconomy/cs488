@@ -63,6 +63,8 @@ void A4_Render(
       double anglex = -((double)x - (double)w / 2.0) / (double)w * fovx;
       vec3 ray = rotate(mainRay, radians((float)anglex), up);
       ray = rotate(ray, radians((float)angley), cross(up, mainRay));
+      float mind;
+      bool anyobj = false;
       for (SceneNode* node : root->children) {
         if (node->m_nodeType == NodeType::GeometryNode) {
 					GeometryNode* geonode = (GeometryNode*)node;
@@ -70,7 +72,9 @@ void A4_Render(
           vec3 normal;
           float d;
 					bool isect = geonode->m_primitive->intersect(eye, ray, point, normal, d);
-					if (isect) {
+					if (isect && (!anyobj || d < mind)) {
+            mind = d;
+            anyobj = true;
 						// image(x, y, 0) = 1;
 						vec3 colour;
 						PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
@@ -126,6 +130,9 @@ void A4_Render(
 						}
 					}
         }
+      }
+      if (!anyobj) {
+        image(x, y, 2) = y / h;
       }
 		}
 	}
