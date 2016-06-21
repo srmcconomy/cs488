@@ -50,7 +50,7 @@ std::ostream& operator<<(std::ostream& out, const Mesh& mesh)
 bool Mesh::intersect(const vec3& eye, const vec3& ray, const mat4& transform, vec3& point, vec3& normal, float& d) {
   mat4 inv = inverse(transform);
   vec4 eye4(eye.x, eye.y, eye.z, 1.0f);
-  vec4 ray4(eye.x, eye.y, eye.z, 0);
+  vec4 ray4(ray.x, ray.y, ray.z, 0);
   eye4 = inv * eye4;
   ray4 = inv * ray4;
 	std::cout << to_string(ray) << " => " << to_string(inv) << std::endl;
