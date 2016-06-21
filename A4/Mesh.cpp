@@ -16,6 +16,7 @@ Mesh::Mesh( const std::string& fname )
 
 	std::ifstream ifs( fname.c_str() );
 	while( ifs >> code ) {
+		std::cout << code << std::endl;
 		if( code == "v" ) {
 			ifs >> vx >> vy >> vz;
 			m_vertices.push_back( glm::vec3( vx, vy, vz ) );
@@ -24,7 +25,6 @@ Mesh::Mesh( const std::string& fname )
 			m_faces.push_back( Triangle( s1 - 1, s2 - 1, s3 - 1 ) );
 		}
 	}
-	std::cout << m_faces[0].v1 << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& out, const Mesh& mesh)
