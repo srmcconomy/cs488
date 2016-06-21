@@ -70,7 +70,7 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal
 		vec3 v = m_vertices[face.v3] - m_vertices[face.v2];
 		vec3 n = -normalize(cross(u, v));
 		float nray = dot(ray, n);
-    std::cout << nray << std::endl;
+    std::cout << to_string(ray) << std::endl;
 		if (nray >= 0) continue;
 		float d2 = dot(m_vertices[face.v2] - eye, n) / nray;
     std::cout << d2 << std::endl;
