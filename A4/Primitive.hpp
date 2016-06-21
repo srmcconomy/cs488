@@ -9,7 +9,7 @@ using namespace glm;
 class Primitive {
 public:
   virtual ~Primitive();
-  virtual float intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
+  virtual bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d) {
     return 0;
   }
 };
@@ -31,7 +31,7 @@ public:
   {
   }
   virtual ~NonhierSphere();
-  float intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
+  bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d) {
     double roots[2];
     size_t i = quadraticRoots(dot(ray, ray),
       2 * dot(ray, eye - m_pos),
@@ -39,12 +39,12 @@ public:
       roots);
     switch(i) {
       case 0:
-        return -1.0f;
+        return false;
       case 1:
         point = eye + (float)roots[0] * ray;
         normal = point - m_pos;
-        return (float)roots[0];
-        break;
+        d = (float)roots[0];
+        return true;
       case 2:
         double root;
         if (roots[0] < 0 && roots[1] < 0) {
@@ -58,8 +58,8 @@ public:
         }
         point = eye + (float)root * ray;
         normal = normalize(point - m_pos);
-        return (float)root;
-        break;
+        d = (float)root;
+        return true;
     }
   }
 
@@ -75,7 +75,7 @@ public:
     : m_pos(pos), m_size(size)
   {
   }
-  float intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
+  float intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d) {
     vec3 ns[6] = {
       vec3(0, 0, (float)m_size / 2.0f),
       vec3(0, 0, -(float)m_size / 2.0f),
@@ -85,25 +85,23 @@ public:
       vec3(-(float)m_size / 2.0f, 0, 0)
     };
     bool isect = false;
-    float mind = -1.0f;
     for (uint i = 0; i < 6; i++) {
       vec3 n = ns[i];
       vec3 p = m_pos + vec3(m_size / 2.0f, m_size / 2.0f, m_size / 2.0f) + n;
-      float d = dot(p - eye, n) / dot(ray, n);
-      if (d > 0 && (mind < 0 || d < mind)) {
-        vec3 pt = eye + ray * d;
+      float d2 = dot(p - eye, n) / dot(ray, n);
+      if (!isect || (d2 * d > 0 && abs(d2) < abs(d))) {
+        vec3 pt = eye + ray * d2;
         if ((pt - p).x > -m_size / 2.0f && (pt - p).x < m_size / 2.0f
           && (pt - p).y > -m_size / 2.0f && (pt - p).y < m_size / 2.0f
           && (pt - p).z > -m_size / 2.0f && (pt - p).z < m_size / 2.0f) {
-            mind = d;
+            d = d2;
             point = pt;
-            normal = n;
+            normal = normalize(n);
             isect = true;
         }
       }
     }
-    normal = normalize(normal);
-    return mind;
+    return isect;
   }
 
   virtual ~NonhierBox();
