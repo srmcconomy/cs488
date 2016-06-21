@@ -43,7 +43,15 @@ public:
         normal = point - m_pos;
         break;
       case 2:
-        point = eye + (float)(roots[0] > roots[1] ? roots[1] : roots[0]) * ray;
+        double root;
+        if (roots[0] < 0) {
+          root = roots[1];
+        } else if (roots[1] < 0) {
+          root = roots[0]
+        } else {
+          root = roots[0] > root[1] ? roots[1] : roots[0]
+        }
+        point = eye + (float)root * ray;
         normal = point - m_pos;
         break;
     }
