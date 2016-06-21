@@ -86,7 +86,6 @@ void A4_Render(
 
 			          float d2;
 								bool isect2 = geonode2->m_primitive->intersect(light->position, l, point2, normal2, d2);
-								if (isect2) cout << dNode << " v " << d2 << endl;
 								if (isect2 && d2 * dNode > 0 && abs(d2) < abs(dNode)) {
 									lightHits = false;
 									break;
