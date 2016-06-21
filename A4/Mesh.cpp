@@ -64,14 +64,13 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, const mat4& transform, ve
 }
 
 bool Mesh::intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal, float& d) {
-  std::cout << "H" << std::endl;
   bool isect = false;
 	for (Triangle face : m_faces) {
-    std::cout << "T" << std::endl;
 		vec3 u = m_vertices[face.v1] - m_vertices[face.v2];
 		vec3 v = m_vertices[face.v3] - m_vertices[face.v2];
 		vec3 n = -normalize(cross(u, v));
 		float nray = dot(ray, n);
+    std::cout << nray << std::endl;
 		if (nray >= 0) continue;
 		float d2 = dot(m_vertices[face.v2] - eye, n) / nray;
     std::cout << d2 << std::endl;
