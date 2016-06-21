@@ -10,6 +10,8 @@ Mesh::Mesh( const std::string& fname )
 	: m_vertices()
 	, m_faces()
 {
+
+		std::cout << "HI" << std::endl;
 	std::string code;
 	double vx, vy, vz;
 	size_t s1, s2, s3;
