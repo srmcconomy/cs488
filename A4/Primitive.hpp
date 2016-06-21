@@ -37,8 +37,16 @@ public:
       2 * dot(ray, eye - m_pos),
       dot(eye - m_pos, eye - m_pos) - m_radius * m_radius,
       roots);
-    point = eye + (float)roots[0] * ray;
-    normal = point - m_pos;
+    switch(i) {
+      case 1:
+        point = eye + (float)roots[0] * ray;
+        normal = point - m_pos;
+        break;
+      case 2:
+        point = eye + (float)(roots[0] > roots[1] ? roots[1] : roots[0]) * ray;
+        normal = point - m_pos;
+        break;
+    }
     return i;
   }
 
