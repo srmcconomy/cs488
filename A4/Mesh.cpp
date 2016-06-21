@@ -56,6 +56,7 @@ bool Mesh::intersect(const vec3& ray, const vec3& eye, vec3& point, vec3& normal
 		float nray = dot(ray, n);
 		if (nray >= 0) continue;
 		float d2 = dot(m_vertices[face.v2] - eye, n) / nray;
+		std::cout << d2 << std::endl; 	
 		if (d2 > 0 && (!isect || d2 < d)) {
 			vec3 pt = eye + ray * d2;
 			std::cout << to_string(pt) << std::endl;
