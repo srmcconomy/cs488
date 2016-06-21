@@ -43,6 +43,7 @@ plane:rotate('X', 180)
 poly = gr.mesh( 'poly', 'Assets/dodeca.obj' )
 scene:add_child(poly)
 poly:scale(1, 0.5, 1)
+poly:translate(0, 3, 0)
 poly:set_material(blue)
 
 -- The lights
