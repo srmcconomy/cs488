@@ -82,7 +82,7 @@ void A4_Render(
 								}
 								GeometryNode* geonode2 = (GeometryNode*)node2;
 
-			          float d2 = geonode->m_primitive->intersect(light->position, l, point2, normal2);
+			          float d2 = geonode2->m_primitive->intersect(light->position, l, point2, normal2);
 								if (d2 > 0 && d2 < dNode) {
 									lightHits = false;
 									break;
