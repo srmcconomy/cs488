@@ -115,6 +115,7 @@ void A4_Render(
   								}
   							}
               }
+              std::cout << lightHits << std::endl;
 							if (lightHits) {
                 float attenuation = 1.0f / (light->falloff[0] + dNode * light->falloff[1] + dNode * dNode * light->falloff[2]);
 								vec3 r = reflect(l, normal);
