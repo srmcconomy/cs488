@@ -78,5 +78,6 @@ bool Mesh::intersect(const vec3& ray, const vec3& eye, vec3& point, vec3& normal
 			isect = true;
 		}
 	}
+	std::cout << isect << std::endl;
 	return isect;
 }
