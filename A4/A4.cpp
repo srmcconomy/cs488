@@ -76,6 +76,7 @@ void A4_Render(
 							colour[c] += phong->m_kd[c] * dot(l, normal) * light->colour[c];
 						}
 					}
+					cout << to_string(colour) << endl;
 
 					for (int c = 0; c < 3; c++) {
 						image(x, y, c) = colour[c];
