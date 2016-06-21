@@ -1,4 +1,5 @@
 #include <glm/ext.hpp>
+#include <stack>
 
 #include "A4.hpp"
 #include "Primitive.hpp"
@@ -65,13 +66,15 @@ void A4_Render(
       ray = rotate(ray, radians((float)angley), cross(up, mainRay));
       float mind;
       bool anyobj = false;
+			stack<mat4> transStack;
+			transStack.push(root->trans);
       for (SceneNode* node : root->children) {
         if (node->m_nodeType == NodeType::GeometryNode) {
 					GeometryNode* geonode = (GeometryNode*)node;
           vec3 point;
           vec3 normal;
           float d;
-					bool isect = geonode->m_primitive->intersect(eye, ray, node->trans, point, normal, d);
+					bool isect = geonode->m_primitive->intersect(eye, ray, transStack.top() * node->trans, point, normal, d);
 					if (isect && (!anyobj || d < mind)) {
             mind = d;
             anyobj = true;
@@ -89,7 +92,7 @@ void A4_Render(
 							vec3 point2;
 							vec3 normal2;
 							float dNode;
-						  geonode->m_primitive->intersect(light->position, l, node->trans, point2, normal2, dNode);
+						  geonode->m_primitive->intersect(light->position, l, transStack.top() * node->trans, point2, normal2, dNode);
               vec3 distance = point2 - point;
               if (abs(dot(distance, distance)) > EPSILON) {
                 lightHits = false;
@@ -101,7 +104,7 @@ void A4_Render(
   								GeometryNode* geonode2 = (GeometryNode*)node2;
 
   			          float d2;
-  								bool isect2 = geonode2->m_primitive->intersect(light->position, l, node2->trans, point2, normal2, d2);
+  								bool isect2 = geonode2->m_primitive->intersect(light->position, l, transStack.top() * node2->trans, point2, normal2, d2);
   								if (isect2 && d2 * dNode > 0 && abs(d2) < abs(dNode)) {
   									lightHits = false;
   									break;
