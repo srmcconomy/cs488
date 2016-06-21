@@ -49,6 +49,7 @@ std::ostream& operator<<(std::ostream& out, const Mesh& mesh)
 
 bool Mesh::intersect(const vec3& ray, const vec3& eye, vec3& point, vec3& normal, float& d) {
 	bool isect = false;
+		std::cout << "HI" << std::endl;
 	for (Triangle face : m_faces) {
 		std::cout << "HI" << std::endl;
 		vec3 u = m_vertices[face.v1] - m_vertices[face.v2];
