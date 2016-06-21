@@ -36,7 +36,7 @@ scene:translate(0, 0, -15)
 plane = gr.mesh( 'plane', 'Assets/plane.obj' )
 scene:add_child(plane)
 plane:set_material(grass)
-plane:scale(30, 30, 30)
+-- plane:scale(30, 30, 30)
 
 -- sphere
 -- poly = gr.mesh( 'poly', 'Assets/dodeca.obj' )
