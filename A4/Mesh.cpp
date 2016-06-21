@@ -16,7 +16,7 @@ Mesh::Mesh( const std::string& fname )
 	double vx, vy, vz;
 	size_t s1, s2, s3;
 
-	std::ifstream ifs( "Assets/" + fname.c_str() );
+	std::ifstream ifs( fname.c_str() );
 	while( ifs >> code ) {
 		std::cout << code << std::endl;
 		if( code == "v" ) {
