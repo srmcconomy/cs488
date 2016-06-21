@@ -80,7 +80,7 @@ void A4_Render(
 
 								dotp = dot(r, -ray);
 								if (dotp < 0) dotp = 0;
-								colour[c] += phong->m_ks[c] * pow(dotp, phong->shininess) * light->colour[c];
+								colour[c] += phong->m_ks[c] * pow(dotp, phong->m_shininess) * light->colour[c];
 							}
 
 						}
