@@ -66,7 +66,7 @@ void A4_Render(
           vec3 point;
           vec3 normal;
           float d;
-					bool isect = geonode->m_primitive->intersect(eye, ray, point, normal);
+					bool isect = geonode->m_primitive->intersect(eye, ray, point, normal, d);
 					if (isect) {
 						// image(x, y, 0) = 1;
 						vec3 colour;
