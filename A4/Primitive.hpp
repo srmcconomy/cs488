@@ -12,6 +12,9 @@ public:
   virtual bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d) {
     return 0;
   }
+  virtual bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::mat4 transform, glm::vec3& point, glm::vec3& normal, float& d) {
+    return 0;
+  }
 };
 
 class Sphere : public Primitive {
@@ -75,34 +78,8 @@ public:
     : m_pos(pos), m_size(size)
   {
   }
-  bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d) {
-    vec3 ns[6] = {
-      vec3(0, 0, (float)m_size / 2.0f),
-      vec3(0, 0, -(float)m_size / 2.0f),
-      vec3(0, (float)m_size / 2.0f, 0),
-      vec3(0, -(float)m_size / 2.0f, 0),
-      vec3((float)m_size / 2.0f, 0, 0),
-      vec3(-(float)m_size / 2.0f, 0, 0)
-    };
-    bool isect = false;
-    for (uint i = 0; i < 6; i++) {
-      vec3 n = ns[i];
-      vec3 p = m_pos + vec3(m_size / 2.0f, m_size / 2.0f, m_size / 2.0f) + n;
-      float d2 = dot(p - eye, n) / dot(ray, n);
-      if (!isect || (d2 * d > 0 && abs(d2) < abs(d))) {
-        vec3 pt = eye + ray * d2;
-        if ((pt - p).x > -m_size / 2.0f && (pt - p).x < m_size / 2.0f
-          && (pt - p).y > -m_size / 2.0f && (pt - p).y < m_size / 2.0f
-          && (pt - p).z > -m_size / 2.0f && (pt - p).z < m_size / 2.0f) {
-            d = d2;
-            point = pt;
-            normal = normalize(n);
-            isect = true;
-        }
-      }
-    }
-    return isect;
-  }
+  bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d);
+  bool intersect(const glm::vec3& eye, const glm::vec3& ray, const glm::mat4 transform, glm::vec3& point, glm::vec3& normal, float& d);
 
   virtual ~NonhierBox();
 
