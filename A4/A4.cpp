@@ -72,7 +72,7 @@ void A4_Render(
 						PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
 						for (Light* light : lights) {
 							vec3 l = normalize(light->position - point);
-							vec3 r = reflect(l, normal);
+							vec3 r = reflect(-l, normal);
 							for (int c = 0; c < 3; c++) {
 								float dotp = dot(l, normal);
 								if (dotp < 0) dotp = 0;
