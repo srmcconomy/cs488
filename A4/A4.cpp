@@ -71,6 +71,11 @@ void A4_Render(
 						// image(x, y, 0) = 1;
 						vec3 colour;
 						PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
+
+						for (int c = 0; c < 3; c++) {
+							colour[c] += phong->m_kd * ambient[c];
+						}
+
 						for (Light* light : lights) {
 							bool lightHits = true;
 							vec3 l = normalize(light->position - point);
@@ -108,7 +113,6 @@ void A4_Render(
 
 
 						for (int c = 0; c < 3; c++) {
-							colour[c] += ambient[c];
 							image(x, y, c) = colour[c] > 1.0f ? 1.0f : colour[c];
 						}
 					}
