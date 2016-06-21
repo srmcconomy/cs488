@@ -10,15 +10,12 @@ Mesh::Mesh( const std::string& fname )
 	: m_vertices()
 	, m_faces()
 {
-
-		std::cout << "HI" << std::endl;
 	std::string code;
 	double vx, vy, vz;
 	size_t s1, s2, s3;
 
 	std::ifstream ifs( fname.c_str() );
 	while( ifs >> code ) {
-		std::cout << code << std::endl;
 		if( code == "v" ) {
 			ifs >> vx >> vy >> vz;
 			m_vertices.push_back( glm::vec3( vx, vy, vz ) );
@@ -58,7 +55,6 @@ bool Mesh::intersect(const vec3& ray, const vec3& eye, vec3& point, vec3& normal
 		vec3 n = normalize(cross(u, v));
 		float d2 = dot(m_vertices[face.v2] - eye, n) / dot(ray, n);
 		if (!isect || (d * d2 > 0 && abs(d2) < abs(d))) {
-			std::cout << d2 << std::endl;
 			vec3 pt = eye + ray * d2;
 			vec3 w = pt - m_vertices[face.v2];
 
