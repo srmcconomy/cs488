@@ -73,7 +73,7 @@ void A4_Render(
 					for (Light* light : lights) {
 						vec3 l = light->position - point;
 						for (int c = 0; c < 3; c++) {
-							colour[c] += phong->kd * dot(l, normal) * light->colour[c];
+							colour[c] += phong->m_kd * dot(l, normal) * light->colour[c];
 						}
 					}
 
