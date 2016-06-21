@@ -49,7 +49,7 @@ public:
         } else if (roots[1] < 0) {
           root = roots[0]
         } else {
-          root = roots[0] > root[1] ? roots[1] : roots[0]
+          root = roots[0] > roots[1] ? roots[1] : roots[0]
         }
         point = eye + (float)root * ray;
         normal = point - m_pos;
