@@ -54,7 +54,7 @@ bool Mesh::intersect(const vec3& ray, const vec3& eye, vec3& point, vec3& normal
 		vec3 v = m_vertices[face.v3] - m_vertices[face.v2];
 		vec3 n = normalize(cross(u, v));
 		float d2 = dot(m_vertices[face.v2] - eye, n) / dot(ray, n);
-		if (!isect || (d * d2 > 0 && abs(d2) < abs(d)) {
+		if (!isect || (d * d2 > 0 && abs(d2) < abs(d))) {
 			vec3 pt = eye + ray * d2;
 			vec3 w = pt - m_vertices[face.v2];
 
