@@ -12,7 +12,7 @@ public:
   virtual bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d) {
     return 0;
   }
-  virtual bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::mat4 transform, glm::vec3& point, glm::vec3& normal, float& d) {
+  virtual bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::mat4& transform, glm::vec3& point, glm::vec3& normal, float& d) {
     return 0;
   }
 };
@@ -21,14 +21,14 @@ class Sphere : public Primitive {
 public:
   virtual ~Sphere();
   bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d);
-  bool intersect(const glm::vec3& eye, const glm::vec3& ray, const glm::mat4 transform, glm::vec3& point, glm::vec3& normal, float& d);
+  bool intersect(const glm::vec3& eye, const glm::vec3& ray, const glm::mat4& transform, glm::vec3& point, glm::vec3& normal, float& d);
 };
 
 class Cube : public Primitive {
 public:
   virtual ~Cube();
   bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d);
-  bool intersect(const glm::vec3& eye, const glm::vec3& ray, const glm::mat4 transform, glm::vec3& point, glm::vec3& normal, float& d);
+  bool intersect(const glm::vec3& eye, const glm::vec3& ray, const glm::mat4& transform, glm::vec3& point, glm::vec3& normal, float& d);
 };
 
 class NonhierSphere : public Primitive {
@@ -39,7 +39,7 @@ public:
   }
   virtual ~NonhierSphere();
   bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d);
-  bool intersect(const glm::vec3& eye, const glm::vec3& ray, const glm::mat4 transform, glm::vec3& point, glm::vec3& normal, float& d);
+  bool intersect(const glm::vec3& eye, const glm::vec3& ray, const glm::mat4& transform, glm::vec3& point, glm::vec3& normal, float& d);
 private:
 
   glm::vec3 m_pos;
@@ -53,7 +53,7 @@ public:
   {
   }
   bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d);
-  bool intersect(const glm::vec3& eye, const glm::vec3& ray, const glm::mat4 transform, glm::vec3& point, glm::vec3& normal, float& d);
+  bool intersect(const glm::vec3& eye, const glm::vec3& ray, const glm::mat4& transform, glm::vec3& point, glm::vec3& normal, float& d);
 
   virtual ~NonhierBox();
 
