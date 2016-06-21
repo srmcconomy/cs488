@@ -73,7 +73,9 @@ void A4_Render(
 						for (Light* light : lights) {
 							vec3 l = normalize(light->position - point);
 							for (int c = 0; c < 3; c++) {
-								colour[c] += phong->m_kd[c] * max(dot(l, normal), 0.0f) * light->colour[c];
+								float dotp = dot(l, normal);
+								if (dotp < 0) dotp = 0;
+								colour[c] += phong->m_kd[c] * dotp * light->colour[c];
 							}
 							break;
 						}
