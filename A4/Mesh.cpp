@@ -58,11 +58,11 @@ bool Mesh::intersect(const vec3& ray, const vec3& eye, vec3& point, vec3& normal
 			vec3 pt = eye + ray * d2;
 			vec3 w = pt - m_vertices[face.v2];
 
-			vec3 uv = dot(u, v);
-			vec3 wv = dot(w, v);
-			vec3 vv = dot(v, v);
-			vec3 uu = dot(u, u);
-			vec3 wu = dot(w, u);
+			float uv = dot(u, v);
+			float wv = dot(w, v);
+			float vv = dot(v, v);
+			float uu = dot(u, u);
+			float wu = dot(w, u);
 			float D = uv * uv - uu * vv;
 			float s = (uv * wv - vv * wu) / D;
 			if (s < 0.0f || s > 1.0f) {
