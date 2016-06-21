@@ -132,7 +132,7 @@ void A4_Render(
         }
       }
       if (!anyobj) {
-        image(x, y, 2) = y / h;
+        image(x, y, 2) = (float)y / (float)h;
       }
 		}
 	}
