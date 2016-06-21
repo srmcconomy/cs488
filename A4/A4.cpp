@@ -107,7 +107,7 @@ void A4_Render(
 							if (lightHits) {
 								vec3 r = reflect(-l, normal);
 								for (int c = 0; c < 3; c++) {
-									float dotp = dot(l, normal);
+									float dotp = dot(-l, normal);
 									if (dotp < 0) dotp = 0;
 									colour[c] += phong->m_kd[c] * dotp * light->colour[c];
 
