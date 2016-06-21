@@ -9,7 +9,7 @@
 using namespace glm;
 using namespace std;
 
-#define EPSILON 0.1f
+#define EPSILON 0.00001f
 
 void A4_Render(
 		// What to render
