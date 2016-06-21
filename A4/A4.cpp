@@ -81,11 +81,11 @@ void A4_Render(
 
 						for (Light* light : lights) {
 							bool lightHits = true;
-							vec3 l = normalize(light->position - point);
+							vec3 l = normalize(point - light->position);
 							vec3 point2;
 							vec3 normal2;
 							float dNode;
-							geonode->m_primitive->intersect(light->position, l, point2, normal2, dNode);
+						  geonode->m_primitive->intersect(light->position, l, point2, normal2, dNode);
               cout <<to_string(point) << to_string(point2) << endl;
               vec3 distance = point2 - point;
               if (abs(dot(distance, distance)) > EPSILON) {
