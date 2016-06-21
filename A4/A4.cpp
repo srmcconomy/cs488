@@ -73,7 +73,7 @@ void A4_Render(
 						PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
 
 						for (int c = 0; c < 3; c++) {
-							colour[c] += phong->m_kd * ambient[c];
+							colour[c] += phong->m_kd[c] * ambient[c];
 						}
 
 						for (Light* light : lights) {
