@@ -30,7 +30,7 @@ std::ostream& operator<<(std::ostream& out, const Mesh& mesh)
 {
   out << "mesh {";
   /*
-  
+
   for( size_t idx = 0; idx < mesh.m_verts.size(); ++idx ) {
   	const MeshVertex& v = mesh.m_verts[idx];
   	out << glm::to_string( v.m_position );
@@ -45,4 +45,37 @@ std::ostream& operator<<(std::ostream& out, const Mesh& mesh)
 */
   out << "}";
   return out;
+}
+
+bool Mesh::intersect(const vec3& ray, const vec3& eye, vec3& point, vec3& normal, float& d) {
+	bool isect = false;
+	for (Triangle face : m_faces) {
+		vec3 u = m_vertices[face.v1] - m_vertices[face.v2];
+		vec3 v = m_vertices[face.v3] - m_vertices[face.v2];
+		vec3 n = normalize(cross(u, v));
+		float d2 = dot(m_vertices[face.v2] - eye, n) / dot(ray, n);
+		if (!isect || (d * d2 > 0 && abs(d2) < abs(d)) {
+			vec3 pt = eye + ray * d2;
+			vec3 w = pt - m_vertices[face.v2];
+
+			vec3 uv = dot(u, v);
+			vec3 wv = dot(w, v);
+			vec3 vv = dot(v, v);
+			vec3 uu = dot(u, u);
+			vec3 wu = dot(w, u);
+			float D = uv * uv - uu * vv;
+			float s = (uv * wv - vv * wu) / D;
+			if (s < 0.0f || s > 1.0f) {
+				continue;
+			}
+			float t = (uv * wu - uu * wv) / D;
+			if (t < 0.0f || s + t > 1.0f) {
+				continue
+			}
+			d = d2;
+			point = pt;
+			normal = n;
+		}
+	}
+	return isect;
 }
