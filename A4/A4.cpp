@@ -65,22 +65,40 @@ void A4_Render(
 					GeometryNode* geonode = (GeometryNode*)node;
           vec3 point;
           vec3 normal;
-          size_t i = geonode->m_primitive->intersect(eye, ray, point, normal);
-					if (i > 0) {
+          float d = geonode->m_primitive->intersect(eye, ray, point, normal);
+					if (d > 0) {
 						// image(x, y, 0) = 1;
 						vec3 colour;
 						PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
 						for (Light* light : lights) {
+							bool lightHits = true;
 							vec3 l = normalize(light->position - point);
-							vec3 r = reflect(-l, normal);
-							for (int c = 0; c < 3; c++) {
-								float dotp = dot(l, normal);
-								if (dotp < 0) dotp = 0;
-								colour[c] += phong->m_kd[c] * dotp * light->colour[c];
+							vec3 point2;
+							vec3 normal2;
+							float dNode = geonode->m_primitive->intersect(light->position, l, point2, normal2);
+							for (SceneNode* node2 : root->children) {
+								if (node2->m_nodeType != NodeType::GeometryNode || node2->m_nodeId == node->m_nodeId) {
+									continue;
+								}
+								GeometryNode* geonode2 = (GeometryNode*)node2;
 
-								dotp = dot(r, -ray);
-								if (dotp < 0) dotp = 0;
-								colour[c] += phong->m_ks[c] * pow(dotp, phong->m_shininess) * light->colour[c];
+			          float d2 = geonode->m_primitive->intersect(light->position, l, point2, normal2);
+								if (d2 > 0 && d2 < dNode) {
+									lightHits = false;
+									break;
+								}
+							}
+							if (lightHits) {
+								vec3 r = reflect(-l, normal);
+								for (int c = 0; c < 3; c++) {
+									float dotp = dot(l, normal);
+									if (dotp < 0) dotp = 0;
+									colour[c] += phong->m_kd[c] * dotp * light->colour[c];
+
+									dotp = dot(r, -ray);
+									if (dotp < 0) dotp = 0;
+									colour[c] += phong->m_ks[c] * pow(dotp, phong->m_shininess) * light->colour[c];
+								}
 							}
 
 						}

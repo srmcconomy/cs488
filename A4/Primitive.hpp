@@ -9,7 +9,7 @@ using namespace glm;
 class Primitive {
 public:
   virtual ~Primitive();
-  virtual size_t intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
+  virtual float intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
     return 0;
   }
 };
@@ -31,16 +31,19 @@ public:
   {
   }
   virtual ~NonhierSphere();
-  size_t intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
+  float intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
     double roots[2];
     size_t i = quadraticRoots(dot(ray, ray),
       2 * dot(ray, eye - m_pos),
       dot(eye - m_pos, eye - m_pos) - m_radius * m_radius,
       roots);
     switch(i) {
+      case 0:
+        return -1.0f;
       case 1:
         point = eye + (float)roots[0] * ray;
         normal = point - m_pos;
+        return (float)roots[0];
         break;
       case 2:
         double root;
@@ -53,9 +56,9 @@ public:
         }
         point = eye + (float)root * ray;
         normal = normalize(point - m_pos);
+        return (float)root;
         break;
     }
-    return i;
   }
 
 private:
@@ -70,7 +73,7 @@ public:
     : m_pos(pos), m_size(size)
   {
   }
-  size_t intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
+  float intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal) {
     vec3 ns[6] = {
       vec3(0, 0, (float)m_size / 2.0f),
       vec3(0, 0, -(float)m_size / 2.0f),
@@ -98,7 +101,7 @@ public:
       }
     }
     normal = normalize(normal);
-    return isect ? 1 : 0;
+    return mind;
   }
 
   virtual ~NonhierBox();
