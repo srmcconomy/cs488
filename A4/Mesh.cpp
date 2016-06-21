@@ -72,11 +72,11 @@ bool Mesh::intersect(const vec3& ray, const vec3& eye, vec3& point, vec3& normal
 			if (s < 0.0f || s > 1.0f) {
 				continue;
 			}
-			float t = (uv * wu - uu * wv) / D;
-			std::cout << "t " << t << std:: endl;
-			if (t < 0.0f || s + t > 1.0f) {
-				continue;
-			}
+			// float t = (uv * wu - uu * wv) / D;
+			// std::cout << "t " << t << std:: endl;
+			// if (t < 0.0f || s + t > 1.0f) {
+			// 	continue;
+			// }
 			d = d2;
 			point = pt;
 			normal = n;
