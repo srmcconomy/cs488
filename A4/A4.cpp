@@ -86,6 +86,7 @@ void A4_Render(
 							vec3 normal2;
 							float dNode;
 							geonode->m_primitive->intersect(light->position, l, point2, normal2, dNode);
+              cout <<to_string(point) << to_string(point2) << endl;
               vec3 distance = point2 - point;
               if (abs(dot(distance, distance)) > EPSILON) {
                 lightHits = false;
