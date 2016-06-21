@@ -39,7 +39,7 @@ scene = gr.node('scene')
 -- plane:scale(30, 30, 30)
 
 -- sphere
-poly = gr.mesh( 'poly', 'Assets/smstdodeca.obj' )
+poly = gr.mesh( 'poly', 'Assets/cube.obj' )
 scene:add_child(poly)
 poly:scale(1, 1, 1)
 poly:set_material(blue)
