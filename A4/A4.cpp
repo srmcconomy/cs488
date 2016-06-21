@@ -77,7 +77,6 @@ void A4_Render(
 							}
 							break;
 						}
-						cout << to_string(colour) << endl;
 
 
 						for (int c = 0; c < 3; c++) {
