@@ -25,6 +25,7 @@ struct Triangle
 class Mesh : public Primitive {
 public:
   Mesh( const std::string& fname );
+	bool intersect(const vec3& ray, const vec3& eye, const mat4& transform, vec3& point, vec3& normal, float& d);
 	bool intersect(const vec3& ray, const vec3& eye, vec3& point, vec3& normal, float& d);
 
 private:
