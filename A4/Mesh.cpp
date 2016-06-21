@@ -57,12 +57,12 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, const mat4& transform, ve
   vec3 ray3 = normalize(vec3(ray4.x, ray4.y, ray4.z));
   // intersect(eye, ray, point, normal, d);
   bool ret = intersect(eye3, ray3, point, normal, d);
-  // vec4 point4 = transform * vec4(point.x, point.y, point.z, 1.0f);
-  // mat3 sub = mat3(vec3(transform[0]), vec3(transform[1]), vec3(transform[2]));
-  // sub = transpose(inverse(sub));
-  // normal = normalize(sub * normal);
-  // point = vec3(point4.x, point4.y, point4.z);
-  // d = length(point - eye);
+  vec4 point4 = transform * vec4(point.x, point.y, point.z, 1.0f);
+  mat3 sub = mat3(vec3(transform[0]), vec3(transform[1]), vec3(transform[2]));
+  sub = transpose(inverse(sub));
+  normal = normalize(sub * normal);
+  point = vec3(point4.x, point4.y, point4.z);
+  d = length(point - eye);
   return ret;
 
 }
