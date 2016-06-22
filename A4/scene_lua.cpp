@@ -262,7 +262,6 @@ int gr_mesh_cmd(lua_State* L)
 	// at most once.
 	auto i = mesh_map.find( path.c_str() );
 	Mesh *mesh = nullptr;
-  std::cout << path << std::endl;
 
 	if( i == mesh_map.end() ) {
 		mesh = new Mesh( path.c_str() );

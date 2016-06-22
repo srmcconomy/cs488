@@ -55,6 +55,6 @@ whitelight = gr.light({-100, 100, 100}, {0.8, 0.8, 0.8}, {1, 0, 0})
 bluelight = gr.light({100, 100, -100}, {0, 0, 0.8}, {1, 0, 0})
 
 gr.render(scene,
-	  'sample.png', 256, 256,
+	  'sample.png', 512, 512,
 	  {0, 2, 30}, {0, 0, -1}, {0, 1, 0}, 50,
 	  {0.4, 0.4, 0.4}, {redlight, whitelight, bluelight})
