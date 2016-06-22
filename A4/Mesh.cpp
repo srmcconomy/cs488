@@ -24,6 +24,22 @@ Mesh::Mesh( const std::string& fname )
 			m_faces.push_back( Triangle( s1 - 1, s2 - 1, s3 - 1 ) );
 		}
 	}
+
+  vec3 total(0);
+  for (vec3 vertex : m_vertices) {
+    total += vertex;
+  }
+  vec3 center = total / m_vertices.length();
+  float max = 0;
+  for (vec3 vertex : m_vertices) {
+    vec3 dif = vertex - center;
+    float distsq = dot(dif, dif);
+    if (distsq > max) {
+      max = distsq;
+    }
+  }
+  max = sqrt(max);
+  bb = NonhierSphere(center, max);
 }
 
 std::ostream& operator<<(std::ostream& out, const Mesh& mesh)
