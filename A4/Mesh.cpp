@@ -86,6 +86,7 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, const mat4& transform, ve
 }
 
 bool Mesh::intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal, float& d) {
+  if (!bb.intersect(eye, ray, point, normal, d)) return false;
   bool isect = false;
 	for (Triangle face : m_faces) {
 		vec3 u = m_vertices[face.v2] - m_vertices[face.v1];
