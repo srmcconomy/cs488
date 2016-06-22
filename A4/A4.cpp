@@ -12,6 +12,82 @@ using namespace std;
 
 #define EPSILON 0.001f
 
+void lighting(SceneNode* root, SceneNode* node, mat4 trans, Light* light, vec3 l, float dNode, bool& lightHits) {
+  mat4 nodetrans = trans * root->trans;
+  if (root->m_nodeType == NodeType::GeometryNode && root->m_nodeId == node->m_nodeId) {
+    GeometryNode* geonode2 = (GeometryNode*)root;
+
+    float d2;
+    vec3 point2;
+    vec3 normal2;
+
+    bool isect2 = geonode2->m_primitive->intersect(light->position, l, nodetrans, point2, normal2, d2);
+    if (isect2 && d2 * dNode > 0 && abs(d2) < abs(dNode)) {
+      lightHits = false;
+      break;
+    }
+    for (SceneNode* node2 : root->children) {
+      lighting(node2, node, nodetrans, light, l, dNode, lightHits);
+    }
+  }
+}
+
+
+void render(SceneNode* node, SceneNode* root, mat4 trans, vec3 eye, vec3 ray, vec3& colour, float& mind bool& anyobj) {
+  mat4 nodetrans = trans * node->trans;
+  if (node->m_nodeType == NodeType::GeometryNode) {
+    GeometryNode* geonode = (GeometryNode*)node;
+    vec3 point;
+    vec3 normal;
+    float d;
+    bool isect = geonode->m_primitive->intersect(eye, ray, trans, point, normal, d);
+    if (isect && (!anyobj || d < mind)) {
+      mind = d;
+      anyobj = true;
+      // image(x, y, 0) = 1;
+      PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
+
+      for (int c = 0; c < 3; c++) {
+        colour[c] += phong->m_kd[c] * ambient[c];
+      }
+
+      for (Light* light : lights) {
+        bool lightHits = true;
+        vec3 l = normalize(point - light->position);
+        vec3 point2;
+        vec3 normal2;
+        float dNode;
+        geonode->m_primitive->intersect(light->position, l, trans, point2, normal2, dNode);
+        vec3 distance = point2 - point;
+        // std::cout << to_string(point) << to_string(point2) << std::endl;
+        if (abs(dot(distance, distance)) > EPSILON) {
+          lightHits = false;
+        } else {
+          lighting(root, node, mat4(1.0f), light, l, dNode, lightHits);
+        }
+        if (lightHits) {
+          float attenuation = 1.0f / (light->falloff[0] + dNode * light->falloff[1] + dNode * dNode * light->falloff[2]);
+          vec3 r = reflect(l, normal);
+          for (int c = 0; c < 3; c++) {
+            float dotp = dot(-l, normal);
+            if (dotp < 0) dotp = 0;
+            colour[c] += phong->m_kd[c] * dotp * light->colour[c] * attenuation;
+
+            dotp = dot(r, -ray);
+            if (dotp < 0) dotp = 0;
+            colour[c] += phong->m_ks[c] * pow(dotp, phong->m_shininess) * light->colour[c] * attenuation;
+          }
+        }
+
+      }
+    }
+  }
+  for (SceneNode* n : node->children) {
+    render(n, nodetrans, eye, ray, colour, mind, anyobj);
+  }
+}
+
+
 void A4_Render(
 		// What to render
 		SceneNode * root,
@@ -68,78 +144,16 @@ void A4_Render(
       bool anyobj = false;
 			stack<mat4> transStack;
 			transStack.push(root->trans);
-			// std::cout << to_string(root->trans) << std::endl;
-      for (SceneNode* node : root->children) {
-        if (node->m_nodeType == NodeType::GeometryNode) {
-					GeometryNode* geonode = (GeometryNode*)node;
-          vec3 point;
-          vec3 normal;
-          float d;
-					mat4 trans = transStack.top() * node->trans;
-					bool isect = geonode->m_primitive->intersect(eye, ray, trans, point, normal, d);
-					if (isect && (!anyobj || d < mind)) {
-            mind = d;
-            anyobj = true;
-						// image(x, y, 0) = 1;
-						vec3 colour;
-						PhongMaterial* phong = (PhongMaterial*)geonode->m_material;
+      vec3 colour;
+      float mind;
+      bool anyobj = false;
+      render(root, root, mat4(1.0f), eye, ray, colour, mind, anyobj);
 
-						for (int c = 0; c < 3; c++) {
-							colour[c] += phong->m_kd[c] * ambient[c];
-						}
-
-						for (Light* light : lights) {
-							bool lightHits = true;
-							vec3 l = normalize(point - light->position);
-							vec3 point2;
-							vec3 normal2;
-							float dNode;
-						  geonode->m_primitive->intersect(light->position, l, trans, point2, normal2, dNode);
-              vec3 distance = point2 - point;
-              // std::cout << to_string(point) << to_string(point2) << std::endl;
-              if (abs(dot(distance, distance)) > EPSILON) {
-                lightHits = false;
-              } else {
-                for (SceneNode* node2 : root->children) {
-  								if (node2->m_nodeType != NodeType::GeometryNode || node2->m_nodeId == node->m_nodeId) {
-  									continue;
-  								}
-  								GeometryNode* geonode2 = (GeometryNode*)node2;
-
-  			          float d2;
-
-									mat4 trans2 = transStack.top() * node2->trans;
-  								bool isect2 = geonode2->m_primitive->intersect(light->position, l, trans2, point2, normal2, d2);
-  								if (isect2 && d2 * dNode > 0 && abs(d2) < abs(dNode)) {
-  									lightHits = false;
-  									break;
-  								}
-  							}
-              }
-							if (lightHits) {
-                float attenuation = 1.0f / (light->falloff[0] + dNode * light->falloff[1] + dNode * dNode * light->falloff[2]);
-								vec3 r = reflect(l, normal);
-								for (int c = 0; c < 3; c++) {
-									float dotp = dot(-l, normal);
-									if (dotp < 0) dotp = 0;
-									colour[c] += phong->m_kd[c] * dotp * light->colour[c] * attenuation;
-
-									dotp = dot(r, -ray);
-									if (dotp < 0) dotp = 0;
-									colour[c] += phong->m_ks[c] * pow(dotp, phong->m_shininess) * light->colour[c] * attenuation;
-								}
-							}
-
-						}
-
-
-						for (int c = 0; c < 3; c++) {
-							image(x, y, c) = colour[c] > 1.0f ? 1.0f : colour[c];
-						}
-					}
+      if (anyobj) {
+        for (int c = 0; c < 3; c++) {
+          image(x, y, c) = colour[c] > 1.0f ? 1.0f : colour[c];
         }
-      }
-      if (!anyobj) {
+      } else (!anyobj) {
         image(x, y, 2) = (float)y / (float)h;
       }
 		}
