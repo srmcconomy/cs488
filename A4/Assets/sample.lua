@@ -26,8 +26,9 @@ orb3:set_material(redorb)
 
 cow = gr.mesh('cow', 'cow.obj')
 scene:add_child(cow)
-cow:rotate('X', -40)
-cow:rotate('Y', -20)
+cow:rotate('X', 20)
+cow:rotate('Y', -70)
+cow:translate(4, -3, 0)
 cow:set_material(gold)
 
 redlight = gr.light({100, 100, 100}, {0.8, 0, 0}, {1, 0, 0})
