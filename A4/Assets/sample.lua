@@ -31,7 +31,7 @@ orb3:set_material(redorb)
 -- cow:translate(4, -3, 0)
 -- cow:set_material(gold)
 
-cow2 = gr.sphere('cow2')
+cow2 = gr.mesh('cow2', 'cow.obj')
 cow2:set_material(greenorb)
 scene:add_child(cow2)
 cow2:scale(0.2, 0.2, 0.2)
