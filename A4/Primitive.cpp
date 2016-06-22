@@ -11,14 +11,18 @@ Sphere::~Sphere()
 bool Sphere::intersect(const vec3& eye, const vec3& ray, const mat4& transform, vec3& point, vec3& normal, float& d) {
   mat4 inv = inverse(transform);
   vec4 eye4(eye.x, eye.y, eye.z, 1.0f);
-  vec4 ray4(eye.x, eye.y, eye.z, 0);
+  vec4 ray4(ray.x, ray.y, ray.z, 0);
   eye4 = inv * eye4;
   ray4 = inv * ray4;
-  bool ret = intersect(vec3(eye4.y, eye4.x, eye4.z), vec3(ray4.x, ray4.y, ray4.z), point, normal, d);
+  vec3 eye3 = vec3(eye4.x, eye4.y, eye4.z);
+  vec3 ray3 = normalize(vec3(ray4.x, ray4.y, ray4.z));
+  // intersect(eye, ray, point, normal, d);
+  bool ret = intersect(eye3, ray3, point, normal, d);
   vec4 point4 = transform * vec4(point.x, point.y, point.z, 1.0f);
-  vec4 normal4 = transform * vec4(normal.x, normal.y, normal.z, 0);
+  mat3 sub = mat3(vec3(transform[0]), vec3(transform[1]), vec3(transform[2]));
+  sub = transpose(inverse(sub));
+  normal = normalize(sub * normal);
   point = vec3(point4.x, point4.y, point4.z);
-  normal = vec3(normal4.x, normal4.y, normal4.z);
   d = length(point - eye);
   return ret;
 }
@@ -62,14 +66,18 @@ Cube::~Cube()
 bool Cube::intersect(const vec3& eye, const vec3& ray, const mat4& transform, vec3& point, vec3& normal, float& d) {
   mat4 inv = inverse(transform);
   vec4 eye4(eye.x, eye.y, eye.z, 1.0f);
-  vec4 ray4(eye.x, eye.y, eye.z, 0);
+  vec4 ray4(ray.x, ray.y, ray.z, 0);
   eye4 = inv * eye4;
   ray4 = inv * ray4;
-  bool ret = intersect(vec3(eye4.y, eye4.x, eye4.z), vec3(ray4.x, ray4.y, ray4.z), point, normal, d);
+  vec3 eye3 = vec3(eye4.x, eye4.y, eye4.z);
+  vec3 ray3 = normalize(vec3(ray4.x, ray4.y, ray4.z));
+  // intersect(eye, ray, point, normal, d);
+  bool ret = intersect(eye3, ray3, point, normal, d);
   vec4 point4 = transform * vec4(point.x, point.y, point.z, 1.0f);
-  vec4 normal4 = transform * vec4(normal.x, normal.y, normal.z, 0);
+  mat3 sub = mat3(vec3(transform[0]), vec3(transform[1]), vec3(transform[2]));
+  sub = transpose(inverse(sub));
+  normal = normalize(sub * normal);
   point = vec3(point4.x, point4.y, point4.z);
-  normal = vec3(normal4.x, normal4.y, normal4.z);
   d = length(point - eye);
   return ret;
 }
