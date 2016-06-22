@@ -72,9 +72,11 @@ scene:rotate('X', 23)
 mickey = gr.mesh( 'mickey', 'mickey.obj' )
 scene:add_child(mickey)
 mickey:set_material(stone)
-mickey:scale(1.5, 1.5, 1.5)
+mickey:rotate('X', 90);
+mickey:rotate('Y', 90);
+mickey:scale(5, 5, 5)
 
-icosa = gr.mesh( 'icosa', 'icosa.obj' )
+icosa = gr.mesh( 'icosa', 'dodeca.obj' )
 scene:add_child(icosa)
 icosa:set_material(stone)
 icosa:scale(1.5, 1.5, 1.5)
@@ -109,6 +111,6 @@ for i = 1, 6 do
 end
 
 gr.render(scene,
-	  'macho-cows.png', 256, 256,
+	  'sample.png', 256, 256,
 	  {0, 2, 30}, {0, 0, -1}, {0, 1, 0}, 50,
 	  {0.4, 0.4, 0.4}, {gr.light({200, 202, 430}, {0.8, 0.8, 0.8}, {1, 0, 0})})
