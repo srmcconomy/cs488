@@ -10,7 +10,7 @@
 using namespace glm;
 using namespace std;
 
-#define EPSILON 0.001f
+#define EPSILON 0.01f
 
 void lighting(SceneNode* root, SceneNode* node, mat4 trans, Light* light, vec3 l, float dNode, bool& lightHits) {
   mat4 nodetrans = trans * root->trans;
