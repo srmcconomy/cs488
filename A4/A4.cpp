@@ -83,7 +83,7 @@ void render(SceneNode* node, SceneNode* root, mat4 trans, vec3 eye, vec3 ray, ve
     }
   }
   for (SceneNode* n : node->children) {
-    render(n, nodetrans, eye, ray, colour, mind, anyobj);
+    render(n, nodetrans, eye, ray, colour, lights, ambient, mind, anyobj);
   }
 }
 
