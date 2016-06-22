@@ -143,7 +143,7 @@ void A4_Render(
       float mind;
       bool anyobj = false;
       vec3 colour;
-      render(root, root, mat4(1.0f), eye, ray, colour, mind, anyobj);
+      render(root, root, mat4(1.0f), eye, ray, colour, lights, ambient, mind, anyobj);
 
       if (anyobj) {
         for (int c = 0; c < 3; c++) {
