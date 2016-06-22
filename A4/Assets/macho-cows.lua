@@ -60,10 +60,10 @@ scene:rotate('X', 23)
 
 -- the floor
 
-plane = gr.mesh('plane', 'plane.obj' )
-scene:add_child(plane)
-plane:set_material(grass)
-plane:scale(30, 30, 30)
+-- plane = gr.mesh('plane', 'plane.obj' )
+-- scene:add_child(plane)
+-- plane:set_material(grass)
+-- plane:scale(30, 30, 30)
 
 -- Construct a central altar in the shape of a buckyball.  The
 -- buckyball at the centre of the real Stonehenge was destroyed
