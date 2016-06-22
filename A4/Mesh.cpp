@@ -9,7 +9,7 @@
 Mesh::Mesh( const std::string& fname )
 	: m_vertices()
 	, m_faces()
-  , bb(0, 0)
+  , bb()
 {
 	std::string code;
 	double vx, vy, vz;
