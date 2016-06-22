@@ -44,6 +44,12 @@ cylinder:set_material(gold)
 cylinder:scale(1, 10, 1)
 cylinder:translate(-7, -10, -2)
 
+plane = gr:mesh('plane', 'plane.obj')
+scene:add_child(plane)
+plane:set_material(greenorb)
+plane:scale(30, 30, 30)
+plane:translate(0, -15, 0)
+
 redlight = gr.light({100, 100, 100}, {0.8, 0, 0}, {1, 0, 0})
 whitelight = gr.light({-100, 100, 100}, {0.8, 0.8, 0.8}, {1, 0, 0})
 bluelight = gr.light({100, 100, -100}, {0, 0, 0.8}, {1, 0, 0})
