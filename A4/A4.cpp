@@ -41,7 +41,7 @@ void render(SceneNode* node, SceneNode* root, mat4 trans, vec3 eye, vec3 ray, ve
     vec3 point;
     vec3 normal;
     float d;
-    bool isect = geonode->m_primitive->intersect(eye, ray, trans, point, normal, d);
+    bool isect = geonode->m_primitive->intersect(eye, ray, nodetrans, point, normal, d);
     if (isect && (!anyobj || d < mind)) {
       colour = vec3(0);
       mind = d;
@@ -59,7 +59,7 @@ void render(SceneNode* node, SceneNode* root, mat4 trans, vec3 eye, vec3 ray, ve
         vec3 point2;
         vec3 normal2;
         float dNode;
-        geonode->m_primitive->intersect(light->position, l, trans, point2, normal2, dNode);
+        geonode->m_primitive->intersect(light->position, l,nodetrans, point2, normal2, dNode);
         vec3 distance = point2 - point;
         // std::cout << to_string(point) << to_string(point2) << std::endl;
         if (abs(dot(distance, distance)) > EPSILON) {
