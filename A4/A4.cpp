@@ -14,7 +14,7 @@ using namespace std;
 
 void lighting(SceneNode* root, SceneNode* node, mat4 trans, Light* light, vec3 l, float dNode, bool& lightHits) {
   mat4 nodetrans = trans * root->trans;
-  if (root->m_nodeType == NodeType::GeometryNode && root->m_nodeId == node->m_nodeId) {
+  if (root->m_nodeType == NodeType::GeometryNode && root->m_nodeId != node->m_nodeId) {
     GeometryNode* geonode2 = (GeometryNode*)root;
 
     float d2;
@@ -23,7 +23,6 @@ void lighting(SceneNode* root, SceneNode* node, mat4 trans, Light* light, vec3 l
 
     bool isect2 = geonode2->m_primitive->intersect(light->position, l, nodetrans, point2, normal2, d2);
     if (isect2 && d2 * dNode > 0 && abs(d2) < abs(dNode)) {
-      std::cout << "HI" << std::endl;
       lightHits = false;
       return;
     }
