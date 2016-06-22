@@ -149,7 +149,7 @@ void A4_Render(
         for (int c = 0; c < 3; c++) {
           image(x, y, c) = colour[c] > 1.0f ? 1.0f : colour[c];
         }
-      } else (!anyobj) {
+      } else {
         image(x, y, 2) = (float)y / (float)h;
       }
 		}
