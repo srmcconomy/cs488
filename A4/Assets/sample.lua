@@ -1,6 +1,7 @@
-purpleorb = gr.material({0.4, 0, 0.8}, {0.3, 0.3, 0.3}, 100)
-greenorb = gr.material({0, 0.8, 0}, {0.3, 0.3, 0.3}, 100)
-redorb = gr.material({0.8, 0, 0}, {0.3, 0.3, 0.3}, 100)
+purpleorb = gr.material({0.4, 0, 0.8}, {0.3, 0.3, 0.3}, 25)
+greenorb = gr.material({0, 0.8, 0}, {0.3, 0.3, 0.3}, 25)
+redorb = gr.material({0.8, 0, 0}, {0.3, 0.3, 0.3}, 25)
+gold = gr.material({0.9, 0.8, 0.4}, {0.8, 0.8, 0.4}, 25)
 
 
 scene = gr.node('scene')
@@ -22,6 +23,12 @@ scene:add_child(orb3)
 orb3:scale(5, 5, 5)
 orb3:translate(-7, 2, -2)
 orb3:set_material(redorb)
+
+cow = gr.mesh('cow', 'cow.obj')
+scene:add_child(cow)
+cow:rotate('X', -40)
+cow:rotate('Y', -20)
+cow:set_material(gold)
 
 redlight = gr.light({100, 100, 100}, {0.8, 0, 0}, {1, 0, 0})
 whitelight = gr.light({-100, 100, 100}, {0.8, 0.8, 0.8}, {1, 0, 0})
