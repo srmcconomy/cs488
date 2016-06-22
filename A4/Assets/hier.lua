@@ -7,7 +7,7 @@ blue = gr.material({0.7, 0.6, 1}, {0.5, 0.4, 0.8}, 25)
 
 scene = gr.node('scene')
 scene:rotate('X', 23)
-scene:translate(0, 1, -15)
+scene:translate(0, 0, -15)
 --
 -- -- the arc
 -- arc = gr.node('arc')
@@ -43,7 +43,7 @@ plane:rotate('X', 180)
 poly = gr.mesh( 'poly', 'Assets/dodeca.obj' )
 scene:add_child(poly)
 poly:scale(1, 0.5, 1)
-poly:translate(0, 3, 0)
+poly:translate(0, 7, 0)
 poly:set_material(blue)
 
 -- The lights
