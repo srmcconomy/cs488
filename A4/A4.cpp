@@ -154,7 +154,7 @@ void A4_Render(
         image(x, y, 2) = (float)y / (float)h;
       }
 		}
-    std::cout << (float)(y + 1)/ (float)h * 100.0f << '%' << std::endl;
+    if (y % h / 20 == 0) std::cout << (float)(y + 1)/ (float)h * 100.0f << '%' << std::endl;
 	}
 
 }
