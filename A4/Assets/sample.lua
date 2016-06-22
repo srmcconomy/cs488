@@ -63,10 +63,6 @@ plane:set_material(grass)
 plane:scale(30, 30, 30)
 plane:rotate('X', 180)
 
--- Construct a central altar in the shape of a buckyball.  The
--- buckyball at the centre of the real Stonehenge was destroyed
--- in the great fire of 733 AD.
-
 mickey = gr.mesh( 'mickey', 'mickey.obj' )
 scene:add_child(mickey)
 mickey:set_material(mouse)
@@ -81,24 +77,24 @@ icosa:scale(1.5, 1.5, 1.5)
 icosa:rotate('Y', 20)
 icosa:translate(0, 10, 0);
 
- cow_instance = gr.node('cow')
- scene:add_child(cow_instance)
- cow_instance:add_child(cow_poly)
- cow_instance:scale(2, 2, 2)
- cow_instance:rotate('Y', 20)
- cow_instance:translate(1, 1.3, 14)
+cow_instance = gr.node('cow')
+scene:add_child(cow_instance)
+cow_instance:add_child(cow_poly)
+cow_instance:scale(2, 2, 2)
+cow_instance:rotate('Y', 20)
+cow_instance:translate(1, 1.3, 14)
 
- cow_instance2 = gr.node('cow2')
- scene:add_child(cow_instance2)
- cow_instance2:add_child(cow_poly)
- cow_instance2:rotate('Y', 150)
- cow_instance2:translate(6, 1.3, -4)
+cow_instance2 = gr.node('cow2')
+scene:add_child(cow_instance2)
+cow_instance2:add_child(cow_poly)
+cow_instance2:rotate('Y', 150)
+cow_instance2:translate(6, 1.3, -4)
 
- cow_instance3 = gr.node('cow3')
- scene:add_child(cow_instance3)
- cow_instance3:add_child(cow_poly)
- cow_instance3:rotate('Y', 150)
- cow_instance3:translate(6, 1.3, -4)
+cow_instance3 = gr.node('cow3')
+scene:add_child(cow_instance3)
+cow_instance3:add_child(cow_poly)
+cow_instance3:rotate('Y', 150)
+cow_instance3:translate(6, 1.3, -4)
 
 cylinder = gr.mesh('cylinder', 'cylinder.obj')
 scene:add_child(cylinder)
