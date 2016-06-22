@@ -40,7 +40,7 @@ public:
   virtual ~NonhierSphere();
   bool intersect(const glm::vec3& eye, const glm::vec3& ray, glm::vec3& point, glm::vec3& normal, float& d);
   bool intersect(const glm::vec3& eye, const glm::vec3& ray, const glm::mat4& transform, glm::vec3& point, glm::vec3& normal, float& d);
-private:
+
 
   glm::vec3 m_pos;
   double m_radius;

@@ -9,6 +9,7 @@
 Mesh::Mesh( const std::string& fname )
 	: m_vertices()
 	, m_faces()
+  , bb(vec3(0), 0)
 {
 	std::string code;
 	double vx, vy, vz;
@@ -39,7 +40,8 @@ Mesh::Mesh( const std::string& fname )
     }
   }
   max = sqrt(max);
-  bb = NonhierSphere(center, max);
+  bb.m_pos = center;
+  bb.m_radius = max;
 }
 
 std::ostream& operator<<(std::ostream& out, const Mesh& mesh)
