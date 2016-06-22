@@ -89,16 +89,16 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal
   if (!bb.intersect(eye, ray, point, normal, d)) return false;
   bool isect = false;
 	for (Triangle face : m_faces) {
-		vec3 u = m_vertices[face.v1] - m_vertices[face.v2];
+		vec3 u = m_vertices[face.v2] - m_vertices[face.v1];
 		vec3 v = m_vertices[face.v3] - m_vertices[face.v1];
 		vec3 n = -normalize(cross(u, v));
 		float nray = dot(ray, n);
 		if (nray <= 0) continue;
-		float d2 = dot(m_vertices[face.v2] - eye, n) / nray;
+		float d2 = dot(m_vertices[face.v1] - eye, n) / nray;
 
 		if (d2 > 0 && (!isect || d2 < d)) {
 			vec3 pt = eye + ray * d2;
-			vec3 w = pt - m_vertices[face.v2];
+			vec3 w = pt - m_vertices[face.v1];
 
 			float uv = dot(u, v);
 			float wv = dot(w, v);
