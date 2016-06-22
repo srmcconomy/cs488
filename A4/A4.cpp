@@ -42,6 +42,7 @@ void render(SceneNode* node, SceneNode* root, mat4 trans, vec3 eye, vec3 ray, ve
     float d;
     bool isect = geonode->m_primitive->intersect(eye, ray, trans, point, normal, d);
     if (isect && (!anyobj || d < mind)) {
+      colour = vec3(0);
       mind = d;
       anyobj = true;
       // image(x, y, 0) = 1;
