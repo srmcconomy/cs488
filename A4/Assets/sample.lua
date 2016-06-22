@@ -31,6 +31,12 @@ cow:rotate('Y', -70)
 cow:translate(4, -3, 0)
 cow:set_material(gold)
 
+cow2 = gr.mesh('cow2', 'cow.obj')
+scene:add_child(cow2)
+cow2:translate(-9, 2, -2)
+cow2:rotate('Z', 90)
+cow2:scale(0.2, 0.2, 0.2)
+
 redlight = gr.light({100, 100, 100}, {0.8, 0, 0}, {1, 0, 0})
 whitelight = gr.light({-100, 100, 100}, {0.8, 0.8, 0.8}, {1, 0, 0})
 bluelight = gr.light({100, 100, -100}, {0, 0, 0.8}, {1, 0, 0})
