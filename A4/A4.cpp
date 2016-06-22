@@ -152,7 +152,7 @@ void A4_Render(
         }
       } else {
         image(x, y, 0) = (float)y / (float)h / 2.0f;
-        image(x, y, 2) = (float)y / (float)h / 2.0f;
+        image(x, y, 2) = (float)y / (float)h;
       }
 		}
 	}
