@@ -23,6 +23,7 @@ void lighting(SceneNode* root, SceneNode* node, mat4 trans, Light* light, vec3 l
 
     bool isect2 = geonode2->m_primitive->intersect(light->position, l, nodetrans, point2, normal2, d2);
     if (isect2 && d2 * dNode > 0 && abs(d2) < abs(dNode)) {
+      std::cout << "HI" << std::endl;
       lightHits = false;
       return;
     }
