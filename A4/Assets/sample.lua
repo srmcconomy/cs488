@@ -32,6 +32,7 @@ orb3:set_material(redorb)
 -- cow:set_material(gold)
 
 cow2 = gr.sphere('cow2')
+cow2:set_material(greenorb)
 -- scene:add_child(cow2)
 -- cow2:translate(-5, 2, -2)
 -- cow2:rotate('Z', 90)
