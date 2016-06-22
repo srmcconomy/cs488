@@ -30,7 +30,7 @@ Mesh::Mesh( const std::string& fname )
   for (vec3 vertex : m_vertices) {
     total += vertex;
   }
-  vec3 center = total / m_vertices.length();
+  vec3 center = total / m_vertices.size();
   float max = 0;
   for (vec3 vertex : m_vertices) {
     vec3 dif = vertex - center;
