@@ -73,7 +73,7 @@ scene:rotate('X', 23)
 
 mickey = gr.mesh( 'mickey', 'mickey.obj' )
 scene:add_child(mickey)
-mickey:set_material(stone)
+mickey:set_material(mouse)
 mickey:rotate('X', -90);
 mickey:rotate('Y', -90);
 mickey:scale(5, 5, 5)
