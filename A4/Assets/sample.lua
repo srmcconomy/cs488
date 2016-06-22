@@ -39,11 +39,6 @@ s:set_material(stone)
 s:scale(4, 0.6, 0.6)
 s:translate(0, 4, 0)
 
-
--- #############################################
--- Read in the cow model from a separate file.
--- #############################################
-
 cow_poly = gr.mesh('cow', 'cow.obj')
 factor = 2.0/(2.76+3.637)
 
@@ -86,33 +81,29 @@ icosa:scale(1.5, 1.5, 1.5)
 icosa:rotate('Y', 20)
 icosa:translate(0, 10, 0);
 
--- Use the instanced cow model to place some actual cows in the scene.
--- For convenience, do this in a loop.
+ cow_instance = gr.node('cow')
+ scene:add_child(cow_instance)
+ cow_instance:add_child(cow_poly)
+ cow_instance:scale(2, 2, 2)
+ cow_instance:rotate('Y', 20)
+ cow_instance:translate(1, 1.3, 14)
 
-cow_number = 1
+ cow_instance2 = gr.node('cow2')
+ scene:add_child(cow_instance2)
+ cow_instance2:add_child(cow_poly)
+ cow_instance2:rotate('Y', 150)
+ cow_instance2:translate(6, 1.3, -4)
 
-for _, pt in pairs({
-		      {{1,1.3,14}, 20},
-		      {{5,1.3,-11}, 180},
-		      {{-5.5,1.3,-3}, -60}}) do
-   cow_instance = gr.node('cow' .. tostring(cow_number))
-   scene:add_child(cow_instance)
-   cow_instance:add_child(cow_poly)
-   cow_instance:scale(1.4, 1.4, 1.4)
-   cow_instance:rotate('Y', pt[2])
-   cow_instance:translate(table.unpack(pt[1]))
+ cow_instance3 = gr.node('cow3')
+ scene:add_child(cow_instance3)
+ cow_instance3:add_child(cow_poly)
+ cow_instance3:rotate('Y', 150)
+ cow_instance3:translate(6, 1.3, -4)
 
-   cow_number = cow_number + 1
-end
-
--- Place a ring of arches.
-
-for i = 1, 6 do
-   an_arc = gr.node('arc' .. tostring(i))
-   an_arc:rotate('Y', (i-1) * 60)
-   scene:add_child(an_arc)
-   an_arc:add_child(arc)
-end
+cylinder = gr.mesh('cylinder', 'cylinder.obj')
+scene:add_child(cylinder)
+cylinder:translate(-10, 0, 0)
+cylinder:scale(10, 10, 10)
 
 gr.render(scene,
 	  'sample.png', 256, 256,
