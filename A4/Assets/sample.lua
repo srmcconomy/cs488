@@ -1,6 +1,5 @@
-purpleorb = gr.material({0.5, 0, 1.0}, {0.3, 0.3, 0.3}, 100)
-grass = gr.material({0.1, 0.7, 0.1}, {0.0, 0.0, 0.0}, 0)
-hide = gr.material({0.84, 0.6, 0.53}, {0.3, 0.3, 0.3}, 20)
+purpleorb = gr.material({0.4, 0, 0.8}, {0.3, 0.3, 0.3}, 100)
+greenorb = gr.material({0, 0.8, 0}, {0.3, 0.3, 0.3}, 100)
 
 
 scene = gr.node('scene')
@@ -8,9 +7,14 @@ scene:rotate('X', 23)
 
 orb1 = gr.sphere('orb1')
 scene:add_child(orb1)
-orb1:scale(10, 10, 10)
+orb1:scale(2, 2, 2)
 orb1:translate(0, 10, 0)
 orb1:set_material(purpleorb)
+
+orb2 = gr.sphere('orb2')
+scene:add_child(orb2)
+orb2:translate(3, 6, 1)
+orb2:set_material(greenorb)
 
 redlight = gr.light({100, 100, 100}, {0.8, 0, 0}, {1, 0, 0})
 whitelight = gr.light({-100, 100, 100}, {0.8, 0.8, 0.8}, {1, 0, 0})
