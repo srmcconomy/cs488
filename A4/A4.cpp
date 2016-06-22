@@ -28,6 +28,7 @@ void lighting(SceneNode* root, SceneNode* node, mat4 trans, Light* light, vec3 l
     }
     for (SceneNode* node2 : root->children) {
       lighting(node2, node, nodetrans, light, l, dNode, lightHits);
+      if (!lightHits) return;
     }
   }
 }
