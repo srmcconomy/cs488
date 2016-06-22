@@ -1,0 +1,9 @@
+I did not have time to implement a bonus feature.
+
+My scene depicts 3 differently coloured orbs.  One orb is attached to a cylinder support.
+There is a green cow standing on the side of this orb, and a golden cow floating in space.
+The entire scene hovers above a green plane.
+
+Other than the bonus feature, every requirement was met.  I used spheres as bounding boxes.
+
+The program works as laid out in the assignment, with no other missing or extra features.
