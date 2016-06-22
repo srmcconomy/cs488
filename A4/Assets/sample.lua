@@ -25,7 +25,7 @@ orb3:translate(-7, 2, -2)
 orb3:set_material(redorb)
 
 cow = gr.mesh('cow', 'cow.obj')
-scene:add_child(cow)
+--scene:add_child(cow)
 cow:rotate('X', 20)
 cow:rotate('Y', -70)
 cow:translate(4, -3, 0)
