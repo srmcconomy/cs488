@@ -44,7 +44,7 @@ cylinder:set_material(gold)
 cylinder:scale(1, 10, 1)
 cylinder:translate(-7, -10, -2)
 
-plane = gr:mesh('plane', 'plane.obj')
+plane = gr.mesh('plane', 'plane.obj')
 scene:add_child(plane)
 plane:set_material(greenorb)
 plane:scale(30, 30, 30)
