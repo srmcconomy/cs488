@@ -252,7 +252,7 @@ int gr_mesh_cmd(lua_State* L)
 	data->node = 0;
 
 	const char* name = luaL_checkstring(L, 1);
-	char* obj_fname = luaL_checkstring(L, 2);
+	const char* obj_fname = luaL_checkstring(L, 2);
   obj_fname = "Assets/" + obj_fname;
 
 	std::string sfname( obj_fname );
