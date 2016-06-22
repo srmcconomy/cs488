@@ -33,7 +33,7 @@ void lighting(SceneNode* root, SceneNode* node, mat4 trans, Light* light, vec3 l
 }
 
 
-void render(SceneNode* node, SceneNode* root, mat4 trans, vec3 eye, vec3 ray, vec3& colour, float& mind, bool& anyobj) {
+void render(SceneNode* node, SceneNode* root, mat4 trans, vec3 eye, vec3 ray, vec3& colour, std::list<Light*> lights, vec3 ambient, float& mind, bool& anyobj) {
   mat4 nodetrans = trans * node->trans;
   if (node->m_nodeType == NodeType::GeometryNode) {
     GeometryNode* geonode = (GeometryNode*)node;
