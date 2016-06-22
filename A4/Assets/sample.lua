@@ -1,5 +1,6 @@
 purpleorb = gr.material({0.4, 0, 0.8}, {0.3, 0.3, 0.3}, 100)
 greenorb = gr.material({0, 0.8, 0}, {0.3, 0.3, 0.3}, 100)
+redorb = gr.material({0.8, 0, 0}, {0.3, 0.3, 0.3}, 100)
 
 
 scene = gr.node('scene')
@@ -15,6 +16,12 @@ orb2 = gr.sphere('orb2')
 scene:add_child(orb2)
 orb2:translate(3, 6, 1)
 orb2:set_material(greenorb)
+
+orb3 = gr.sphere('orb3')
+scene:add_child(orb3)
+orb3:scale(5, 5, 5)
+orb3:translate(-7, 2, -2)
+orb3:set_material(redorb)
 
 redlight = gr.light({100, 100, 100}, {0.8, 0, 0}, {1, 0, 0})
 whitelight = gr.light({-100, 100, 100}, {0.8, 0.8, 0.8}, {1, 0, 0})
