@@ -151,7 +151,7 @@ void A4_Render(
           image(x, y, c) = colour[c] > 1.0f ? 1.0f : colour[c];
         }
       } else {
-        image(x, y, 1) = (float)y / (float)h / 2.0f;
+        image(x, y, 0) = (float)y / (float)h / 2.0f;
         image(x, y, 2) = (float)y / (float)h / 2.0f;
       }
 		}
