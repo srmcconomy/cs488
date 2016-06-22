@@ -3,7 +3,7 @@
 
 int main(int argc, char** argv)
 {
-  std::string filename = "Assets/nonhier.lua";
+  std::string filename = "Assets/macho-cows.lua";
   if (argc >= 2) {
     filename = argv[1];
   }
