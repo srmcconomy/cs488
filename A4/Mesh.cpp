@@ -78,7 +78,7 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, const mat4& transform, ve
   vec4 point4 = transform * vec4(point.x, point.y, point.z, 1.0f);
   mat3 sub = mat3(vec3(transform[0]), vec3(transform[1]), vec3(transform[2]));
   sub = transpose(inverse(sub));
-  normal = -normalize(sub * normal);
+  normal = normalize(sub * normal);
   point = vec3(point4.x, point4.y, point4.z);
   d = length(point - eye);
   return ret;
@@ -86,7 +86,7 @@ bool Mesh::intersect(const vec3& eye, const vec3& ray, const mat4& transform, ve
 }
 
 bool Mesh::intersect(const vec3& eye, const vec3& ray, vec3& point, vec3& normal, float& d) {
-  return bb.intersect(eye, ray, point, normal, d);
+  if (!bb.intersect(eye, ray, point, normal, d)) return false;
   bool isect = false;
 	for (Triangle face : m_faces) {
 		vec3 u = m_vertices[face.v2] - m_vertices[face.v1];
