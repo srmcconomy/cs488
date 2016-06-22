@@ -19,19 +19,19 @@ arc = gr.node('arc')
 inst:add_child(arc)
 arc:translate(0, 0, -10)
 
-p1 = gr.cube('p1', {0, 0, 0}, 1)
+p1 = gr.nh_box('p1', {0, 0, 0}, 1)
 arc:add_child(p1)
 p1:set_material(stone)
 p1:scale(0.8, 4, 0.8)
 p1:translate(-2.4, 0, -0.4)
 
-p2 = gr.cube('p2', {0, 0, 0}, 1)
+p2 = gr.nh_box('p2', {0, 0, 0}, 1)
 arc:add_child(p2)
 p2:set_material(stone)
 p2:scale(0.8, 4, 0.8)
 p2:translate(1.6, 0, -0.4)
 
-s = gr.sphere('s', {0, 0, 0}, 1)
+s = gr.nh_sphere('s', {0, 0, 0}, 1)
 arc:add_child(s)
 s:set_material(stone)
 s:scale(4, 0.6, 0.6)
@@ -60,10 +60,10 @@ scene:rotate('X', 23)
 
 -- the floor
 
--- plane = gr.mesh('plane', 'plane.obj' )
--- scene:add_child(plane)
--- plane:set_material(grass)
--- plane:scale(30, 30, 30)
+plane = gr.mesh('plane', 'plane.obj' )
+scene:add_child(plane)
+plane:set_material(grass)
+plane:scale(30, 30, 30)
 
 -- Construct a central altar in the shape of a buckyball.  The
 -- buckyball at the centre of the real Stonehenge was destroyed
@@ -89,7 +89,7 @@ for _, pt in pairs({
    cow_instance:scale(1.4, 1.4, 1.4)
    cow_instance:rotate('Y', pt[2])
    cow_instance:translate(table.unpack(pt[1]))
-
+   
    cow_number = cow_number + 1
 end
 
