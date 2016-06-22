@@ -24,7 +24,7 @@ void lighting(SceneNode* root, SceneNode* node, mat4 trans, Light* light, vec3 l
     bool isect2 = geonode2->m_primitive->intersect(light->position, l, nodetrans, point2, normal2, d2);
     if (isect2 && d2 * dNode > 0 && abs(d2) < abs(dNode)) {
       lightHits = false;
-      break;
+      return;
     }
     for (SceneNode* node2 : root->children) {
       lighting(node2, node, nodetrans, light, l, dNode, lightHits);
@@ -33,7 +33,7 @@ void lighting(SceneNode* root, SceneNode* node, mat4 trans, Light* light, vec3 l
 }
 
 
-void render(SceneNode* node, SceneNode* root, mat4 trans, vec3 eye, vec3 ray, vec3& colour, float& mind bool& anyobj) {
+void render(SceneNode* node, SceneNode* root, mat4 trans, vec3 eye, vec3 ray, vec3& colour, float& mind, bool& anyobj) {
   mat4 nodetrans = trans * node->trans;
   if (node->m_nodeType == NodeType::GeometryNode) {
     GeometryNode* geonode = (GeometryNode*)node;
