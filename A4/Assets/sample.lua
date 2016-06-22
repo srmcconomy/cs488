@@ -62,10 +62,11 @@ scene:rotate('X', 23)
 
 -- the floor
 
--- plane = gr.mesh('plane', 'plane.obj' )
--- scene:add_child(plane)
--- plane:set_material(grass)
--- plane:scale(30, 30, 30)
+plane = gr.mesh('plane', 'plane.obj' )
+scene:add_child(plane)
+plane:set_material(grass)
+plane:scale(30, 30, 30)
+plane:rotate('X', 180)
 
 -- Construct a central altar in the shape of a buckyball.  The
 -- buckyball at the centre of the real Stonehenge was destroyed
@@ -82,6 +83,7 @@ icosa = gr.mesh( 'icosa', 'dodeca.obj' )
 scene:add_child(icosa)
 icosa:set_material(stone)
 icosa:scale(1.5, 1.5, 1.5)
+icosa:rotate('Y', 20)
 icosa:translate(0, 10, 0);
 
 -- Use the instanced cow model to place some actual cows in the scene.
