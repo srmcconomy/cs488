@@ -142,11 +142,7 @@ void A4_Render(
       ray = rotate(ray, radians((float)angley), cross(up, mainRay));
       float mind;
       bool anyobj = false;
-			stack<mat4> transStack;
-			transStack.push(root->trans);
       vec3 colour;
-      float mind;
-      bool anyobj = false;
       render(root, root, mat4(1.0f), eye, ray, colour, mind, anyobj);
 
       if (anyobj) {
